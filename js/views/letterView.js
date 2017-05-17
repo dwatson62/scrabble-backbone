@@ -9,7 +9,11 @@ Scrabble.LetterView = Backbone.View.extend({
   events: {},
 
   render: function() {
-    this.$el.html(this.template({ imageSrc: this.model.imageSrc }));
+    var context = {
+      imageSrc: this.model.imageSrc,
+      uid: this.model.uid
+    }
+    this.$el.html(this.template(context));
     return this;
   }
 });

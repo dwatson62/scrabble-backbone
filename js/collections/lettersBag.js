@@ -40,10 +40,12 @@ Scrabble.LettersBag = Backbone.Collection.extend({
   createBag: function() {
     var letters = _.keys(this.letterValues);
     var bag = [];
+    var count = 1;
     for (var letter in letters) {
       for (i = 0; i < this.letterValues[letters[letter]].tiles; i ++) {
-        newLetter = new Scrabble.Letter(letters[letter]);
+        newLetter = new Scrabble.Letter(letters[letter], count);
         bag.push(newLetter);
+        count += 1;
       }
     }
     return _.shuffle(bag);
