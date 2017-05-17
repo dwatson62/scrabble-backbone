@@ -11,6 +11,11 @@ $(document).ready(function() {
   var boardView = new Scrabble.BoardView(board.models);
 
   var bag = new Scrabble.LettersBag();
-  var firstSeven = bag.models.slice(0, 7);
-  var playerLettersView = new Scrabble.PlayerLettersView(firstSeven);
+
+  var player_context = {
+    letters: bag.models.slice(0, 7),
+    player: new Scrabble.Player('Daryl')
+  };
+
+  var playerLettersView = new Scrabble.PlayerLettersView(player_context);
 });

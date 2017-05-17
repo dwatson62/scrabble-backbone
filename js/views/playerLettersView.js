@@ -7,8 +7,9 @@ Scrabble.PlayerLettersView = Backbone.View.extend({
     'click .player-letter': 'letterClicked'
   },
 
-  initialize: function(letters) {
-    this.collection = letters;
+  initialize: function(context) {
+    this.collection = context.letters;
+    this.player = context.player;
     this.letterViews = {};
     this.render();
   },
