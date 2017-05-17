@@ -32,8 +32,8 @@ Scrabble.BoardView = Backbone.View.extend({
 
   render: function() {
     var baseSrc = '/images/tiles/';
-    for (x = 0; x < 15; x ++) {
-      for (y = 0; y < 15; y ++) {
+    for (var x = 0; x < 15; x ++) {
+      for (var y = 0; y < 15; y ++) {
         var tileId = x.toString() + '_' + y.toString();
         var tileSrc = baseSrc + this.setTile(x, y) + '.png';
 
