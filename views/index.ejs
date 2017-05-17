@@ -4,14 +4,12 @@
     <title>Scrabble</title>
     <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/main.css' />
-    <script src='bower_components/jquery/dist/jquery.min.js'></script>
-    <script src='bower_components/underscore/underscore-min.js'></script>
-    <script src='bower_components/backbone/backbone-min.js'></script>
-    <script src='js/scrabble.js'></script>
-    <script src='js/views/scrabbleView.js'></script>
-    <script src='js/views/boardView.js'></script>
-    <script src='js/collections/lettersBag.js'></script>
-    <script src='js/models/letter.js'></script>
+
+    <script id="letter-template" type="text/template">
+      <div class='player-letter'>
+        <img class='letter-tile' src='{{ imageSrc }}' />
+      </div>
+    </script>
   </head>
   <body>
     <div class='container'>
@@ -20,8 +18,20 @@
           <% include board %>
         </section>
         <div class="col-md-4">
+          <section id='player-letters'></section>
         </div>
       </div>
     </div>
+
+    <script src='bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='bower_components/underscore/underscore-min.js'></script>
+    <script src='bower_components/backbone/backbone-min.js'></script>
+    <script src='js/scrabble.js'></script>
+    <script src='js/views/scrabbleView.js'></script>
+    <script src='js/views/boardView.js'></script>
+    <script src='js/views/letterView.js'></script>
+    <script src='js/views/playerLettersView.js'></script>
+    <script src='js/collections/lettersBag.js'></script>
+    <script src='js/models/letter.js'></script>
   </body>
 </html>
