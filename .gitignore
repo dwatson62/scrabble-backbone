@@ -5,3 +5,4 @@ public/stylesheets
 scss/
 .env
 notes
+bower_components/
