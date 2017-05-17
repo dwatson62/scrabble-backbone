@@ -3,8 +3,8 @@
     <tr>
       <% for (y = 0; y < 15; y ++) { %>
         <td class="tg-031e">
-          <div>
-            <img id='img<%= x %>-<%= y %>' ng-src='/images/tiles/{{ scrbCtrl.tile(<%= x %>, <%= y %>) }}.png'>
+          <div id='tile_<%= x %>_<%= y %>'>
+            <img class='board-tile' />
           </div>
         </td>
       <% } %>

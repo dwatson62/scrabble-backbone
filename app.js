@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
-app.use('/src', express.static(__dirname + '/src'));
+app.use('/js', express.static(__dirname + '/js'));
 
 app.use('/', routes);
 app.use('/users', users);

@@ -7,12 +7,16 @@
     <script src='bower_components/jquery/dist/jquery.min.js'></script>
     <script src='bower_components/underscore/underscore-min.js'></script>
     <script src='bower_components/backbone/backbone-min.js'></script>
+    <script src='js/scrabble.js'></script>
+    <script src='js/views/scrabbleView.js'></script>
+    <script src='js/views/boardView.js'></script>
   </head>
   <body>
     <div class='container'>
       <div class="row">
-        <div class="col-md-8">
-        </div>
+        <section id='scrabble-board' class="col-md-8">
+          <% include board %>
+        </section>
         <div class="col-md-4">
         </div>
       </div>

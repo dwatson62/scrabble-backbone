@@ -1,0 +1,23 @@
+body {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#627d4d+0,1f3b08+100;Olive+3D */
+  background: #627d4d;
+  /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #627d4d 0%, #1f3b08 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #627d4d), color-stop(100%, #1f3b08));
+  /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #627d4d 0%, #1f3b08 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #627d4d 0%, #1f3b08 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #627d4d 0%, #1f3b08 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, #627d4d 0%, #1f3b08 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#627d4d', endColorstr='#1f3b08',GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */ }
+
+.board-tile {
+  height: 50px; }
+
+/*# sourceMappingURL=main.css.map */
