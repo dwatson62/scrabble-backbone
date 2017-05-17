@@ -1,4 +1,7 @@
 #### Scrabble Backbone
+=================================
+
+![scrabble-logo](https://github.com/dwatson62/scrabble-backbone/blob/master/public/images/scrabble-logo.jpg)
 
 #### Scripts
 
