@@ -26,4 +26,7 @@ body {
 .letter-container {
   display: inline-block; }
 
+.selected {
+  opacity: .5; }
+
 /*# sourceMappingURL=main.css.map */
