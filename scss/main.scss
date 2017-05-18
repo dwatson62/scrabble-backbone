@@ -20,8 +20,12 @@ body {
 
 .letter-container {
   display: inline-block;
-}
 
-.selected {
-  opacity: .5;
+  .selected {
+    opacity: .5;
+  }
+
+  .placed {
+    opacity: .1;
+  }
 }

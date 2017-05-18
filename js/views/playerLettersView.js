@@ -39,15 +39,27 @@ Scrabble.PlayerLettersView = Backbone.View.extend({
   },
 
   letterClicked: function(event) {
-    this.$el.find('.player-letter').removeClass('selected');
-
+    this.unselectAll();
     var uid = event.currentTarget.dataset.uid;
-    this.letterView(uid).toggleSelected();
-    var letter = this.letterModel(uid);
-    this.pickUpLetter(letter);
+
+    if (this.letterModel(uid) === this.player.selectedLetter) {
+      this.putDownLetter();
+    } else {
+      var letterView = this.letterView(uid);
+      this.letterView(uid).selectLetter();
+      this.pickUpLetter(letterView);
+    }
   },
 
-  pickUpLetter: function(letter) {
-    this.player.pickUpLetter(letter);
+  unselectAll: function() {
+    this.$el.find('.player-letter').removeClass('selected');
+  },
+
+  pickUpLetter: function(letterView) {
+    this.player.pickUpLetter(letterView);
+  },
+
+  putDownLetter: function() {
+    this.player.putDownLetter();
   }
 });

@@ -25,8 +25,9 @@ body {
 
 .letter-container {
   display: inline-block; }
-
-.selected {
-  opacity: .5; }
+  .letter-container .selected {
+    opacity: .5; }
+  .letter-container .placed {
+    opacity: .1; }
 
 /*# sourceMappingURL=main.css.map */

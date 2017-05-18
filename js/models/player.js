@@ -10,7 +10,13 @@ Scrabble.Player = Backbone.Model.extend({
     this.selectedLetter;
   },
 
-  pickUpLetter: function(letter) {
-    this.selectedLetter = letter;
+  pickUpLetter: function(letterView) {
+    this.selectedLetterView = letterView;
+    this.selectedLetter = letterView.model;
+  },
+
+  putDownLetter: function() {
+    this.selectedLetterView = undefined;
+    this.selectedLetter = undefined;
   }
 });

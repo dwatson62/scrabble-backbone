@@ -17,7 +17,16 @@ Scrabble.LetterView = Backbone.View.extend({
     return this;
   },
 
-  toggleSelected: function() {
-    this.$el.find('.player-letter').toggleClass('selected');
+  selectLetter: function() {
+    this.$el.find('.player-letter').addClass('selected');
+  },
+
+  unselectLetter: function() {
+    this.$el.find('.player-letter').removeClass('selected');
+  },
+
+  placeLetter: function() {
+    this.unselectLetter();
+    this.$el.find('.player-letter').addClass('placed');
   }
 });
