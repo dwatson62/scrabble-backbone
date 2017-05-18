@@ -25,17 +25,20 @@ Scrabble.Tile = Backbone.Model.extend({
   },
 
   initialize: function(options) {
+    this.options = options;
     this.tileId = options.x.toString() + '_' + options.y.toString();
-    this.coords = this.convertToCoords(options.x, options.y);
-    this.tileSrc = this.baseSrc + this.fetchTile(this.coords) + '.png';
+    this.coords = this.convertToCoords();
+    this.tileSrc = this.baseSrc + this.fetchTile() + '.png';
   },
 
-  convertToCoords: function(x, y) {
+  convertToCoords: function() {
+    var x = this.options.x;
+    var y = this.options.y;
     return this.letters[x] + String(y + 1);
   },
 
-  fetchTile: function(coords) {
-    var tile = this.board[coords];
+  fetchTile: function() {
+    var tile = this.board[this.coords];
     if (tile === null) { return; }
     if (tile === undefined) { return 'empty'; }
     if (tile.length === 1 || tile === 'blank') { return 'letter-' + tile; }
