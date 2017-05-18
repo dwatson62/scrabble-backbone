@@ -11,14 +11,16 @@
       </div>
     </script>
   </head>
-  <body>
+  <body id='scrabble-app'>
     <div class='container'>
       <div class="row">
         <section id='scrabble-board' class="col-md-8">
           <% include board %>
         </section>
         <div class="col-md-4">
-          <section id='player-letters'></section>
+          <section id='player-dashboard'>
+            <section id='player-letters'></section>
+          </section>
         </div>
       </div>
     </div>
@@ -31,7 +33,7 @@
     <script src='js/views/boardView.js'></script>
     <script src='js/views/letterView.js'></script>
     <script src='js/views/tileView.js'></script>
-    <script src='js/views/playerLettersView.js'></script>
+    <script src='js/views/playerDashboardView.js'></script>
     <script src='js/collections/lettersBag.js'></script>
     <script src='js/collections/boardTiles.js'></script>
     <script src='js/models/letter.js'></script>

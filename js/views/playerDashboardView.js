@@ -1,7 +1,7 @@
 var Scrabble = Scrabble || {};
 
-Scrabble.PlayerLettersView = Backbone.View.extend({
-  el: '#player-letters',
+Scrabble.PlayerDashboardView = Backbone.View.extend({
+  el: '#player-dashboard',
 
   events: {
     'click .player-letter': 'letterClicked'
@@ -26,7 +26,7 @@ Scrabble.PlayerLettersView = Backbone.View.extend({
     var letterView = new Scrabble.LetterView({
       model: letter
     });
-    this.$el.append(letterView.render().el);
+    this.$el.find('#player-letters').append(letterView.render().el);
     this.letterViews[letter.uid] = letterView;
   },
 

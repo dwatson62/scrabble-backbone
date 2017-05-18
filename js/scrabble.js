@@ -5,8 +5,6 @@ _.templateSettings = {
 };
 
 $(document).ready(function() {
-  var scrabbleView = new Scrabble.ScrabbleView();
-
   var board = new Scrabble.BoardTiles();
   var bag = new Scrabble.LettersBag();
 
@@ -23,5 +21,11 @@ $(document).ready(function() {
   }
 
   var boardView = new Scrabble.BoardView(boardContext);
-  var playerLettersView = new Scrabble.PlayerLettersView(playerContext);
+  var playerDashboardView = new Scrabble.PlayerDashboardView(playerContext);
+
+  var scrabbleView = new Scrabble.ScrabbleView({
+    bag: bag,
+    boardView: boardView,
+    playerDashboardView: playerDashboardView
+  });
 });
