@@ -8,5 +8,9 @@ Scrabble.Player = Backbone.Model.extend({
   initialize: function(name) {
     this.attributes.name = name;
     this.selectedLetter;
+  },
+
+  pickUpLetter: function(letter) {
+    this.selectedLetter = letter;
   }
 });
