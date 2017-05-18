@@ -36,13 +36,14 @@ Scrabble.PlayerLettersView = Backbone.View.extend({
 
   letterModel: function(uid) {
     return this.letterView(uid).model;
-  }
+  },
 
   letterClicked: function(event) {
     this.$el.find('.player-letter').removeClass('selected');
 
     var uid = event.currentTarget.dataset.uid;
-    var letter = this.letterModel();
+    this.letterView(uid).toggleSelected();
+    var letter = this.letterModel(uid);
     this.pickUpLetter(letter);
   },
 

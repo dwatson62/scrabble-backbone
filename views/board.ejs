@@ -3,8 +3,8 @@
     <tr>
       <% for (y = 0; y < 15; y ++) { %>
         <td class="tg-031e">
-          <div id='tile_<%= x %>_<%= y %>'>
-            <img class='board-tile' />
+          <div class='tile-container' id='tile_<%= x %>_<%= y %>'>
+            <img class='board-tile' data-tile-id='tile_<%= x %>_<%= y %>' />
           </div>
         </td>
       <% } %>

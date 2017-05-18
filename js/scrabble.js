@@ -8,14 +8,20 @@ $(document).ready(function() {
   var scrabbleView = new Scrabble.ScrabbleView();
 
   var board = new Scrabble.BoardTiles();
-  var boardView = new Scrabble.BoardView(board.models);
-
   var bag = new Scrabble.LettersBag();
 
-  var player_context = {
+  var player = new Scrabble.Player('Daryl')
+
+  var playerContext = {
     letters: bag.models.slice(0, 7),
-    player: new Scrabble.Player('Daryl')
+    player: player
   };
 
-  var playerLettersView = new Scrabble.PlayerLettersView(player_context);
+  var boardContext = {
+    players: [player],
+    boardTiles: board.models
+  }
+
+  var boardView = new Scrabble.BoardView(boardContext);
+  var playerLettersView = new Scrabble.PlayerLettersView(playerContext);
 });

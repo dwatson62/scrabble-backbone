@@ -2,10 +2,13 @@ var Scrabble = Scrabble || {};
 
 Scrabble.BoardView = Backbone.View.extend({
   el: '#scrabble-board',
-  events: {},
+  events: {
+    'click .board-tile': 'tileClicked'
+  },
 
-  initialize: function(board) {
-    this.collection = board;
+  initialize: function(context) {
+    this.collection = context.boardTiles;
+    this.players = context.players;
     this.tileViews = {};
     this.render();
   },
@@ -19,8 +22,21 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   renderTile: function(tile) {
-    var tileView = new Scrabble.TileView({});
-    this.tileViews[tile.coords] = tileView;
-    this.$el.find('#tile_' + tile.tileId + ' img').prop('src', tile.tileSrc);
+    var tileId = 'tile_' + tile.tileId;
+    var tileView = new Scrabble.TileView({ el: $('#' + tileId) });
+    this.tileViews[tileId] = tileView;
+    this.$el.find('#' + tileId + ' img').prop('src', tile.tileSrc);
+  },
+
+  currentPlayer: function() {
+    return this.players[0];
+  },
+
+  tileClicked: function(event) {
+    var letter = this.currentPlayer().selectedLetter;
+    if (letter) {
+      var id = event.currentTarget.dataset.tileId;
+      this.tileViews[id].placeLetter(letter);
+    }
   }
 });
