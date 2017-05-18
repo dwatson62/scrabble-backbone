@@ -27,6 +27,8 @@ Scrabble.LetterView = Backbone.View.extend({
 
   placeLetter: function() {
     this.unselectLetter();
+    this.model.place();
     this.$el.find('.player-letter').addClass('placed');
+    this.$el.find('.player-letter').removeClass('unplaced');
   }
 });

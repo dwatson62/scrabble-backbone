@@ -4,7 +4,7 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   el: '#player-dashboard',
 
   events: {
-    'click .player-letter': 'letterClicked'
+    'click .player-letter.unplaced': 'letterClicked'
   },
 
   initialize: function(context) {
