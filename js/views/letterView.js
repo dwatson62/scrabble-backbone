@@ -8,6 +8,10 @@ Scrabble.LetterView = Backbone.View.extend({
 
   events: {},
 
+  initialize: function() {
+    this.listenTo(this.model, 'change:placed', this.onPlaceChange);
+  },
+
   render: function() {
     var context = {
       imageSrc: this.model.imageSrc,
@@ -15,6 +19,12 @@ Scrabble.LetterView = Backbone.View.extend({
     }
     this.$el.html(this.template(context));
     return this;
+  },
+
+  onPlaceChange: function(model, placed) {
+    if (placed === true) {
+      this.placeLetter();
+    }
   },
 
   selectLetter: function() {

@@ -43,8 +43,8 @@ Scrabble.BoardView = Backbone.View.extend({
     var letterView = this.currentPlayer().selectedLetterView;
 
     if (letter) {
+      letter.place();
       tileView.placeLetter(letter);
-      letterView.placeLetter();
       this.currentPlayer().putDownLetter();
     }
   }

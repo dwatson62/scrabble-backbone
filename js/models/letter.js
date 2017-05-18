@@ -12,6 +12,6 @@ Scrabble.Letter = Backbone.Model.extend({
   },
 
   place: function() {
-    this.placed = true;
+    this.set('placed', true);
   }
 });
