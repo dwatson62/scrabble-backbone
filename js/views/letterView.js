@@ -9,31 +9,11 @@ Scrabble.LetterView = Backbone.View.extend({
   events: {},
 
   initialize: function() {
-    this.listenTo(this.model, 'change:placed', this.onPlaceChange);
+    this.listenTo(this.model, 'change:status', this.render);
   },
 
   render: function() {
     this.$el.html(this.template(this.model.attributes));
     return this;
-  },
-
-  onPlaceChange: function(model, placed) {
-    if (placed === true) {
-      this.placeLetter();
-      this.render();
-    }
-  },
-
-  selectLetter: function() {
-    this.$el.find('.player-letter').addClass('selected');
-  },
-
-  unselectLetter: function() {
-    this.$el.find('.player-letter').removeClass('selected');
-  },
-
-  placeLetter: function() {
-    this.unselectLetter();
-    this.model.place();
   }
 });

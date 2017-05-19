@@ -2,8 +2,7 @@ var Scrabble = Scrabble || {};
 
 Scrabble.Letter = Backbone.Model.extend({
   defaults: {
-    placed: false,
-    status: 'unplaced'
+    status: 'unselected'
   },
 
   initialize: function(value, uid) {
@@ -12,8 +11,15 @@ Scrabble.Letter = Backbone.Model.extend({
     this.set('imageSrc', '/images/tiles/letter-' + this.get('value') + '.png');
   },
 
+  choose: function() {
+    this.set('status', 'selected');
+  },
+
+  unselect: function() {
+    this.set('status', 'unselected');
+  },
+
   place: function() {
-    this.set('placed', true);
     this.set('status', 'placed');
   }
 });

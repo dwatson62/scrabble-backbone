@@ -4,7 +4,7 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   el: '#player-dashboard',
 
   events: {
-    'click .player-letter.unplaced': 'letterClicked'
+    'click .player-letter.unselected': 'letterClicked'
   },
 
   initialize: function(context) {
@@ -35,24 +35,27 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   },
 
   letterModel: function(uid) {
-    return this.letterView(uid).model;
+    return this.collection.find(function(model) {
+      return model.get('uid') === parseInt(uid);
+    });
   },
 
   letterClicked: function(event) {
-    this.unselectAll();
+    _.each(this.collection, function(letter) {
+      if (letter.get('status') === 'selected') {
+        letter.unselect();
+      }
+    });
+
     var uid = event.currentTarget.dataset.uid;
 
     if (this.letterModel(uid) === this.player.selectedLetter) {
       this.putDownLetter();
     } else {
+      this.letterModel(uid).choose();
       var letterView = this.letterView(uid);
-      this.letterView(uid).selectLetter();
       this.pickUpLetter(letterView);
     }
-  },
-
-  unselectAll: function() {
-    this.$el.find('.player-letter').removeClass('selected');
   },
 
   pickUpLetter: function(letterView) {
