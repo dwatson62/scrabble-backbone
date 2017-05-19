@@ -10,7 +10,6 @@ Scrabble.BoardView = Backbone.View.extend({
   initialize: function(context) {
     this.collection = context.boardTiles;
     this.players = context.players;
-    this.tileViews = {};
     this.render();
   },
 
@@ -31,19 +30,23 @@ Scrabble.BoardView = Backbone.View.extend({
     this.$el.find(domId).append(tileView.render().el);
   },
 
+  tileModel: function(tileId) {
+    return this.collection.find(function(model) {
+      return model.get('tileId') === tileId;
+    });
+  },
+
   currentPlayer: function() {
     return this.players[0];
   },
 
   emptyTileClicked: function(event) {
     var letter = this.currentPlayer().selectedLetter;
-    var id = event.currentTarget.dataset.tileId;
-    var tileView = this.tileViews[id];
 
     if (letter) {
       letter.place();
-      tile.receiveLetter(letter)
-      tileView.placeLetter(letter);
+      var tileId = event.currentTarget.dataset.tileId;
+      this.tileModel(tileId).receiveLetter(letter)
       this.currentPlayer().putDownLetter();
     }
   }
