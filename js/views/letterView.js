@@ -13,17 +13,14 @@ Scrabble.LetterView = Backbone.View.extend({
   },
 
   render: function() {
-    var context = {
-      imageSrc: this.model.imageSrc,
-      uid: this.model.uid
-    }
-    this.$el.html(this.template(context));
+    this.$el.html(this.template(this.model.attributes));
     return this;
   },
 
   onPlaceChange: function(model, placed) {
     if (placed === true) {
       this.placeLetter();
+      this.render();
     }
   },
 
@@ -38,7 +35,5 @@ Scrabble.LetterView = Backbone.View.extend({
   placeLetter: function() {
     this.unselectLetter();
     this.model.place();
-    this.$el.find('.player-letter').addClass('placed');
-    this.$el.find('.player-letter').removeClass('unplaced');
   }
 });

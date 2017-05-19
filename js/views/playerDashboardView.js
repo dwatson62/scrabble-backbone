@@ -27,7 +27,7 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
       model: letter
     });
     this.$el.find('#player-letters').append(letterView.render().el);
-    this.letterViews[letter.uid] = letterView;
+    this.letterViews[letter.get('uid')] = letterView;
   },
 
   letterView: function(uid) {
