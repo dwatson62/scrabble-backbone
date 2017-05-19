@@ -60,7 +60,7 @@ Scrabble.Tile = Backbone.Model.extend({
     this.set('tileSrc', letter.get('imageSrc'));
   },
 
-  replaceTile: function() {
+  returnLetter: function() {
     this.letter = undefined;
     this.set('status', 'empty');
     this.set('tileSrc', this.get('defaultTileSrc'));

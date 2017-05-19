@@ -8,4 +8,13 @@ describe('Player', function() {
       expect(player.selectedLetter).to.eql(letter);
     });
   });
+
+  describe('#putDownLetter()', function() {
+    it('the selectedLetter gets erased', function() {
+      player.pickUpLetter(letter);
+
+      player.putDownLetter(letter);
+      expect(player.selectedLetter).to.eql(undefined);
+    });
+  });
 });

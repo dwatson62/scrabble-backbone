@@ -14,7 +14,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
     var tiles = this.findAllPlacedTiles();
     _.each(tiles, function(tile) {
       tile.letter.unselect();
-      tile.replaceTile();
+      tile.returnLetter();
     });
   },
 
