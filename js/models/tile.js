@@ -24,11 +24,19 @@ Scrabble.Tile = Backbone.Model.extend({
     'Q1': 'tripleword', 'Q4': 'doubleletter', 'Q8': 'tripleword', 'Q12': 'doubleletter', 'Q15': 'tripleword'
   },
 
+  defaults: {
+    status: 'empty'
+  },
+
   initialize: function(options) {
     this.options = options;
-    this.tileId = options.x.toString() + '_' + options.y.toString();
-    this.coords = this.convertToCoords();
-    this.tileSrc = this.baseSrc + this.fetchTile() + '.png';
+    this.set('tileId', this.generateTileId());
+    this.set('coords', this.convertToCoords());
+    this.set('tileSrc', this.baseSrc + this.fetchTile() + '.png');
+  },
+
+  generateTileId: function() {
+    return 'tile_' + this.options.x.toString() + '_' + this.options.y.toString();
   },
 
   convertToCoords: function() {
@@ -38,10 +46,16 @@ Scrabble.Tile = Backbone.Model.extend({
   },
 
   fetchTile: function() {
-    var tile = this.board[this.coords];
+    var tile = this.board[this.get('coords')];
     if (tile === null) { return; }
     if (tile === undefined) { return 'empty'; }
     if (tile.length === 1 || tile === 'blank') { return 'letter-' + tile; }
     return tile;
+  },
+
+  receiveLetter: function(letter) {
+    this.letter = letter;
+    this.set('status', 'set');
+    this.set('tileSrc', letter.get('imageSrc'))
   }
 });

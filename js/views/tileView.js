@@ -1,11 +1,16 @@
 var Scrabble = Scrabble || {};
 
 Scrabble.TileView = Backbone.View.extend({
+  template: _.template($('#tile-template').html()),
   events: {},
 
   initialize: function(context) {
-    this.imageSrc = context.tileSrc;
-    this.status = 'empty';
+    this.listenTo(this.model, 'change:status', this.render);
+  },
+
+  render: function() {
+    this.$el.html(this.template(this.model.attributes));
+    return this;
   },
 
   placeLetter: function(letter) {
@@ -14,6 +19,5 @@ Scrabble.TileView = Backbone.View.extend({
     this.$el.find('img').addClass('placed');
 
     this.letter = letter;
-    this.status = 'placed';
   }
 });

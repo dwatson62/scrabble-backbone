@@ -10,6 +10,10 @@
         <img class='letter-tile' src='{{ imageSrc }}' />
       </div>
     </script>
+
+    <script id="tile-template" type="text/template">
+      <img class='board-tile {{ status }}' data-tile-id='{{ tileId }}' src='{{ tileSrc }}' />
+    </script>
   </head>
   <body id='scrabble-app'>
     <div class='container'>

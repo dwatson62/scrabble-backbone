@@ -23,13 +23,12 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   renderTile: function(tile) {
-    var tileId = 'tile_' + tile.tileId;
+    var domId = '#' + tile.get('tileId');
     var tileView = new Scrabble.TileView({
-      el: $('#' + tileId),
-      tileSrc: tile.tileSrc
+      el: $(domId),
+      model: tile
     });
-    this.tileViews[tileId] = tileView;
-    this.$el.find('#' + tileId + ' img').prop('src', tile.tileSrc);
+    this.$el.find(domId).append(tileView.render().el);
   },
 
   currentPlayer: function() {
@@ -43,6 +42,7 @@ Scrabble.BoardView = Backbone.View.extend({
 
     if (letter) {
       letter.place();
+      tile.receiveLetter(letter)
       tileView.placeLetter(letter);
       this.currentPlayer().putDownLetter();
     }
