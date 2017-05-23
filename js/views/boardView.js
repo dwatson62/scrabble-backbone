@@ -4,7 +4,7 @@ Scrabble.BoardView = Backbone.View.extend({
   el: '#scrabble-board',
 
   events: {
-    'click .board-tile.empty': 'emptyTileClicked'
+    'click .board-tile.empty.highlight': 'emptyTileClicked'
   },
 
   initialize: function(context) {
@@ -15,7 +15,7 @@ Scrabble.BoardView = Backbone.View.extend({
 
   render: function() {
     var self = this;
-    _.each(self.collection, function(tile) {
+    _.each(self.collection.models, function(tile) {
       self.renderTile(tile);
     });
     return this;
@@ -31,7 +31,7 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   tileModel: function(tileId) {
-    return this.collection.find(function(model) {
+    return this.collection.models.find(function(model) {
       return model.get('tileId') === tileId;
     });
   },
@@ -48,6 +48,23 @@ Scrabble.BoardView = Backbone.View.extend({
       var tileId = event.currentTarget.dataset.tileId;
       this.tileModel(tileId).receiveLetter(letter)
       this.currentPlayer().putDownLetter();
+      this.highlightAllTiles();
     }
+  },
+
+  highlightAvailableTiles: function() {
+    this.collection.findWhere('centre').highlight();
+  },
+
+  highlightAllTiles: function() {
+    _.each(this.collection.models, function(tile) {
+      tile.highlight();
+    });
+  },
+
+  unhighlightAllTiles: function() {
+    _.each(this.collection.models, function(tile) {
+      tile.unhighlight();
+    });
   }
 });

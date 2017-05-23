@@ -25,6 +25,7 @@ Scrabble.Tile = Backbone.Model.extend({
   },
 
   defaults: {
+    highlight: 'highlight',
     status: 'empty'
   },
 
@@ -72,10 +73,10 @@ Scrabble.Tile = Backbone.Model.extend({
   },
 
   highlight: function() {
-    this.set('active', 'active');
+    this.set('highlight', 'highlight');
   },
 
   unhighlight: function() {
-    this.set('active', 'inactive');
+    this.set('highlight', 'unhighlight');
   }
 });

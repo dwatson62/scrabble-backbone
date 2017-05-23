@@ -12,6 +12,14 @@ body {
 
 .board-tile {
   height: 50px;
+
+  &.highlight {
+    opacity: 1;
+  }
+
+  &.unhighlight {
+    opacity: .1;
+  }
 }
 
 .letter-tile {

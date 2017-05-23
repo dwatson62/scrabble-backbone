@@ -6,6 +6,7 @@ Scrabble.TileView = Backbone.View.extend({
 
   initialize: function(context) {
     this.listenTo(this.model, 'change:tileSrc', this.render);
+    this.listenTo(this.model, 'change:highlight', this.render);
   },
 
   render: function() {

@@ -54,4 +54,22 @@ describe('Tile', function() {
       expect(tile.get('tileSrc')).to.eql(tile.get('defaultTileSrc'));
     });
   });
+
+  describe('#highlight()', function() {
+    it('sets highlight attribute', function() {
+      var tile = new Scrabble.Tile({ x: 0, y: 1 });
+
+      tile.highlight();
+      expect(tile.get('highlight')).to.eql('highlight');
+    });
+  });
+
+  describe('#unhighlight()', function() {
+    it('sets unhighlight attribute', function() {
+      var tile = new Scrabble.Tile({ x: 0, y: 1 });
+
+      tile.unhighlight();
+      expect(tile.get('highlight')).to.eql('unhighlight');
+    });
+  });
 });

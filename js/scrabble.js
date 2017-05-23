@@ -17,7 +17,7 @@ $(document).ready(function() {
 
   var boardContext = {
     players: [player],
-    boardTiles: board.models
+    boardTiles: board
   }
 
   var boardView = new Scrabble.BoardView(boardContext);
