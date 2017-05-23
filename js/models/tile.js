@@ -34,6 +34,7 @@ Scrabble.Tile = Backbone.Model.extend({
     this.set('coords', this.convertToCoords());
     this.set('defaultTileSrc', this.baseSrc + this.fetchTile() + '.png');
     this.set('tileSrc', this.get('defaultTileSrc'));
+    this.set('centre', this.isCentreTile());
   },
 
   generateTileId: function() {
@@ -54,6 +55,10 @@ Scrabble.Tile = Backbone.Model.extend({
     return tile;
   },
 
+  isCentreTile: function() {
+    return this.get('coords') === 'H8';
+  },
+
   receiveLetter: function(letter) {
     this.letter = letter;
     this.set('status', 'placed');
@@ -64,5 +69,13 @@ Scrabble.Tile = Backbone.Model.extend({
     this.letter = undefined;
     this.set('status', 'empty');
     this.set('tileSrc', this.get('defaultTileSrc'));
+  },
+
+  highlight: function() {
+    this.set('active', 'active');
+  },
+
+  unhighlight: function() {
+    this.set('active', 'inactive');
   }
 });
