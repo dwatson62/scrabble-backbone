@@ -1,25 +1,33 @@
 var Scrabble = Scrabble || {};
 
 Scrabble.PlacedLetters = Backbone.Collection.extend({
-  defaults: {
-    'direction': null
-  },
-
   sort_key: 'tileId',
 
   comparator: function(letter) {
     return letter.get(this.sort_key);
   },
 
-  determineDirection: function() {
-    var ids = this.pluck('tileId').map(function(tileId) {
-      return tileId.split('_')
-    });
+  direction: function() {
+    this.direction = this.determineDirection();
+  },
 
-    if (parseInt(ids[0][2]) != parseInt(ids[1][2])) {
-      this.set('direction', 'horizontal');
+  determineDirection: function() {
+    if (this.length < 2) {
+      return null;
+    }
+
+    var ids = this._splitIds();
+
+    if (parseInt(ids[0][2]) !== parseInt(ids[1][2])) {
+      return 'horizontal';
     } else {
-      this.set('direction', 'vertical');
+      return 'vertical';
     }
   },
+
+  _splitIds: function() {
+    return this.pluck('tileId').map(function(tileId) {
+      return tileId.split('_');
+    });
+  }
 });
