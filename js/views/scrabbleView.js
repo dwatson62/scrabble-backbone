@@ -6,7 +6,8 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   events: {
     'click .cancel-btn': 'cancelButtonClicked',
     'click .player-letter.unselected': 'letterClicked',
-    'click .player-letter.selected': 'selectedLetterClicked'
+    'click .player-letter.selected': 'selectedLetterClicked',
+    'click .play-word-btn': 'playWordButtonClicked'
   },
 
   initialize: function(context) {
@@ -45,5 +46,20 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   selectedLetterClicked: function(event) {
     this.boardView.highlightAllTiles();
     this.playerDashboardView.selectedLetterClicked(event);
+  },
+
+  playWordButtonClicked: function() {
+    var word = this.boardView.placedLettersCollection.pluck('value').join('');
+    var config = { params: { 'word': word } };
+    var self = this;
+
+    $.get('/word', config)
+      .done(function(response) {
+        if (response.length === 0) {
+          console.log(word + ' is not a word!');
+        } else {
+          console.log(word + ' is a word!');
+        }
+      });
   }
 });

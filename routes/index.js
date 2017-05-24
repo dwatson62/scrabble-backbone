@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/word', function(req, res, next) {
   var url = 'http://api.wordnik.com:80/v4/word.json/';
-  var wordDef = req.query.word + '/definitions?';
+  var wordDef = req.query.params.word + '/definitions?';
   var extraParams = 'limit=1&includeRelated=true&useCanonical=false&includeTags=false';
   var wordRequest = url + wordDef + extraParams + '&api_key=' + process.env.APIKEY;
   request(wordRequest, function(error, response, body) {
