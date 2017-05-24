@@ -21,13 +21,18 @@ Scrabble.ScrabbleView = Backbone.View.extend({
       tile.letter.unselect();
       tile.returnLetter();
     });
+    this.clearPlacedLettersCollection();
     this.boardView.highlightAllTiles();
   },
 
   findAllPlacedTiles: function() {
-    return this.boardView.collection.filter(function(tile) {
+    return this.boardView.boardTilesCollection.filter(function(tile) {
       return tile.get('status') === 'placed';
     });
+  },
+
+  clearPlacedLettersCollection: function() {
+    this.boardView.placedLettersCollection.reset();
   },
 
   letterClicked: function(event) {
