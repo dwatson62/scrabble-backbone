@@ -55,6 +55,55 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   highlightAvailableTiles: function() {
+    if (this.placedLettersCollection.length === 0) {
+      this.highlightCentreTile();
+    } else if (this.placedLettersCollection.length === 1) {
+      this.highlightHorizontalAndVertical();
+    }
+  },
+
+  highlightHorizontalAndVertical: function() {
+    var firstTileId = this.placedLettersCollection.at(0).get('tileId');
+
+    var tileIds = [
+      firstTileId,
+      this.oneTileBelow(firstTileId),
+      this.oneTileAbove(firstTileId),
+      this.oneTileToLeft(firstTileId),
+      this.oneTileToRight(firstTileId)
+    ];
+
+    var self = this;
+    _.each(tileIds, function(id) {
+      self.boardTilesCollection.findWhere({ tileId: id }).highlight();
+    });
+  },
+
+  oneTileBelow: function(firstTileId) {
+    var splitId = firstTileId.split('_');
+    splitId[1] = String(parseInt(splitId[1]) + 1);
+    return splitId.join('_');
+  },
+
+  oneTileAbove: function(firstTileId) {
+    var splitId = firstTileId.split('_');
+    splitId[1] = String(parseInt(splitId[1]) - 1);
+    return splitId.join('_');
+  },
+
+  oneTileToLeft: function(firstTileId) {
+    var splitId = firstTileId.split('_');
+    splitId[2] = String(parseInt(splitId[2]) + 1);
+    return splitId.join('_');
+  },
+
+  oneTileToRight: function(firstTileId) {
+    var splitId = firstTileId.split('_');
+    splitId[2] = String(parseInt(splitId[2]) - 1);
+    return splitId.join('_');
+  },
+
+  highlightCentreTile: function() {
     this.boardTilesCollection.findWhere('centre').highlight();
   },
 
