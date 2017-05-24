@@ -58,97 +58,23 @@ Scrabble.BoardView = Backbone.View.extend({
     if (this.placedLettersCollection.length === 0) {
       this.highlightCentreTile();
     } else if (this.placedLettersCollection.length === 1) {
-      this.highlightHorizontalAndVertical();
+      this.showHorizontalAndVertical();
     } else {
-      var direction = this.determineDirection();
-
-      if (direction === 'horizontal') {
-        this.showHorizontalTiles();
-      } else {
-        this.showVerticalTiles();
-      }
+      this.showNextAvailableTiles();
     }
   },
 
-  determineDirection: function() {
-    var ids = this.placedLettersCollection.pluck('tileId').map(function(tileId) {
-      return tileId.split('_')
-    });
-
-    if (parseInt(ids[0][2]) != parseInt(ids[1][2])) {
-      return 'horizontal';
-    } else {
-      return 'vertical';
-    }
+  showHorizontalAndVertical: function() {
+    var firstTileId = this.placedLettersCollection.at(0).get('tileId');
+    this.boardTilesCollection.showHorizontalAndVertical(firstTileId);
   },
 
-  showHorizontalTiles: function() {
+  showNextAvailableTiles: function() {
     var firstTileId = this.placedLettersCollection.at(0).get('tileId');
     var lastTileId = this.placedLettersCollection.at(-1).get('tileId');
-    var tileIds = [
-      this.oneTileToLeft(firstTileId),
-      this.oneTileToRight(lastTileId)
-    ];
+    var direction = this.placedLettersCollection.determineDirection();
 
-    var self = this;
-    _.each(tileIds, function(id) {
-      self.boardTilesCollection.findWhere({ tileId: id }).highlight();
-    });
-  },
-
-  showVerticalTiles: function() {
-    var firstTileId = this.placedLettersCollection.at(0).get('tileId');
-    var lastTileId = this.placedLettersCollection.at(-1).get('tileId');
-    var tileIds = [
-      this.oneTileAbove(firstTileId),
-      this.oneTileBelow(lastTileId)
-    ];
-
-    var self = this;
-    _.each(tileIds, function(id) {
-      self.boardTilesCollection.findWhere({ tileId: id }).highlight();
-    });
-  },
-
-  highlightHorizontalAndVertical: function() {
-    var firstTileId = this.placedLettersCollection.at(0).get('tileId');
-
-    var tileIds = [
-      firstTileId,
-      this.oneTileBelow(firstTileId),
-      this.oneTileAbove(firstTileId),
-      this.oneTileToLeft(firstTileId),
-      this.oneTileToRight(firstTileId)
-    ];
-
-    var self = this;
-    _.each(tileIds, function(id) {
-      self.boardTilesCollection.findWhere({ tileId: id }).highlight();
-    });
-  },
-
-  oneTileBelow: function(firstTileId) {
-    var splitId = firstTileId.split('_');
-    splitId[1] = String(parseInt(splitId[1]) + 1);
-    return splitId.join('_');
-  },
-
-  oneTileAbove: function(firstTileId) {
-    var splitId = firstTileId.split('_');
-    splitId[1] = String(parseInt(splitId[1]) - 1);
-    return splitId.join('_');
-  },
-
-  oneTileToLeft: function(firstTileId) {
-    var splitId = firstTileId.split('_');
-    splitId[2] = String(parseInt(splitId[2]) - 1);
-    return splitId.join('_');
-  },
-
-  oneTileToRight: function(firstTileId) {
-    var splitId = firstTileId.split('_');
-    splitId[2] = String(parseInt(splitId[2]) + 1);
-    return splitId.join('_');
+    this.boardTilesCollection.showNextAvailableTiles(direction, firstTileId, lastTileId);
   },
 
   highlightCentreTile: function() {
