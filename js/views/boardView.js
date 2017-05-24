@@ -8,14 +8,15 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   initialize: function(context) {
-    this.collection = context.boardTiles;
+    this.boardTilesCollection = context.boardTiles;
+    this.placedLettersCollection = context.placedLetters;
     this.players = context.players;
     this.render();
   },
 
   render: function() {
     var self = this;
-    _.each(self.collection.models, function(tile) {
+    _.each(self.boardTilesCollection.models, function(tile) {
       self.renderTile(tile);
     });
     return this;
@@ -31,7 +32,7 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   tileModel: function(tileId) {
-    return this.collection.models.find(function(model) {
+    return this.boardTilesCollection.models.find(function(model) {
       return model.get('tileId') === tileId;
     });
   },
@@ -44,8 +45,9 @@ Scrabble.BoardView = Backbone.View.extend({
     var letter = this.currentPlayer().selectedLetter;
 
     if (letter) {
-      letter.place();
       var tileId = event.currentTarget.dataset.tileId;
+      letter.place(tileId);
+      this.placedLettersCollection.add(letter);
       this.tileModel(tileId).receiveLetter(letter)
       this.currentPlayer().putDownLetter();
       this.highlightAllTiles();
@@ -53,17 +55,17 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   highlightAvailableTiles: function() {
-    this.collection.findWhere('centre').highlight();
+    this.boardTilesCollection.findWhere('centre').highlight();
   },
 
   highlightAllTiles: function() {
-    _.each(this.collection.models, function(tile) {
+    _.each(this.boardTilesCollection.models, function(tile) {
       tile.highlight();
     });
   },
 
   unhighlightAllTiles: function() {
-    _.each(this.collection.models, function(tile) {
+    _.each(this.boardTilesCollection.models, function(tile) {
       tile.unhighlight();
     });
   }

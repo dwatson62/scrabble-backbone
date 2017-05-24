@@ -5,6 +5,7 @@ _.templateSettings = {
 };
 
 $(document).ready(function() {
+  var placedLetters = new Scrabble.PlacedLetters();
   var board = new Scrabble.BoardTiles();
   var bag = new Scrabble.LettersBag();
 
@@ -17,7 +18,8 @@ $(document).ready(function() {
 
   var boardContext = {
     players: [player],
-    boardTiles: board
+    boardTiles: board,
+    placedLetters: placedLetters
   }
 
   var boardView = new Scrabble.BoardView(boardContext);
