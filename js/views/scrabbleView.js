@@ -37,6 +37,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
 
   letterClicked: function(event) {
     this.boardView.unhighlightAllTiles();
+    this.boardView.highlightUsedTiles();
     this.boardView.highlightAvailableTiles();
     this.playerDashboardView.letterClicked(event);
   },
