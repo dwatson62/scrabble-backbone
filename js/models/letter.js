@@ -5,10 +5,11 @@ Scrabble.Letter = Backbone.Model.extend({
     status: 'unselected'
   },
 
-  initialize: function(value, uid) {
-    this.set('value', value);
-    this.set('uid', uid);
+  initialize: function(context) {
+    this.set('value', context.value);
+    this.set('uid', context.uid);
     this.set('imageSrc', '/images/tiles/letter-' + this.get('value') + '.png');
+    this.set('points', context.points);
   },
 
   choose: function() {
