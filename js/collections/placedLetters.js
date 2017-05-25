@@ -27,6 +27,16 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     }
   },
 
+  assembleWord: function() {
+    return this.pluck('value').join('');
+  },
+
+  calculateScore: function() {
+    return _.reduce(this.pluck('points'), function(memo, num) {
+      return memo + num;
+    }, 0);
+  },
+
   _splitIds: function() {
     return this.pluck('tileId').map(function(tileId) {
       return tileId.split('_');

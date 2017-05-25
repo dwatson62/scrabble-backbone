@@ -38,4 +38,26 @@ describe('PlacedLetters Collection', function() {
       collection.reset();
     });
   });
+
+  describe('#assembleWord', function() {
+    it('correctly assembles the word', function() {
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_7', value: 'c' }));
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_10', value: 'a' }));
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', value: 't' }));
+
+      expect(collection.assembleWord()).to.eql('cat')
+      collection.reset();
+    });
+  });
+
+  describe('#calculateScore', function() {
+    it('correctly calculates score of letters placed', function() {
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_7', points: 1 }));
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_10', points: 2 }));
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', points: 3 }));
+
+      expect(collection.calculateScore()).to.eql(6)
+      collection.reset();
+    });
+  });
 });

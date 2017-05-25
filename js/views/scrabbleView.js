@@ -50,7 +50,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   },
 
   playWordButtonClicked: function() {
-    var word = this.boardView.placedLettersCollection.pluck('value').join('');
+    var word = this.boardView.placedLettersCollection.assembleWord();
     var config = { params: { 'word': word } };
     var self = this;
 
@@ -66,8 +66,11 @@ Scrabble.ScrabbleView = Backbone.View.extend({
       });
   },
 
-  playWord: function(word) {
-    var newWord = new Scrabble.Word({ value: word });
+  playWord: function(placedLettersCollection) {
+    var newWord = new Scrabble.Word({
+      points: placedLettersCollection.calculateScore(),
+      value: placedLettersCollection.assembleWord()
+    });
     this.playedWordsCollection.add(newWord);
   }
 });
