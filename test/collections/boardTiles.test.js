@@ -33,4 +33,20 @@ describe('BoardTiles Collection', function() {
       expect(collection.oneTileToRight('tile_7_7')).to.eql('tile_7_8')
     });
   });
+
+  describe('#showNextAvailableTiles', function() {
+    it('calls showHorizontalTiles when given direction of horizontal', function() {
+      var collectionSpy = sinon.spy(collection, 'showHorizontalTiles');
+
+      collection.showNextAvailableTiles('horizontal', 'tile_7_7', 'tile_7_7')
+      expect(collectionSpy.calledOnce).to.be(true);
+    });
+
+    it('calls showVerticalTiles when given direction of vertical', function() {
+      var collectionSpy = sinon.spy(collection, 'showVerticalTiles');
+
+      collection.showNextAvailableTiles('vertical', 'tile_7_7', 'tile_7_7')
+      expect(collectionSpy.calledOnce).to.be(true);
+    });
+  });
 });
