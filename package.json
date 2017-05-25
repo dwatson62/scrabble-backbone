@@ -28,6 +28,7 @@
     "mongodb": "^2.2.26",
     "mongoose": "^4.9.9",
     "node-sass": "^4.5.2",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "sinon": "^2.3.1"
   }
 }
