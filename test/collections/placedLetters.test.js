@@ -14,6 +14,7 @@ describe('PlacedLetters Collection', function() {
       collection.add(letter);
 
       expect(collection.determineDirection()).to.eql('horizontal');
+      collection.reset();
     });
 
     it('can calculate when tiles are placed vertically', function() {
@@ -23,6 +24,18 @@ describe('PlacedLetters Collection', function() {
       collection.add(letter);
 
       expect(collection.determineDirection()).to.eql('vertical');
+      collection.reset();
+    });
+  });
+
+  describe('#comparator', function() {
+    it('correctly sorts based on tileId', function() {
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_7' }));
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_10' }));
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_11' }));
+
+      expect(collection.pluck('tileId')).to.eql(['tile_6_7', 'tile_6_10', 'tile_6_11'])
+      collection.reset();
     });
   });
 });

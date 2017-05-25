@@ -3,8 +3,10 @@ var Scrabble = Scrabble || {};
 Scrabble.PlacedLetters = Backbone.Collection.extend({
   sort_key: 'tileId',
 
-  comparator: function(letter) {
-    return letter.get(this.sort_key);
+  comparator: function(letter1, letter2) {
+    var a = letter1.get(this.sort_key);
+    var b = letter2.get(this.sort_key);
+    return (Number(a.match(/(\d+)/g)[0]) - Number((b.match(/(\d+)/g)[0])));
   },
 
   direction: function() {
