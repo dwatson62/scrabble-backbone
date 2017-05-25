@@ -14,7 +14,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
     this.context = context;
     this.boardView = this.context.boardView;
     this.playerDashboardView = this.context.playerDashboardView;
-    this.playedWordsCollection = this.context.playedWordsCollection;
+    this.playedWordsView = this.context.playedWordsView;
   },
 
   cancelButtonClicked: function() {
@@ -66,11 +66,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
       });
   },
 
-  playWord: function(placedLettersCollection) {
-    var newWord = new Scrabble.Word({
-      points: placedLettersCollection.calculateScore(),
-      value: placedLettersCollection.assembleWord()
-    });
-    this.playedWordsCollection.add(newWord);
+  playWord: function(placedLetters) {
+    this.playedWordsView.playWord(placedLetters);
   }
 });

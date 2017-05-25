@@ -25,11 +25,12 @@ $(document).ready(function() {
 
   var boardView = new Scrabble.BoardView(boardContext);
   var playerDashboardView = new Scrabble.PlayerDashboardView(playerContext);
+  var playedWordsView = new Scrabble.PlayedWordsView();
 
   var scrabbleView = new Scrabble.ScrabbleView({
     bag: bag,
     boardView: boardView,
     playerDashboardView: playerDashboardView,
-    playedWordsCollection: playedWords
+    playedWordsView: playedWordsView
   });
 });

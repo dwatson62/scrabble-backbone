@@ -14,6 +14,14 @@
     <script id="tile-template" type="text/template">
       <img class='board-tile {{ status }} {{ highlight }}' data-tile-id='{{ tileId }}' src='{{ tileSrc }}' />
     </script>
+
+    <script id="word-template" type="text/template">
+      <div>
+        <div class='word-value'>{{ value }}</div>
+        <div class='word-points'>{{ points }}</div>
+        <div class='word-meaning'>{{ meaning }}</div>
+      </div>
+    </script>
   </head>
   <body id='scrabble-app'>
     <div class='container'>
@@ -27,6 +35,8 @@
             <button class='cancel-btn'>Cancel</button>
             <button class='play-word-btn'>Play Word</button>
           </section>
+
+          <section id='played-words-list'></section>
         </div>
       </div>
     </div>
@@ -40,6 +50,8 @@
     <script src='js/views/letterView.js'></script>
     <script src='js/views/tileView.js'></script>
     <script src='js/views/playerDashboardView.js'></script>
+    <script src='js/views/playedWordsView.js'></script>
+    <script src='js/views/wordView.js'></script>
     <script src='js/collections/placedLetters.js'></script>
     <script src='js/collections/lettersBag.js'></script>
     <script src='js/collections/boardTiles.js'></script>
