@@ -32,7 +32,7 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   tileModel: function(tileId) {
-    return this.boardTilesCollection.models.find(function(model) {
+    return this.boardTilesCollection.findWhere(function(model) {
       return model.get('tileId') === tileId;
     });
   },

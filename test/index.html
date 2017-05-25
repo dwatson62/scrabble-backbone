@@ -15,8 +15,14 @@
   <script src="https://cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
   <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
 
+  <script id="tile-template" type="text/template">
+    <img class='board-tile {{ status }} {{ highlight }}' data-centre='{{ centre }}' data-tile-id='{{ tileId }}' src='{{ tileSrc }}' />
+  </script>
+
   <script>mocha.setup('bdd')</script>
+  <script src="../bower_components/sinon-browser-only/sinon.js"></script>
   <script src="../vendor/index.js"></script>
+  <script src="../js/views/tileView.js"></script>
   <script src="../js/views/boardView.js"></script>
   <script src="../js/collections/boardTiles.js"></script>
   <script src="../js/collections/placedLetters.js"></script>
@@ -28,6 +34,7 @@
   <script src="models/letter.test.js"></script>
   <script src="models/player.test.js"></script>
   <script src="models/tile.test.js"></script>
+  <script src="views/boardView.test.js"></script>
   <script>
     mocha.checkLeaks();
     mocha.globals(['jQuery']);
