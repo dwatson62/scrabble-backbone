@@ -6,6 +6,7 @@ _.templateSettings = {
 
 $(document).ready(function() {
   var placedLetters = new Scrabble.PlacedLetters();
+  var playedWords = new Scrabble.PlayedWords();
   var board = new Scrabble.BoardTiles();
   var bag = new Scrabble.LettersBag();
 
@@ -28,6 +29,7 @@ $(document).ready(function() {
   var scrabbleView = new Scrabble.ScrabbleView({
     bag: bag,
     boardView: boardView,
-    playerDashboardView: playerDashboardView
+    playerDashboardView: playerDashboardView,
+    playedWordsCollection: playedWords
   });
 });
