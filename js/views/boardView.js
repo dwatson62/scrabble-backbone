@@ -85,7 +85,7 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   highlightCentreTile: function() {
-    this.boardTilesCollection.findWhere('centre').highlight();
+    this.boardTilesCollection.centreTile.highlight();
   },
 
   highlightAllTiles: function() {

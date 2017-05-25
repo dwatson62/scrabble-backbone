@@ -5,7 +5,7 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
 
   initialize: function() {
     this.models = this.createBoard();
-    this.centreTile = this.findWhere('centre');
+    this.centreTile = this.findWhere({ tileId: 'tile_7_7' });
     this.direction = null
   },
 

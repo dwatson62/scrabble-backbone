@@ -48,9 +48,7 @@ describe('BoardView', function() {
 
   describe('#highlightCentreTile', function() {
     it('calls highlight on the centre tile', function() {
-      var centreTile = boardTiles.findWhere('centre');
-
-      var highlightSpy = sinon.spy(centreTile, 'highlight');
+      var highlightSpy = sinon.spy(boardTiles.centreTile, 'highlight');
       boardView.highlightCentreTile();
 
       expect(highlightSpy.calledOnce).to.be(true)
