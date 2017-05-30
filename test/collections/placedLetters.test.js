@@ -50,13 +50,13 @@ describe('PlacedLetters Collection', function() {
     });
   });
 
-  describe('#calculateScore', function() {
+  describe('#calculatePoints', function() {
     it('correctly calculates score of letters placed', function() {
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_7', points: 1 }));
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_10', points: 2 }));
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', points: 3 }));
 
-      expect(collection.calculateScore()).to.eql(6)
+      expect(collection.calculatePoints()).to.eql(6)
       collection.reset();
     });
   });

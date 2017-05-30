@@ -31,12 +31,18 @@ describe('ScrabbleView', function() {
 
   describe('#playWord', function() {
     it('creates a Word instance and adds to playedWordsCollection', function() {
-      scrabbleView.playWord(placedLettersCollection);
+      var response = {[
+        text: 'House pet',
+        word: 'cat'
+      ]};
+      scrabbleView.playWord(response);
 
       expect(scrabbleView.playedWordsCollection.length).to.eql(1)
+
       var word = scrabbleView.playedWordsCollection.at(0)
-      expect(word.get('value')).to.eql('cat');
+      expect(word.get('meaning')).to.eql(response[0].text);
       expect(word.get('points')).to.eql(5);
+      expect(word.get('value')).to.eql(response[0].word);
     });
   });
 });

@@ -59,14 +59,14 @@ Scrabble.ScrabbleView = Backbone.View.extend({
         if (response.length === 0) {
           console.log(word + ' is not a word!');
         } else {
-          console.log(word + ' is a word!');
-          var placedLetters = self.boardView.placedLettersCollection;
-          self.playWord(placedLetters);
+          self.playWord(response);
         }
       });
   },
 
-  playWord: function(placedLetters) {
-    this.playedWordsView.playWord(placedLetters);
+  playWord: function(response) {
+    var points = this.boardView.placedLettersCollection.calculatePoints();
+    this.playedWordsView.playWord(response, points);
+    this.boardView.placedLettersCollection.reset();
   }
 });

@@ -31,7 +31,7 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     return this.pluck('value').join('');
   },
 
-  calculateScore: function() {
+  calculatePoints: function() {
     return _.reduce(this.pluck('points'), function(memo, num) {
       return memo + num;
     }, 0);

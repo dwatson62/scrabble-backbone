@@ -10,10 +10,11 @@ Scrabble.PlayedWordsView = Backbone.View.extend({
     this.render();
   },
 
-  playWord: function(placedLetters) {
+  playWord: function(response, points) {
     var newWord = new Scrabble.Word({
-      points: placedLetters.calculateScore(),
-      value: placedLetters.assembleWord()
+      meaning: response[0].text,
+      points: points,
+      value: response[0].word
     });
 
     var wordView = new Scrabble.WordView({
@@ -23,6 +24,5 @@ Scrabble.PlayedWordsView = Backbone.View.extend({
     this.$el.append(wordView.render().el);
 
     this.playedWordsCollection.add(newWord);
-    console.log(this.playedWordsCollection);
   }
 });
