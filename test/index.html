@@ -36,6 +36,7 @@
   <script>mocha.setup('bdd')</script>
   <script src="../bower_components/sinon-browser-only/sinon.js"></script>
   <script src="../vendor/index.js"></script>
+  <script src='../js/backbone.helper.js'></script>
   <script src="../js/views/boardView.js"></script>
   <script src="../js/views/letterView.js"></script>
   <script src="../js/views/playedWordsView.js"></script>
@@ -52,6 +53,7 @@
   <script src="../js/models/player.js"></script>
   <script src="../js/models/tile.js"></script>
   <script src="../js/models/word.js"></script>
+  <script src="../js/helpers/tileHelper.js"></script>
 
   <script src="collections/boardTiles.test.js"></script>
   <script src="collections/lettersBag.test.js"></script>
@@ -62,6 +64,7 @@
   <script src="models/tile.test.js"></script>
   <script src="views/boardView.test.js"></script>
   <script src="views/scrabbleView.test.js"></script>
+  <script src="helpers/tileHelper.test.js"></script>
   <script>
     mocha.checkLeaks();
     mocha.globals(['jQuery']);

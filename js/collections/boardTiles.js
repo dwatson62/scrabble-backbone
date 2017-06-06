@@ -5,6 +5,7 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
 
   initialize: function() {
     this.models = this.createBoard();
+    this.helper = new Scrabble.TileHelper();
     this.centreTile = this.findWhere({ tileId: 'tile_7_7' });
     this.direction = null
   },
@@ -61,32 +62,8 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     this.showVerticalTiles(firstTileId, firstTileId);
   },
 
-  oneTileBelow: function(tileId) {
-    var splitId = tileId.split('_');
-    splitId[1] = String(parseInt(splitId[1]) + 1);
-    return splitId.join('_');
-  },
-
-  oneTileAbove: function(tileId) {
-    var splitId = tileId.split('_');
-    splitId[1] = String(parseInt(splitId[1]) - 1);
-    return splitId.join('_');
-  },
-
-  oneTileToLeft: function(tileId) {
-    var splitId = tileId.split('_');
-    splitId[2] = String(parseInt(splitId[2]) - 1);
-    return splitId.join('_');
-  },
-
-  oneTileToRight: function(tileId) {
-    var splitId = tileId.split('_');
-    splitId[2] = String(parseInt(splitId[2]) + 1);
-    return splitId.join('_');
-  },
-
   _firstTileNotPlaced: function(tileId, fn) {
-    var tile = this[fn](tileId);
+    var tile = this.helper[fn](tileId);
     if (this.findWhere({ tileId: tile }).isPlaced()) {
       return this._firstTileNotPlaced(tile, fn);
     } else {

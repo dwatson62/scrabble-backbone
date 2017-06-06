@@ -10,30 +10,6 @@ describe('BoardTiles Collection', function() {
     });
   });
 
-  describe('#oneTileBelow', function() {
-    it('returns the tile immediately below the given tileId', function() {
-      expect(collection.oneTileBelow('tile_7_7')).to.eql('tile_8_7')
-    });
-  });
-
-  describe('#oneTileAbove', function() {
-    it('returns the tile immediately above the given tileId', function() {
-      expect(collection.oneTileAbove('tile_7_7')).to.eql('tile_6_7')
-    });
-  });
-
-  describe('#oneTileToLeft', function() {
-    it('returns the tile immediately above the given tileId', function() {
-      expect(collection.oneTileToLeft('tile_7_7')).to.eql('tile_7_6')
-    });
-  });
-
-  describe('#oneTileToRight', function() {
-    it('returns the tile immediately above the given tileId', function() {
-      expect(collection.oneTileToRight('tile_7_7')).to.eql('tile_7_8')
-    });
-  });
-
   describe('#showNextAvailableTiles', function() {
     it('calls showHorizontalTiles when given direction of horizontal', function() {
       var collectionSpy = sinon.spy(collection, 'showHorizontalTiles');
