@@ -9,11 +9,13 @@ $(document).ready(function() {
   var playedWords = new Scrabble.PlayedWords();
   var board = new Scrabble.BoardTiles();
   var bag = new Scrabble.LettersBag();
+  var playerLetters = new Scrabble.PlayerLetters();
+  playerLetters.add(bag.retrieve(7))
 
   var player = new Scrabble.Player('Daryl')
 
   var playerContext = {
-    letters: bag.models.slice(0, 7),
+    collection: playerLetters,
     player: player
   };
 

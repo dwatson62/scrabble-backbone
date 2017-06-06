@@ -1,8 +1,6 @@
 var Scrabble = Scrabble || {};
 
 Scrabble.LettersBag = Backbone.Collection.extend({
-  model: Scrabble.Letter,
-
   letterValues: {
     "a": { "points":  1, "tiles":  9 },
     "b": { "points":  3, "tiles":  2 },
@@ -34,13 +32,10 @@ Scrabble.LettersBag = Backbone.Collection.extend({
   },
 
   initialize: function() {
-    this.models = this.createBag();
-  },
-
-  createBag: function() {
     var letters = _.keys(this.letterValues);
-    var bag = [];
+    var self = this;
     var count = 1;
+
     for (var letter in letters) {
       for (i = 0; i < this.letterValues[letters[letter]].tiles; i ++) {
         newLetter = new Scrabble.Letter({
@@ -48,10 +43,20 @@ Scrabble.LettersBag = Backbone.Collection.extend({
           uid: count,
           value: letters[letter]
         });
-        bag.push(newLetter);
+        self.add(newLetter);
         count += 1;
       }
     }
-    return _.shuffle(bag);
-  }
+
+    this.reset(this.shuffle(), { silent: true });
+  },
+
+  retrieve: function(number) {
+    var retrieved = [];
+    var self = this;
+    _.times(number, function() {
+      retrieved.push(self.pop());
+    });
+    return retrieved;
+  },
 });

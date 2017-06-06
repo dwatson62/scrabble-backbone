@@ -3,19 +3,17 @@ var Scrabble = Scrabble || {};
 Scrabble.PlayerDashboardView = Backbone.View.extend({
   el: '#player-dashboard',
 
-  events: {
-
-  },
+  events: {},
 
   initialize: function(context) {
-    this.collection = context.letters;
+    this.collection = context.collection;
     this.player = context.player;
     this.render();
   },
 
   render: function() {
     var self = this;
-    _.each(self.collection, function(letter) {
+    _.each(self.collection.models, function(letter) {
       self.renderLetter(letter);
     });
     return this;
