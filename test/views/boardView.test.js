@@ -1,17 +1,31 @@
 describe('BoardView', function() {
+  var player = new Scrabble.Player('Daryl');
   var boardTiles = new Scrabble.BoardTiles()
   var playedWordsView = new Scrabble.PlayedWordsView();
+
   var boardView = new Scrabble.BoardView({
     boardTiles: boardTiles,
-    playedWordsView: playedWordsView
+    playedWordsView: playedWordsView,
+    players: [player],
   });
+
   var placedLetters = new Scrabble.PlacedLetters();
   var letter = new Scrabble.Letter({ tileId: 'tile_7_7' });
+
+  var clearUp = function() {
+    boardView.placedLettersCollection.reset();
+  };
 
   describe('#tileModel', function() {
     it('finds the tile from a collection when passed a tileId', function() {
       var tile = boardView.tileModel('tile_7_7');
       expect(tile.get('tileId')).to.eql('tile_7_7');
+    });
+  });
+
+  describe('#currentPlayer', function() {
+    it('returns the current player', function() {
+      expect(boardView.currentPlayer()).to.eql(player);
     });
   });
 
@@ -23,6 +37,7 @@ describe('BoardView', function() {
 
       expect(boardSpy.calledOnce).to.be(true)
       boardSpy.restore();
+      clearUp();
     });
 
     it('calls showHorizontalAndVertical when 1 letter has been placed', function() {
@@ -34,6 +49,7 @@ describe('BoardView', function() {
 
       expect(boardSpy.calledOnce).to.be(true)
       boardSpy.restore();
+      clearUp();
     });
 
     it('calls showNextAvailableTiles when more than 1 letter has been placed', function() {
@@ -47,6 +63,7 @@ describe('BoardView', function() {
 
       expect(boardSpy.calledOnce).to.be(true)
       boardSpy.restore();
+      clearUp();
     });
   });
 
@@ -78,6 +95,13 @@ describe('BoardView', function() {
         expect(spy.calledOnce).to.be(true);
         spy.restore();
       });
+      clearUp();
+    });
+  });
+
+  describe('#_nothingPlayed', function() {
+    it('returns true when no letters or words have been played', function() {
+      expect(boardView._nothingPlayed()).to.be(true);
     });
   });
 });

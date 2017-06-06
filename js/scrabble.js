@@ -12,9 +12,9 @@ $(document).ready(function() {
   var board = new Scrabble.BoardTiles();
   var bag = new Scrabble.LettersBag();
   var playerLetters = new Scrabble.PlayerLetters();
-  playerLetters.add(bag.retrieve(7))
+  playerLetters.add(bag.retrieve(7));
 
-  var player = new Scrabble.Player('Daryl')
+  var player = new Scrabble.Player('Daryl');
 
   var playerDashboardView = new Scrabble.PlayerDashboardView({
     collection: playerLetters,
