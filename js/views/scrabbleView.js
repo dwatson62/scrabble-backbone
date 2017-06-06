@@ -12,6 +12,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
 
   initialize: function(context) {
     this.context = context;
+    this.bag = this.context.bag;
     this.boardView = this.context.boardView;
     this.playerDashboardView = this.context.playerDashboardView;
     this.playedWordsView = this.context.playedWordsView;
@@ -67,6 +68,15 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   playWord: function(response) {
     var points = this.boardView.placedLettersCollection.calculatePoints();
     this.playedWordsView.playWord(response, points);
+
+    this.fetchNewLettersFromBag();
     this.boardView.placedLettersCollection.reset();
+  },
+
+  fetchNewLettersFromBag: function() {
+    this.playerDashboardView.collection.removeUsed();
+    var letterCount = this.boardView.placedLettersCollection.length;
+    var newLetters = this.bag.retrieve(letterCount);
+    this.playerDashboardView.collection.add(newLetters);
   }
 });

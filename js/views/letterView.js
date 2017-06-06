@@ -10,10 +10,16 @@ Scrabble.LetterView = Backbone.View.extend({
 
   initialize: function() {
     this.listenTo(this.model, 'change:status', this.render);
+    this.model.bind('remove', this.removeView, this);
   },
 
   render: function() {
     this.$el.html(this.template(this.model.attributes));
     return this;
+  },
+
+  removeView: function() {
+    this.unbind();
+    this.remove();
   }
 });

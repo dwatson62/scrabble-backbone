@@ -9,6 +9,8 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
     this.collection = context.collection;
     this.player = context.player;
     this.render();
+
+    this.collection.bind('add', this.renderLetter, this);
   },
 
   render: function() {
@@ -33,10 +35,8 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   },
 
   letterClicked: function(event) {
-    _.each(this.collection, function(letter) {
-      if (letter.get('status') === 'selected') {
-        letter.unselect();
-      }
+    _.each(this.collection.where({ status: 'selected' }), function(letter) {
+      letter.unselect();
     });
 
     var uid = event.currentTarget.dataset.uid;
