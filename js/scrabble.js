@@ -7,6 +7,8 @@ _.templateSettings = {
 $(document).ready(function() {
   var placedLetters = new Scrabble.PlacedLetters();
   var playedWords = new Scrabble.PlayedWords();
+  var playedWordsView = new Scrabble.PlayedWordsView();
+
   var board = new Scrabble.BoardTiles();
   var bag = new Scrabble.LettersBag();
   var playerLetters = new Scrabble.PlayerLetters();
@@ -14,25 +16,21 @@ $(document).ready(function() {
 
   var player = new Scrabble.Player('Daryl')
 
-  var playerContext = {
+  var playerDashboardView = new Scrabble.PlayerDashboardView({
     collection: playerLetters,
     player: player
-  };
+  });
 
-  var boardContext = {
+  var boardView = new Scrabble.BoardView({
     players: [player],
     boardTiles: board,
-    placedLetters: placedLetters
-  }
-
-  var boardView = new Scrabble.BoardView(boardContext);
-  var playerDashboardView = new Scrabble.PlayerDashboardView(playerContext);
-  var playedWordsView = new Scrabble.PlayedWordsView();
+    placedLetters: placedLetters,
+    playedWordsView: playedWordsView
+  });
 
   var scrabbleView = new Scrabble.ScrabbleView({
     bag: bag,
     boardView: boardView,
     playerDashboardView: playerDashboardView,
-    playedWordsView: playedWordsView
   });
 });

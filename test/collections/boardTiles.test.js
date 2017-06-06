@@ -49,4 +49,24 @@ describe('BoardTiles Collection', function() {
       expect(collectionSpy.calledOnce).to.be(true);
     });
   });
+
+  describe('#_firstTileNotPlaced', function() {
+    it('returns the first tile that is not already placed going left', function() {
+      var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_6' });
+      collection.findWhere({ tileId: 'tile_7_6' }).receiveLetter(letter);
+      letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_5' });
+      collection.findWhere({ tileId: 'tile_7_5' }).receiveLetter(letter);
+
+      expect(collection._firstTileNotPlaced('tile_7_7', 'oneTileToLeft')).to.eql('tile_7_4')
+    });
+
+    it('returns the first tile that is not already placed going right', function() {
+      var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_8' });
+      collection.findWhere({ tileId: 'tile_7_8' }).receiveLetter(letter);
+      letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_9' });
+      collection.findWhere({ tileId: 'tile_7_9' }).receiveLetter(letter);
+
+      expect(collection._firstTileNotPlaced('tile_7_7', 'oneTileToRight')).to.eql('tile_7_10')
+    });
+  });
 });

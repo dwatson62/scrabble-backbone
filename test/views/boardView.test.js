@@ -1,6 +1,10 @@
 describe('BoardView', function() {
   var boardTiles = new Scrabble.BoardTiles()
-  var boardView = new Scrabble.BoardView({ boardTiles: boardTiles });
+  var playedWordsView = new Scrabble.PlayedWordsView();
+  var boardView = new Scrabble.BoardView({
+    boardTiles: boardTiles,
+    playedWordsView: playedWordsView
+  });
   var placedLetters = new Scrabble.PlacedLetters();
   var letter = new Scrabble.Letter({ tileId: 'tile_7_7' });
 

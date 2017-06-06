@@ -72,4 +72,16 @@ describe('Tile', function() {
       expect(tile.get('highlight')).to.eql('unhighlight');
     });
   });
+
+  describe('#isPlaced()', function() {
+    it('returns true if tile is placed', function() {
+      tile.receiveLetter(letter);
+      expect(tile.isPlaced()).to.be(true);
+    });
+
+    it('returns false if tile is not placed', function() {
+      tile.receiveLetter(letter);
+      expect(tile.isPlaced()).to.be(true);
+    });
+  });
 });

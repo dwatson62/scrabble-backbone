@@ -19,6 +19,10 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     return board;
   },
 
+  allPlacedTiles: function() {
+    return this.where({ status: 'placed' });
+  },
+
   showNextAvailableTiles: function(direction, firstTileId, lastTileId) {
     if (direction === 'horizontal') {
       this.showHorizontalTiles(firstTileId, lastTileId);
@@ -29,8 +33,8 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
 
   showHorizontalTiles: function(firstTileId, lastTileId) {
     var tileIds = [
-      this.oneTileToLeft(firstTileId),
-      this.oneTileToRight(lastTileId)
+      this._firstTileNotPlaced(firstTileId, 'oneTileToLeft'),
+      this._firstTileNotPlaced(lastTileId, 'oneTileToRight')
     ];
 
     this.highlightTiles(tileIds);
@@ -38,8 +42,8 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
 
   showVerticalTiles: function(firstTileId, lastTileId) {
     var tileIds = [
-      this.oneTileAbove(firstTileId),
-      this.oneTileBelow(lastTileId)
+      this._firstTileNotPlaced(firstTileId, 'oneTileAbove'),
+      this._firstTileNotPlaced(lastTileId, 'oneTileBelow')
     ];
 
     this.highlightTiles(tileIds);
@@ -79,5 +83,14 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     var splitId = tileId.split('_');
     splitId[2] = String(parseInt(splitId[2]) + 1);
     return splitId.join('_');
+  },
+
+  _firstTileNotPlaced: function(tileId, fn) {
+    var tile = this[fn](tileId);
+    if (this.findWhere({ tileId: tile }).isPlaced()) {
+      return this._firstTileNotPlaced(tile, fn);
+    } else {
+      return tile
+    }
   }
 });

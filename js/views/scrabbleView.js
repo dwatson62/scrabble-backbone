@@ -15,7 +15,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
     this.bag = this.context.bag;
     this.boardView = this.context.boardView;
     this.playerDashboardView = this.context.playerDashboardView;
-    this.playedWordsView = this.context.playedWordsView;
+    this.playedWordsView = this.boardView.playedWordsView;
   },
 
   cancelButtonClicked: function() {

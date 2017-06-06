@@ -10,6 +10,7 @@ Scrabble.BoardView = Backbone.View.extend({
   initialize: function(context) {
     this.boardTilesCollection = context.boardTiles;
     this.placedLettersCollection = context.placedLetters;
+    this.playedWordsView = context.playedWordsView;
     this.players = context.players;
     this.render();
   },
@@ -62,13 +63,30 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   highlightAvailableTiles: function() {
-    if (this.placedLettersCollection.length === 0) {
+    this.highlightAllPlacedTiles();
+    if (this._nothingPlayed()) {
       this.highlightCentreTile();
+    } else if (this.placedLettersCollection.length === 0) {
+      this.showAllNeighbourTiles();
     } else if (this.placedLettersCollection.length === 1) {
       this.showHorizontalAndVertical();
     } else {
       this.showNextAvailableTiles();
     }
+  },
+
+  highlightAllPlacedTiles: function() {
+    _.each(this.boardTilesCollection.allPlacedTiles(), function(tile) {
+      tile.highlight();
+    });
+  },
+
+  showAllNeighbourTiles: function() {
+    var self = this;
+    _.each(this.boardTilesCollection.allPlacedTiles(), function(tile) {
+      var tileId = tile.get('tileId');
+      self.boardTilesCollection.showHorizontalAndVertical(tileId);
+    });
   },
 
   showHorizontalAndVertical: function() {
@@ -98,5 +116,10 @@ Scrabble.BoardView = Backbone.View.extend({
     _.each(this.boardTilesCollection.models, function(tile) {
       tile.unhighlight();
     });
+  },
+
+  _nothingPlayed: function() {
+    return this.playedWordsView.playedWordsCollection.length === 0 &&
+      this.placedLettersCollection.length === 0;
   }
 });

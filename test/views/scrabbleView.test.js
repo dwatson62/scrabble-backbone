@@ -24,17 +24,22 @@ describe('ScrabbleView', function() {
     placedLettersCollection.add(letter);
   });
 
+  var boardView = new Scrabble.BoardView({
+    boardTiles: new Scrabble.BoardTiles(),
+    playedWordsView: new Scrabble.PlayedWordsView()
+  });
+
   var scrabbleView = new Scrabble.ScrabbleView({
-    placedLettersCollection: placedLettersCollection,
-    playedWordsCollection: new Scrabble.PlayedWords()
+    boardView: boardView,
+    placedLettersCollection: placedLettersCollection
   });
 
   describe('#playWord', function() {
     it('creates a Word instance and adds to playedWordsCollection', function() {
-      var response = {[
+      var response = [{
         text: 'House pet',
         word: 'cat'
-      ]};
+      }];
       scrabbleView.playWord(response);
 
       expect(scrabbleView.playedWordsCollection.length).to.eql(1)
