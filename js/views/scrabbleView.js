@@ -30,7 +30,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
 
   findAllPlacedTiles: function() {
     return this.boardView.boardTilesCollection.filter(function(tile) {
-      return tile.get('status') === 'placed';
+      return tile.isPlaced();
     });
   },
 

@@ -24,14 +24,20 @@ describe('ScrabbleView', function() {
     placedLettersCollection.add(letter);
   });
 
+  var playerDashboardView = new Scrabble.PlayerDashboardView({
+    collection: new Scrabble.PlayerLetters()
+  });
+
   var boardView = new Scrabble.BoardView({
     boardTiles: new Scrabble.BoardTiles(),
+    placedLetters: placedLettersCollection,
     playedWordsView: new Scrabble.PlayedWordsView()
   });
 
   var scrabbleView = new Scrabble.ScrabbleView({
+    bag: new Scrabble.LettersBag(),
     boardView: boardView,
-    placedLettersCollection: placedLettersCollection
+    playerDashboardView: playerDashboardView
   });
 
   describe('#playWord', function() {
@@ -42,9 +48,9 @@ describe('ScrabbleView', function() {
       }];
       scrabbleView.playWord(response);
 
-      expect(scrabbleView.playedWordsCollection.length).to.eql(1)
+      expect(scrabbleView.playedWordsView.playedWordsCollection.length).to.eql(1)
 
-      var word = scrabbleView.playedWordsCollection.at(0)
+      var word = scrabbleView.playedWordsView.playedWordsCollection.at(0)
       expect(word.get('meaning')).to.eql(response[0].text);
       expect(word.get('points')).to.eql(5);
       expect(word.get('value')).to.eql(response[0].word);

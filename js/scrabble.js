@@ -31,6 +31,6 @@ $(document).ready(function() {
   var scrabbleView = new Scrabble.ScrabbleView({
     bag: bag,
     boardView: boardView,
-    playerDashboardView: playerDashboardView,
+    playerDashboardView: playerDashboardView
   });
 });

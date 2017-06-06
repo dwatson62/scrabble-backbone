@@ -19,20 +19,40 @@
     <img class='board-tile {{ status }} {{ highlight }}' data-tile-id='{{ tileId }}' src='{{ tileSrc }}' />
   </script>
 
+  <script id="letter-template" type="text/template">
+    <div class='player-letter {{ status }}' data-uid='{{ uid }}'>
+      <img class='letter-tile' src='{{ imageSrc }}' />
+    </div>
+  </script>
+
+  <script id="word-template" type="text/template">
+    <div>
+      <div class='word-value'>{{ value }}</div>
+      <div class='word-points'>{{ points }}</div>
+      <div class='word-meaning'>{{ meaning }}</div>
+    </div>
+  </script>
+
   <script>mocha.setup('bdd')</script>
   <script src="../bower_components/sinon-browser-only/sinon.js"></script>
   <script src="../vendor/index.js"></script>
-  <script src="../js/views/tileView.js"></script>
   <script src="../js/views/boardView.js"></script>
-  <script src="../js/views/scrabbleView.js"></script>
+  <script src="../js/views/letterView.js"></script>
   <script src="../js/views/playedWordsView.js"></script>
+  <script src="../js/views/playerDashboardView.js"></script>
+  <script src="../js/views/scrabbleView.js"></script>
+  <script src="../js/views/tileView.js"></script>
+  <script src="../js/views/wordView.js"></script>
+  <script src="../js/collections/lettersBag.js"></script>
   <script src="../js/collections/boardTiles.js"></script>
   <script src="../js/collections/placedLetters.js"></script>
+  <script src="../js/collections/playerLetters.js"></script>
   <script src="../js/collections/playedWords.js"></script>
   <script src="../js/models/letter.js"></script>
   <script src="../js/models/player.js"></script>
   <script src="../js/models/tile.js"></script>
   <script src="../js/models/word.js"></script>
+
   <script src="collections/boardTiles.test.js"></script>
   <script src="collections/placedLetters.test.js"></script>
   <script src="models/letter.test.js"></script>
