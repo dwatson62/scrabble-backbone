@@ -24,6 +24,18 @@ describe('BoardTiles Collection', function() {
     });
   });
 
+  describe('#returnAllPlacedTiles', function() {
+    it('clears all tiles and replaces all letters that have been letter', function() {
+      var tile = collection.findWhere({ tileId: 'tile_7_7' })
+      tile.receiveLetter(letter);
+
+      collection.returnAllPlacedTiles();
+      expect(letter.get('status')).to.eql('unselected');
+      expect(tile.get('status')).to.eql('empty');
+      expect(tile.letter).to.be(undefined);
+    });
+  });
+
   describe('#findAndHighlight', function() {
     it('highlights given tile', function() {
       var tile = collection.findWhere({ tileId: 'tile_7_8' });
