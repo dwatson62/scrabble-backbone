@@ -80,6 +80,10 @@ Scrabble.Tile = Backbone.Model.extend({
     this.set('highlight', 'unhighlight');
   },
 
+  confirm: function() {
+    this.set('status', 'confirmed');
+  },
+
   isPlaced: function() {
     return this.get('status') === 'placed';
   }

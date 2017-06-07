@@ -28,10 +28,20 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     return this.where({ status: 'placed' });
   },
 
+  allConfirmedTiles: function() {
+    return this.where({ status: 'confirmed' });
+  },
+
   returnAllPlacedTiles: function() {
     _.each(this.allPlacedTiles(), function(tile) {
       tile.letter.unselect();
       tile.returnLetter();
+    });
+  },
+
+  confirmAllPlacedTiles: function() {
+    _.each(this.allPlacedTiles(), function(tile) {
+      tile.confirm();
     });
   },
 

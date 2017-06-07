@@ -47,6 +47,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   },
 
   validWord: function(response) {
+    this.boardView.boardTilesCollection.confirmAllPlacedTiles();
     var points = this.boardView.placedLettersCollection.calculatePoints();
     this.playedWordsView.playWord(response, points);
 

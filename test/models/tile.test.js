@@ -73,6 +73,13 @@ describe('Tile', function() {
     });
   });
 
+  describe('#confirm()', function() {
+    it('sets status as confirmed', function() {
+      tile.confirm();
+      expect(tile.get('status')).to.eql('confirmed');
+    });
+  });
+
   describe('#isPlaced()', function() {
     it('returns true if tile is placed', function() {
       tile.receiveLetter(letter);

@@ -24,6 +24,14 @@ describe('BoardTiles Collection', function() {
     });
   });
 
+  describe('#allConfirmedTiles', function() {
+    it('returns all tiles that have a letter confirmed', function() {
+      collection.findWhere({ tileId: 'tile_7_7' }).confirm();
+
+      expect(collection.allConfirmedTiles().length).to.eql(1);
+    });
+  });
+
   describe('#returnAllPlacedTiles', function() {
     it('clears all tiles and replaces all letters that have been letter', function() {
       var tile = collection.findWhere({ tileId: 'tile_7_7' })
@@ -33,6 +41,16 @@ describe('BoardTiles Collection', function() {
       expect(letter.get('status')).to.eql('unselected');
       expect(tile.get('status')).to.eql('empty');
       expect(tile.letter).to.be(undefined);
+    });
+  });
+
+  describe('#confirmAllPlacedTiles', function() {
+    it('confirms all tiles with a placed letter', function() {
+      var tile = collection.findWhere({ tileId: 'tile_7_7' })
+      tile.receiveLetter(letter);
+
+      collection.confirmAllPlacedTiles();
+      expect(tile.get('status')).to.eql('confirmed');
     });
   });
 

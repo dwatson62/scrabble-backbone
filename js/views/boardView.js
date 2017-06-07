@@ -74,7 +74,7 @@ Scrabble.BoardView = Backbone.View.extend({
 
   showAllNeighbourTiles: function() {
     var self = this;
-    _.each(this.boardTilesCollection.allPlacedTiles(), function(tile) {
+    _.each(this.boardTilesCollection.allConfirmedTiles(), function(tile) {
       var tileId = tile.get('tileId');
       self.boardTilesCollection.showHorizontalAndVertical(tileId);
     });
