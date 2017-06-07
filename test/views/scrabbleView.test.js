@@ -17,27 +17,32 @@ describe('ScrabbleView', function() {
       tileId: 'tile_7_9',
       points: 1
     })
-  ]
+  ];
 
-  var placedLettersCollection = new Scrabble.PlacedLetters();
-  _.each(letters, function(letter) {
-    placedLettersCollection.add(letter);
-  });
+  var placedLettersCollection;
+  var playerDashboardView;
+  var boardView;
+  var scrabbleView;
 
-  var playerDashboardView = new Scrabble.PlayerDashboardView({
-    collection: new Scrabble.PlayerLetters()
-  });
+  beforeEach(function() {
+    placedLettersCollection = new Scrabble.PlacedLetters();
+    placedLettersCollection.add(letters);
 
-  var boardView = new Scrabble.BoardView({
-    boardTiles: new Scrabble.BoardTiles(),
-    placedLetters: placedLettersCollection,
-    playedWordsView: new Scrabble.PlayedWordsView()
-  });
+    playerDashboardView = new Scrabble.PlayerDashboardView({
+      collection: new Scrabble.PlayerLetters()
+    });
 
-  var scrabbleView = new Scrabble.ScrabbleView({
-    bag: new Scrabble.LettersBag(),
-    boardView: boardView,
-    playerDashboardView: playerDashboardView
+    boardView = new Scrabble.BoardView({
+      boardTiles: new Scrabble.BoardTiles(),
+      placedLettersCollection: placedLettersCollection,
+      playedWordsView: new Scrabble.PlayedWordsView()
+    });
+
+    scrabbleView = new Scrabble.ScrabbleView({
+      bag: new Scrabble.LettersBag(),
+      boardView: boardView,
+      playerDashboardView: playerDashboardView
+    });
   });
 
   describe('#playWord', function() {
@@ -50,7 +55,7 @@ describe('ScrabbleView', function() {
 
       expect(scrabbleView.playedWordsView.playedWordsCollection.length).to.eql(1)
 
-      var word = scrabbleView.playedWordsView.playedWordsCollection.at(0)
+      var word = scrabbleView.playedWordsView.playedWordsCollection.first();
       expect(word.get('meaning')).to.eql(response[0].text);
       expect(word.get('points')).to.eql(5);
       expect(word.get('value')).to.eql(response[0].word);
