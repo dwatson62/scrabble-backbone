@@ -86,5 +86,13 @@ Scrabble.Tile = Backbone.Model.extend({
 
   isPlaced: function() {
     return this.get('status') === 'placed';
+  },
+
+  isConfirmed: function() {
+    return this.get('status') === 'confirmed';
+  },
+
+  isUnavailable: function() {
+    return this.isPlaced() || this.isConfirmed();
   }
 });

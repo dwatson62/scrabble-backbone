@@ -51,6 +51,12 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     });
   },
 
+  highlightAllConfirmedTiles: function() {
+    return _.each(this.allConfirmedTiles(), function(tile) {
+      tile.highlight();
+    });
+  },
+
   findAndHighlight: function(tile) {
     this.findWhere({ tileId: tile.get('tileId') }).highlight();
   },
@@ -89,8 +95,8 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
 
   showHorizontalTiles: function(firstTileId, lastTileId) {
     var tileIds = [
-      this._firstTileNotPlaced(firstTileId, 'oneTileToLeft'),
-      this._firstTileNotPlaced(lastTileId, 'oneTileToRight')
+      this._firstAvailableTile(firstTileId, 'oneTileToLeft'),
+      this._firstAvailableTile(lastTileId, 'oneTileToRight')
     ];
 
     this.highlightTiles(tileIds);
@@ -98,8 +104,8 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
 
   showVerticalTiles: function(firstTileId, lastTileId) {
     var tileIds = [
-      this._firstTileNotPlaced(firstTileId, 'oneTileAbove'),
-      this._firstTileNotPlaced(lastTileId, 'oneTileBelow')
+      this._firstAvailableTile(firstTileId, 'oneTileAbove'),
+      this._firstAvailableTile(lastTileId, 'oneTileBelow')
     ];
 
     this.highlightTiles(tileIds);
@@ -113,14 +119,18 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
   },
 
   showHorizontalAndVertical: function(firstTileId) {
-    this.showHorizontalTiles(firstTileId, firstTileId);
-    this.showVerticalTiles(firstTileId, firstTileId);
+    var leftTile = this._firstAvailableTile(firstTileId, 'oneTileToLeft');
+    var rightTile = this._firstAvailableTile(firstTileId, 'oneTileToRight');
+    var aboveTile = this._firstAvailableTile(firstTileId, 'oneTileAbove');
+    var belowTile = this._firstAvailableTile(firstTileId, 'oneTileBelow');
+
+    this.highlightTiles([leftTile, rightTile, aboveTile, belowTile])
   },
 
-  _firstTileNotPlaced: function(tileId, fn) {
+  _firstAvailableTile: function(tileId, fn) {
     var tile = this.helper[fn](tileId);
-    if (this.findWhere({ tileId: tile }).isPlaced()) {
-      return this._firstTileNotPlaced(tile, fn);
+    if (this.findWhere({ tileId: tile }).isUnavailable()) {
+      return this._firstAvailableTile(tile, fn);
     } else {
       return tile
     }

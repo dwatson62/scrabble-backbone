@@ -148,23 +148,23 @@ describe('BoardTiles Collection', function() {
     });
   });
 
-  describe('#_firstTileNotPlaced', function() {
-    it('returns the first tile that is not already placed going left', function() {
+  describe('#_firstAvailableTile', function() {
+    it('returns the first tile that is not unavailable going left', function() {
       var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_6' });
       collection.findWhere({ tileId: 'tile_7_6' }).receiveLetter(letter);
       letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_5' });
       collection.findWhere({ tileId: 'tile_7_5' }).receiveLetter(letter);
 
-      expect(collection._firstTileNotPlaced('tile_7_7', 'oneTileToLeft')).to.eql('tile_7_4')
+      expect(collection._firstAvailableTile('tile_7_7', 'oneTileToLeft')).to.eql('tile_7_4')
     });
 
-    it('returns the first tile that is not already placed going right', function() {
+    it('returns the first tile that is not unavailable going right', function() {
       var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_8' });
       collection.findWhere({ tileId: 'tile_7_8' }).receiveLetter(letter);
       letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_9' });
       collection.findWhere({ tileId: 'tile_7_9' }).receiveLetter(letter);
 
-      expect(collection._firstTileNotPlaced('tile_7_7', 'oneTileToRight')).to.eql('tile_7_10')
+      expect(collection._firstAvailableTile('tile_7_7', 'oneTileToRight')).to.eql('tile_7_10')
     });
   });
 });

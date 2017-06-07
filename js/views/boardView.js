@@ -56,7 +56,7 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   highlightAvailableTiles: function() {
-    this.highlightAllPlacedTiles();
+    this.highlightAllPlacedAndConfirmedTiles();
     if (this._nothingPlayed()) {
       this.highlightCentreTile();
     } else if (this.placedLettersCollection.length === 0) {
@@ -68,8 +68,9 @@ Scrabble.BoardView = Backbone.View.extend({
     }
   },
 
-  highlightAllPlacedTiles: function() {
+  highlightAllPlacedAndConfirmedTiles: function() {
     this.boardTilesCollection.highlightAllPlacedTiles();
+    this.boardTilesCollection.highlightAllConfirmedTiles();
   },
 
   showAllNeighbourTiles: function() {
