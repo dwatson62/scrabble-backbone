@@ -5,7 +5,7 @@ _.templateSettings = {
 };
 
 $(document).ready(function() {
-  var placedLetters = new Scrabble.PlacedLetters();
+  var placedLettersCollection = new Scrabble.PlacedLetters();
   var playedWords = new Scrabble.PlayedWords();
   var playedWordsView = new Scrabble.PlayedWordsView();
 
@@ -24,7 +24,7 @@ $(document).ready(function() {
   var boardView = new Scrabble.BoardView({
     players: [player],
     boardTiles: board,
-    placedLetters: placedLetters,
+    placedLettersCollection: placedLettersCollection,
     playedWordsView: playedWordsView
   });
 

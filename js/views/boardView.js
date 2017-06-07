@@ -9,7 +9,7 @@ Scrabble.BoardView = Backbone.View.extend({
 
   initialize: function(context) {
     this.boardTilesCollection = context.boardTiles;
-    this.placedLettersCollection = context.placedLetters;
+    this.placedLettersCollection = context.placedLettersCollection;
     this.playedWordsView = context.playedWordsView;
     this.players = context.players;
     this.render();
