@@ -16,17 +16,13 @@ describe('PlayerLetters Collection', function() {
   });
 
   describe('#unselectAll', function() {
-    it('unselects all letters', function() {
-      collection.first().choose();
+    it('unselects all selected letters', function() {
+      _.first(collection.models).choose();
+      _.last(collection.models).place();
       collection.unselectAll();
 
-      var allLetters = _.map(collection.models, function(letter) {
-        return letter.get('status')
-      });
-
-      expect(_.every(allLetters, function(letter) {
-        return letter == 'unselected';
-      })).to.be(true);
+      expect(_.first(collection.models).get('status')).to.eql('unselected');
+      expect(_.last(collection.models).get('status')).to.eql('placed');
     });
   });
 

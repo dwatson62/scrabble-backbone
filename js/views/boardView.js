@@ -41,10 +41,9 @@ Scrabble.BoardView = Backbone.View.extend({
 
     if (letter) {
       var tileId = event.currentTarget.dataset.tileId;
-      letter.place(tileId);
-      this.placedLettersCollection.add(letter);
       this.boardTilesCollection.fetchTile(tileId).receiveLetter(letter)
-      this.currentPlayer().putDownLetter();
+      this.currentPlayer().putDownLetter(tileId);
+      this.placedLettersCollection.add(letter);
       this.highlightAllTiles();
     }
   },

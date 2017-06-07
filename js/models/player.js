@@ -11,9 +11,16 @@ Scrabble.Player = Backbone.Model.extend({
 
   pickUpLetter: function(letter) {
     this.selectedLetter = letter;
+    this.selectedLetter.choose();
   },
 
-  putDownLetter: function() {
+  putDownLetter: function(tileId) {
+    this.selectedLetter.place(tileId);
+    this.selectedLetter = undefined;
+  },
+
+  replaceLetter: function() {
+    this.selectedLetter.unselect();
     this.selectedLetter = undefined;
   }
 });

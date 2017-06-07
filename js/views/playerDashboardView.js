@@ -33,7 +33,6 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
 
     var uid = event.currentTarget.dataset.uid;
     var letter = this.collection.fetchLetter(uid);
-    letter.choose();
     this.player.pickUpLetter(letter);
   },
 
@@ -42,8 +41,7 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
     var letter = this.collection.fetchLetter(uid);
 
     if (letter === this.player.selectedLetter) {
-      letter.unselect();
-      this.player.putDownLetter();
+      this.player.replaceLetter();
     }
   }
 });

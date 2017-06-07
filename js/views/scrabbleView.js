@@ -20,7 +20,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   },
 
   cancelButtonClicked: function() {
-    this.boardView.placedLettersCollection.returnAllPlacedTiles();
+    this.boardView.boardTilesCollection.returnAllPlacedTiles();
     this.clearPlacedLettersCollection();
     this.boardView.highlightAllTiles();
   },
@@ -43,7 +43,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
 
   playWordButtonClicked: function() {
     var word = this.boardView.placedLettersCollection.assembleWord();
-    this.dictionary.playWord(word, this.validWord, this.invalidWord);
+    this.dictionary.playWord(word, this.validWord.bind(this), this.invalidWord);
   },
 
   validWord: function(response) {

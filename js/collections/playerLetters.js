@@ -6,7 +6,7 @@ Scrabble.PlayerLetters = Backbone.Collection.extend({
   },
 
   unselectAll: function() {
-    _.each(this.models, function(letter) {
+    _.each(this.where({ status: 'selected' }), function(letter) {
       letter.unselect();
     });
   },
