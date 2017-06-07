@@ -1,6 +1,28 @@
 describe('PlacedLetters Collection', function() {
-  var collection = new Scrabble.PlacedLetters();
-  var centreLetter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_7' });
+  var collection;
+  var centreLetter;
+
+  beforeEach(function() {
+    collection = new Scrabble.PlacedLetters();
+    centreLetter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_7' });
+  });
+
+  describe('First and Last tileids', function() {
+    beforeEach(function() {
+      var letter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_7_8' });
+
+      collection.add(centreLetter);
+      collection.add(letter);
+    });
+
+    it('#firstTileId returns tileId of first letter', function() {
+      expect(collection.firstTileId()).to.eql('tile_7_7');
+    });
+
+    it('#lastTileId returns tileId of last letter', function() {
+      expect(collection.lastTileId()).to.eql('tile_7_8');
+    });
+  });
 
   describe('#determineDirection', function() {
     it('returns null if less than two letters have been played', function() {

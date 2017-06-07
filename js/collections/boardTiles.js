@@ -20,8 +20,38 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     return board;
   },
 
+  fetchTile: function(tileId) {
+    return this.findWhere({ tileId: tileId });
+  },
+
   allPlacedTiles: function() {
     return this.where({ status: 'placed' });
+  },
+
+  highlightAllPlacedTiles: function() {
+    return _.each(this.allPlacedTiles(), function(tile) {
+      tile.highlight();
+    });
+  },
+
+  findAndHighlight: function(tile) {
+    this.findWhere({ tileId: tile.get('tileId') }).highlight();
+  },
+
+  highlightCentreTile: function() {
+    this.centreTile.highlight();
+  },
+
+  highlightAllTiles: function() {
+    _.each(this.models, function(tile) {
+      tile.highlight();
+    });
+  },
+
+  unhighlightAllTiles: function() {
+    _.each(this.models, function(tile) {
+      tile.unhighlight();
+    });
   },
 
   showNextAvailableTiles: function(direction, firstTileId, lastTileId) {
@@ -30,6 +60,14 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     } else {
       this.showVerticalTiles(firstTileId, lastTileId);
     }
+  },
+
+  showAllNeighbourTiles: function() {
+    var self = this;
+    _.each(this.allPlacedTiles(), function(tile) {
+      var tileId = tile.get('tileId');
+      self.showHorizontalAndVertical(tileId);
+    });
   },
 
   showHorizontalTiles: function(firstTileId, lastTileId) {

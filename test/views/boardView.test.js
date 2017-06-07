@@ -21,13 +21,6 @@ describe('BoardView', function() {
     letter = new Scrabble.Letter({ tileId: 'tile_7_7' });
   });
 
-  describe('#tileModel', function() {
-    it('finds the tile from a collection when passed a tileId', function() {
-      var tile = boardView.tileModel('tile_7_7');
-      expect(tile.get('tileId')).to.eql('tile_7_7');
-    });
-  });
-
   describe('#currentPlayer', function() {
     it('returns the current player', function() {
       expect(boardView.currentPlayer()).to.eql(player);

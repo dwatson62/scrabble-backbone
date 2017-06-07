@@ -9,6 +9,14 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     return (Number(a.match(/(\d+)/g)[0]) - Number((b.match(/(\d+)/g)[0])));
   },
 
+  firstTileId: function() {
+    return this.first().get('tileId');
+  },
+
+  lastTileId: function() {
+    return _.last(this.models).get('tileId');
+  },
+
   direction: function() {
     this.direction = this.determineDirection();
   },

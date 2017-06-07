@@ -32,12 +32,6 @@ Scrabble.BoardView = Backbone.View.extend({
     this.$el.find(domId).append(tileView.render().el);
   },
 
-  tileModel: function(tileId) {
-    return this.boardTilesCollection.findWhere(function(model) {
-      return model.get('tileId') === tileId;
-    });
-  },
-
   currentPlayer: function() {
     return this.players[0];
   },
@@ -49,7 +43,7 @@ Scrabble.BoardView = Backbone.View.extend({
       var tileId = event.currentTarget.dataset.tileId;
       letter.place(tileId);
       this.placedLettersCollection.add(letter);
-      this.tileModel(tileId).receiveLetter(letter)
+      this.boardTilesCollection.fetchTile(tileId).receiveLetter(letter)
       this.currentPlayer().putDownLetter();
       this.highlightAllTiles();
     }
@@ -58,7 +52,7 @@ Scrabble.BoardView = Backbone.View.extend({
   highlightUsedTiles: function() {
     var self = this;
     _.each(this.placedLettersCollection.models, function(tile) {
-      self.boardTilesCollection.findWhere({ tileId: tile.get('tileId') }).highlight();
+      self.boardTilesCollection.findAndHighlight(tile);
     });
   },
 
@@ -76,9 +70,7 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   highlightAllPlacedTiles: function() {
-    _.each(this.boardTilesCollection.allPlacedTiles(), function(tile) {
-      tile.highlight();
-    });
+    this.boardTilesCollection.highlightAllPlacedTiles();
   },
 
   showAllNeighbourTiles: function() {
@@ -90,32 +82,28 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   showHorizontalAndVertical: function() {
-    var firstTileId = this.placedLettersCollection.at(0).get('tileId');
+    var firstTileId = this.placedLettersCollection.firstTileId();
     this.boardTilesCollection.showHorizontalAndVertical(firstTileId);
   },
 
   showNextAvailableTiles: function() {
-    var firstTileId = this.placedLettersCollection.at(0).get('tileId');
-    var lastTileId = this.placedLettersCollection.at(-1).get('tileId');
+    var firstTileId = this.placedLettersCollection.firstTileId();
+    var lastTileId = this.placedLettersCollection.lastTileId();
     var direction = this.placedLettersCollection.determineDirection();
 
     this.boardTilesCollection.showNextAvailableTiles(direction, firstTileId, lastTileId);
   },
 
   highlightCentreTile: function() {
-    this.boardTilesCollection.centreTile.highlight();
+    this.boardTilesCollection.highlightCentreTile();
   },
 
   highlightAllTiles: function() {
-    _.each(this.boardTilesCollection.models, function(tile) {
-      tile.highlight();
-    });
+    this.boardTilesCollection.highlightAllTiles();
   },
 
   unhighlightAllTiles: function() {
-    _.each(this.boardTilesCollection.models, function(tile) {
-      tile.unhighlight();
-    });
+    this.boardTilesCollection.unhighlightAllTiles();
   },
 
   _nothingPlayed: function() {
