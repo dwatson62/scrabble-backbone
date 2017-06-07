@@ -42,8 +42,21 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   },
 
   playWordButtonClicked: function() {
+    this.addSurroundingLettersToWord();
     var word = this.boardView.placedLettersCollection.assembleWord();
     this.dictionary.playWord(word, this.validWord.bind(this), this.invalidWord);
+  },
+
+  addSurroundingLettersToWord: function() {
+    var firstLetter = this.boardView.placedLettersCollection.first().get('tileId');
+    var direction = this.boardView.placedLettersCollection.determineDirection();
+    var tiles = this.boardView.boardTilesCollection.allSurroundingLetters(firstLetter, direction);
+
+    var letters = _.map(tiles, function(tile){
+      return this.boardView.boardTilesCollection.fetchTile(tile).letter
+    }, this);
+
+    this.boardView.placedLettersCollection.add(letters);
   },
 
   validWord: function(response) {

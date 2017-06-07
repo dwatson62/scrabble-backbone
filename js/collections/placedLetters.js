@@ -18,7 +18,7 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
   },
 
   direction: function() {
-    this.direction = this.determineDirection();
+    this.determineDirection();
   },
 
   determineDirection: function() {

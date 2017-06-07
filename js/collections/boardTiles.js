@@ -134,5 +134,34 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     } else {
       return tile
     }
-  }
+  },
+
+  allSurroundingLetters: function(tileId, direction) {
+    var setOne;
+    var setTwo;
+
+    if (direction === 'horizontal') {
+      setOne = this._yieldLetter([], tileId, 'oneTileToLeft');
+      setTwo = this._yieldLetter([], tileId, 'oneTileToRight');
+    } else if (direction === 'vertical') {
+      setOne = this._yieldLetter([], tileId, 'oneTileAbove');
+      setTwo = this._yieldLetter([], tileId, 'oneTileBelow');
+    } else {
+      return [tileId];
+    }
+
+    return _.union([tileId], setOne, setTwo);
+  },
+
+
+  _yieldLetter: function(tiles, tileId, fn) {
+    var nextTileId = this.helper[fn](tileId);
+    var nextTile = this.fetchTile(nextTileId);
+    if (nextTile.isUnavailable()) {
+      tiles.push(nextTileId);
+      return this._yieldLetter(tiles, nextTileId, fn);
+    } else {
+      return tiles;
+    }
+  },
 });
