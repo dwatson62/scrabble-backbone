@@ -28,26 +28,18 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
     this.$el.find('#player-letters').append(letterView.render().el);
   },
 
-  letterModel: function(uid) {
-    return this.collection.find(function(model) {
-      return model.get('uid') === parseInt(uid);
-    });
-  },
-
   letterClicked: function(event) {
-    _.each(this.collection.where({ status: 'selected' }), function(letter) {
-      letter.unselect();
-    });
+    this.collection.unselectAll();
 
     var uid = event.currentTarget.dataset.uid;
-    var letter = this.letterModel(uid);
+    var letter = this.collection.fetchLetter(uid);
     letter.choose();
     this.player.pickUpLetter(letter);
   },
 
   selectedLetterClicked: function(event) {
     var uid = event.currentTarget.dataset.uid;
-    var letter = this.letterModel(uid);
+    var letter = this.collection.fetchLetter(uid);
 
     if (letter === this.player.selectedLetter) {
       letter.unselect();

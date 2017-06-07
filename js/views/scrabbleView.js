@@ -59,9 +59,9 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   },
 
   fetchNewLettersFromBag: function() {
-    this.playerDashboardView.collection.removeUsed();
     var letterCount = this.boardView.placedLettersCollection.length;
     var newLetters = this.bag.retrieve(letterCount);
-    this.playerDashboardView.collection.add(newLetters);
+
+    this.playerDashboardView.collection.replaceWithNewLetters(newLetters);
   }
 });
