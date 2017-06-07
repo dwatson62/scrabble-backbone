@@ -45,7 +45,7 @@ describe('ScrabbleView', function() {
     });
   });
 
-  describe('#playWord', function() {
+  xdescribe('#playWord', function() {
     it('creates a Word instance and adds to playedWordsCollection', function() {
       var response = [{
         text: 'House pet',

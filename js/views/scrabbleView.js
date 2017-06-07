@@ -14,6 +14,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
     this.context = context;
     this.bag = this.context.bag;
     this.boardView = this.context.boardView;
+    this.dictionary = new Scrabble.DictionaryHelper();
     this.playerDashboardView = this.context.playerDashboardView;
     this.playedWordsView = this.boardView.playedWordsView;
   },
@@ -42,25 +43,19 @@ Scrabble.ScrabbleView = Backbone.View.extend({
 
   playWordButtonClicked: function() {
     var word = this.boardView.placedLettersCollection.assembleWord();
-    var config = { params: { 'word': word } };
-    var self = this;
-
-    $.get('/word', config)
-      .done(function(response) {
-        if (response.length === 0) {
-          console.log(word + ' is not a word!');
-        } else {
-          self.playWord(response);
-        }
-      });
+    this.dictionary.playWord(word, this.validWord, this.invalidWord);
   },
 
-  playWord: function(response) {
+  validWord: function(response) {
     var points = this.boardView.placedLettersCollection.calculatePoints();
     this.playedWordsView.playWord(response, points);
 
     this.fetchNewLettersFromBag();
     this.boardView.placedLettersCollection.reset();
+  },
+
+  invalidWord: function(word) {
+    console.log(word + ' is not a word!');
   },
 
   fetchNewLettersFromBag: function() {
