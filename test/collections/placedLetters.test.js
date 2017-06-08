@@ -51,19 +51,19 @@ describe('PlacedLetters Collection', function() {
   });
 
   describe('#comparator', function() {
-    it('correctly sorts based on tileId', function() {
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_7' }));
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_10' }));
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_11' }));
+    it('correctly sorts based on tileNumber', function() {
+      collection.add(new Scrabble.Letter({ tileNumber: 49 }));
+      collection.add(new Scrabble.Letter({ tileNumber: 48 }));
+      collection.add(new Scrabble.Letter({ tileNumber: 50 }));
 
-      expect(collection.pluck('tileId')).to.eql(['tile_6_7', 'tile_6_10', 'tile_6_11'])
+      expect(collection.pluck('tileNumber')).to.eql([48, 49, 50])
       collection.reset();
     });
   });
 
   describe('#assembleWord', function() {
     it('correctly assembles the word', function() {
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_7', value: 'c' }));
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_9', value: 'c' }));
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_10', value: 'a' }));
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', value: 't' }));
 

@@ -32,6 +32,7 @@ Scrabble.Tile = Backbone.Model.extend({
   initialize: function(options) {
     this.options = options;
     this.set('tileId', this.generateTileId());
+    this.set('tileNumber', options.count);
     this.set('coords', this.convertToCoords());
     this.set('defaultTileSrc', this.baseSrc + this.fetchTile() + '.png');
     this.set('tileSrc', this.get('defaultTileSrc'));

@@ -2,6 +2,7 @@ var Scrabble = Scrabble || {};
 
 Scrabble.Letter = Backbone.Model.extend({
   defaults: {
+    tileNumber: 0,
     status: 'unselected'
   },
 
@@ -20,8 +21,9 @@ Scrabble.Letter = Backbone.Model.extend({
     this.set('status', 'unselected');
   },
 
-  place: function(tileId) {
+  place: function(tile) {
     this.set('status', 'placed');
-    this.set('tileId', tileId);
+    this.set('tileId', tile.get('tileId'));
+    this.set('tileNumber', tile.get('tileNumber'));
   }
 });
