@@ -25,5 +25,9 @@ Scrabble.Letter = Backbone.Model.extend({
     this.set('status', 'placed');
     this.set('tileId', tile.get('tileId'));
     this.set('tileNumber', tile.get('tileNumber'));
+  },
+
+  confirm: function() {
+    this.set('status', 'confirmed');
   }
 });

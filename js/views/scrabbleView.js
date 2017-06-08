@@ -65,7 +65,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
     this.playedWordsView.playWord(response, points);
 
     this.fetchNewLettersFromBag();
-    this.boardView.placedLettersCollection.reset();
+    this.boardView.placedLettersCollection.confirmAndClear();
   },
 
   invalidWord: function(word) {
@@ -73,7 +73,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   },
 
   fetchNewLettersFromBag: function() {
-    var letterCount = this.boardView.placedLettersCollection.length;
+    var letterCount = this.boardView.placedLettersCollection.where({ status: 'placed' }).length;
     var newLetters = this.bag.retrieve(letterCount);
 
     this.playerDashboardView.collection.replaceWithNewLetters(newLetters);
