@@ -1,3 +1,5 @@
+var Scrabble = Scrabble || {};
+
 describe('BoardView', function() {
   var player;
   var boardTiles;

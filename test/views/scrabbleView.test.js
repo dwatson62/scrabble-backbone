@@ -1,3 +1,5 @@
+var Scrabble = Scrabble || {};
+
 describe('ScrabbleView', function() {
   var letters = [
     new Scrabble.Letter({

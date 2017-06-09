@@ -1,3 +1,5 @@
+var Scrabble = Scrabble || {};
+
 describe('Tile', function() {
   var tile = new Scrabble.Tile({ x: 0, y: 0 });
   var letter = new Scrabble.Letter({ value: 'a', uid: 1 });

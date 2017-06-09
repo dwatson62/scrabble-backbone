@@ -1,3 +1,5 @@
+var Scrabble = Scrabble || {};
+
 describe('PlayerLetters Collection', function() {
   var bag;
   var collection;

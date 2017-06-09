@@ -11,8 +11,8 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
   },
 
   createBoard: function() {
-    board = [];
-    count = 0;
+    var board = [];
+    var count = 0;
     for (var x = 0; x < 15; x ++) {
       for (var y = 0; y < 15; y ++) {
         board.push(new Scrabble.Tile({

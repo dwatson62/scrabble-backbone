@@ -1,3 +1,5 @@
+var Scrabble = Scrabble || {};
+
 describe('Letters Bag Collection', function() {
   var collection = new Scrabble.LettersBag();
 

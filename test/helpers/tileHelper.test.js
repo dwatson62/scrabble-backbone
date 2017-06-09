@@ -1,3 +1,5 @@
+var Scrabble = Scrabble || {};
+
 describe('Tile Helper', function() {
   var helper = new Scrabble.TileHelper();
 

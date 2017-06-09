@@ -1,3 +1,5 @@
+var Scrabble = Scrabble || {};
+
 describe('BoardTiles Collection', function() {
   var collection = new Scrabble.BoardTiles();
   var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_7' });
@@ -103,7 +105,7 @@ describe('BoardTiles Collection', function() {
       });
 
       expect(_.every(allTiles, function(tile) {
-        return tile == 'highlight';
+        return tile === 'highlight';
       })).to.be(true);
     });
   });
@@ -116,7 +118,7 @@ describe('BoardTiles Collection', function() {
       });
 
       expect(_.every(allTiles, function(tile) {
-        return tile == 'unhighlight';
+        return tile === 'unhighlight';
       })).to.be(true);
     });
   });

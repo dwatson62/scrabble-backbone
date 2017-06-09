@@ -37,8 +37,8 @@ Scrabble.LettersBag = Backbone.Collection.extend({
     var count = 1;
 
     for (var letter in letters) {
-      for (i = 0; i < this.letterValues[letters[letter]].tiles; i ++) {
-        newLetter = new Scrabble.Letter({
+      for (var i = 0; i < this.letterValues[letters[letter]].tiles; i ++) {
+        var newLetter = new Scrabble.Letter({
           points: this.letterValues[letters[letter]].points,
           uid: count,
           value: letters[letter]

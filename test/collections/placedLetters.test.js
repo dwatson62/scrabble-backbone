@@ -1,3 +1,5 @@
+var Scrabble = Scrabble || {};
+
 describe('PlacedLetters Collection', function() {
   var collection;
   var centreLetter;
