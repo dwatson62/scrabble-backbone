@@ -13,6 +13,8 @@ Scrabble.BoardView = Backbone.View.extend({
     this.playedWordsView = context.playedWordsView;
     this.players = context.players;
     this.render();
+
+    this.listenTo(Backbone, 'board:cancelPlacedLetters', this.cancelPlacedLetters);
   },
 
   render: function() {
@@ -30,6 +32,12 @@ Scrabble.BoardView = Backbone.View.extend({
       model: tile
     });
     this.$el.find(domId).append(tileView.render().el);
+  },
+
+  cancelPlacedLetters: function() {
+    this.boardTilesCollection.returnAllPlacedTiles();
+    this.placedLettersCollection.reset();
+    this.highlightAllTiles();
   },
 
   currentPlayer: function() {

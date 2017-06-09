@@ -3,7 +3,9 @@ var Scrabble = Scrabble || {};
 Scrabble.PlayerDashboardView = Backbone.View.extend({
   el: '#player-dashboard',
 
-  events: {},
+  events: {
+    'click .cancel-btn': 'cancelButtonClicked'
+  },
 
   initialize: function(context) {
     this.collection = context.collection;
@@ -26,6 +28,10 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
       model: letter
     });
     this.$el.find('#player-letters').append(letterView.render().el);
+  },
+
+  cancelButtonClicked: function() {
+    Backbone.trigger('board:cancelPlacedLetters');
   },
 
   letterClicked: function(event) {
