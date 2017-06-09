@@ -7,7 +7,6 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     this.models = this.createBoard();
     this.helper = new Scrabble.TileHelper();
     this.centreTile = this.findWhere({ tileId: 'tile_7_7' });
-    this.direction = null;
   },
 
   createBoard: function() {
@@ -28,6 +27,10 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
 
   fetchTile: function(tileId) {
     return this.findWhere({ tileId: tileId });
+  },
+
+  fetchLetter: function(tileId) {
+    return this.fetchTile(tileId).letter;
   },
 
   allPlacedTiles: function() {
@@ -133,16 +136,18 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     this.highlightTiles([leftTile, rightTile, aboveTile, belowTile]);
   },
 
-  _firstAvailableTile: function(tileId, fn) {
-    var tile = this.helper[fn](tileId);
-    if (this.findWhere({ tileId: tile }).isUnavailable()) {
-      return this._firstAvailableTile(tile, fn);
-    } else {
-      return tile;
-    }
+  allSurroundingLetters: function(tileId, direction) {
+    var surroundingTileIds = this._allSurroundingTiles(tileId, direction);
+    return this._mapTileIdsToLetter(surroundingTileIds);
   },
 
-  allSurroundingLetters: function(tileId, direction) {
+  _mapTileIdsToLetter: function(surroundingTileIds) {
+    return _.map(surroundingTileIds, function(tile) {
+      return this.fetchLetter(tile);
+    }, this);
+  },
+
+  _allSurroundingTiles: function(tileId, direction) {
     var setOne;
     var setTwo;
 
@@ -159,6 +164,14 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     return _.union([tileId], setOne, setTwo);
   },
 
+  _firstAvailableTile: function(tileId, fn) {
+    var tile = this.helper[fn](tileId);
+    if (this.findWhere({ tileId: tile }).isUnavailable()) {
+      return this._firstAvailableTile(tile, fn);
+    } else {
+      return tile;
+    }
+  },
 
   _yieldLetter: function(tiles, tileId, fn) {
     var nextTileId = this.helper[fn](tileId);

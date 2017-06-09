@@ -1,8 +1,12 @@
 var Scrabble = Scrabble || {};
 
 describe('BoardTiles Collection', function() {
-  var collection = new Scrabble.BoardTiles();
+  var collection;
   var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_7' });
+
+  beforeEach(function() {
+    collection = new Scrabble.BoardTiles();
+  });
 
   describe('#createBoard', function() {
     it('creates a large collection of Tiles', function() {
@@ -15,6 +19,19 @@ describe('BoardTiles Collection', function() {
     it('finds the tile from a collection when passed a tileId', function() {
       var tile = collection.fetchTile('tile_7_7');
       expect(tile.get('tileId')).to.eql('tile_7_7');
+    });
+  });
+
+  describe('#fetchLetter', function() {
+    it('finds the letter on a tile when passed a tileId', function() {
+      var tile = collection.fetchTile('tile_7_7');
+      tile.receiveLetter(letter);
+
+      expect(collection.fetchLetter('tile_7_7')).to.eql(letter);
+    });
+
+    it('returns undefined when no tile is present', function() {
+      expect(collection.fetchLetter('tile_7_8')).to.be(undefined);
     });
   });
 
@@ -140,13 +157,54 @@ describe('BoardTiles Collection', function() {
   });
 
   describe('#showAllNeighbourTiles', function() {
-    it('calls showHorizontalAndVertical with all given tiles', function() {
-      var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_6' });
-      collection.findWhere({ tileId: 'tile_7_6' }).receiveLetter(letter);
+    it('calls showHorizontalAndVertical on all placed tiles', function() {
+      var tile = collection.fetchTile('tile_7_7');
+      tile.receiveLetter(letter);
       var collectionSpy = sinon.spy(collection, 'showHorizontalAndVertical');
 
       collection.showAllNeighbourTiles();
-      expect(collectionSpy.calledTwice).to.be(true);
+      expect(collectionSpy.calledWith('tile_7_7')).to.be(true);
+    });
+  });
+
+  describe('#allSurroundingLetters', function() {
+    it('returns all letters surrounding a tileId when direction is horizontal', function() {
+      var firstTile = collection.fetchTile('tile_7_7');
+      firstTile.receiveLetter(letter);
+
+      var secondTile = collection.fetchTile('tile_7_8');
+      var secondLetter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_7_8' });
+      secondTile.receiveLetter(secondLetter);
+
+      var letters = collection.allSurroundingLetters('tile_7_7', 'horizontal');
+
+      expect(letters).to.eql([letter, secondLetter]);
+    });
+
+    it('returns all letters surrounding a tileId when direction is vertical', function() {
+      var firstTile = collection.fetchTile('tile_7_7');
+      firstTile.receiveLetter(letter);
+
+      var secondTile = collection.fetchTile('tile_8_7');
+      var secondLetter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_8_7' });
+      secondTile.receiveLetter(secondLetter);
+
+      var letters = collection.allSurroundingLetters('tile_7_7', 'vertical');
+
+      expect(letters).to.eql([letter, secondLetter]);
+    });
+  });
+
+  describe('#_mapTileIdsToLetter', function() {
+    it('converts given tileIds to their associated letter', function() {
+      var firstTile = collection.fetchTile('tile_7_7');
+      firstTile.receiveLetter(letter);
+
+      var secondTile = collection.fetchTile('tile_7_8');
+      var secondLetter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_7_6' });
+      secondTile.receiveLetter(secondLetter);
+
+      collection._mapTileIdsToLetter([firstTile.get('tileId'), secondTile.get('tileId')]);
     });
   });
 

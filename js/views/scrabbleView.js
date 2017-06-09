@@ -48,13 +48,9 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   },
 
   addSurroundingLettersToWord: function() {
-    var firstLetter = this.boardView.placedLettersCollection.first().get('tileId');
+    var firstLetter = this.boardView.placedLettersCollection.firstTileId();
     var direction = this.boardView.placedLettersCollection.determineDirection();
-    var tiles = this.boardView.boardTilesCollection.allSurroundingLetters(firstLetter, direction);
-
-    var letters = _.map(tiles, function(tile){
-      return this.boardView.boardTilesCollection.fetchTile(tile).letter;
-    }, this);
+    var letters = this.boardView.boardTilesCollection.allSurroundingLetters(firstLetter, direction);
 
     this.boardView.placedLettersCollection.add(letters);
   },
