@@ -4,7 +4,7 @@ describe('Letters Bag Collection', function() {
   describe('#retrieve', function() {
     it('removes given number of letters from collection', function() {
       var originalLength = collection.length;
-      collection.retrieve(5)
+      collection.retrieve(5);
       expect(collection.length).to.eql(originalLength - 5);
     });
   });

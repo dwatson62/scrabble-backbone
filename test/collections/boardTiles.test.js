@@ -34,7 +34,7 @@ describe('BoardTiles Collection', function() {
 
   describe('#returnAllPlacedTiles', function() {
     it('clears all tiles and replaces all letters that have been letter', function() {
-      var tile = collection.findWhere({ tileId: 'tile_7_7' })
+      var tile = collection.findWhere({ tileId: 'tile_7_7' });
       tile.receiveLetter(letter);
 
       collection.returnAllPlacedTiles();
@@ -46,7 +46,7 @@ describe('BoardTiles Collection', function() {
 
   describe('#confirmAllPlacedTiles', function() {
     it('confirms all tiles with a placed letter', function() {
-      var tile = collection.findWhere({ tileId: 'tile_7_7' })
+      var tile = collection.findWhere({ tileId: 'tile_7_7' });
       tile.receiveLetter(letter);
 
       collection.confirmAllPlacedTiles();
@@ -79,7 +79,7 @@ describe('BoardTiles Collection', function() {
       var placedTile = collection.findWhere({ tileId: 'tile_7_7' });
       placedTile.receiveLetter(letter);
 
-      collection.highlightAllPlacedTiles()
+      collection.highlightAllPlacedTiles();
       expect(placedTile.get('highlight')).to.eql('highlight');
     });
   });
@@ -89,7 +89,7 @@ describe('BoardTiles Collection', function() {
       var placedTile = collection.findWhere({ tileId: 'tile_7_7' });
       placedTile.receiveLetter(letter);
 
-      collection.highlightAllPlacedTiles()
+      collection.highlightAllPlacedTiles();
       expect(placedTile.get('highlight')).to.eql('highlight');
     });
   });
@@ -99,7 +99,7 @@ describe('BoardTiles Collection', function() {
       collection.first().unhighlight();
       collection.highlightAllTiles();
       var allTiles = _.map(collection.models, function(tile) {
-        return tile.get('highlight')
+        return tile.get('highlight');
       });
 
       expect(_.every(allTiles, function(tile) {
@@ -112,7 +112,7 @@ describe('BoardTiles Collection', function() {
     it('calls unhighlight on all tiles', function() {
       collection.unhighlightAllTiles();
       var allTiles = _.map(collection.models, function(tile) {
-        return tile.get('highlight')
+        return tile.get('highlight');
       });
 
       expect(_.every(allTiles, function(tile) {
@@ -155,7 +155,7 @@ describe('BoardTiles Collection', function() {
       letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_5' });
       collection.findWhere({ tileId: 'tile_7_5' }).receiveLetter(letter);
 
-      expect(collection._firstAvailableTile('tile_7_7', 'oneTileToLeft')).to.eql('tile_7_4')
+      expect(collection._firstAvailableTile('tile_7_7', 'oneTileToLeft')).to.eql('tile_7_4');
     });
 
     it('returns the first tile that is not unavailable going right', function() {
@@ -164,7 +164,7 @@ describe('BoardTiles Collection', function() {
       letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_9' });
       collection.findWhere({ tileId: 'tile_7_9' }).receiveLetter(letter);
 
-      expect(collection._firstAvailableTile('tile_7_7', 'oneTileToRight')).to.eql('tile_7_10')
+      expect(collection._firstAvailableTile('tile_7_7', 'oneTileToRight')).to.eql('tile_7_10');
     });
   });
 });

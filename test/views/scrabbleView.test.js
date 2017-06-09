@@ -53,7 +53,7 @@ describe('ScrabbleView', function() {
       }];
       scrabbleView.playWord(response);
 
-      expect(scrabbleView.playedWordsView.playedWordsCollection.length).to.eql(1)
+      expect(scrabbleView.playedWordsView.playedWordsCollection.length).to.eql(1);
 
       var word = scrabbleView.playedWordsView.playedWordsCollection.first();
       expect(word.get('meaning')).to.eql(response[0].text);

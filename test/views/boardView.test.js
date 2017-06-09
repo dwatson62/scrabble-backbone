@@ -8,7 +8,7 @@ describe('BoardView', function() {
 
   beforeEach(function() {
     player = new Scrabble.Player('Daryl');
-    boardTiles = new Scrabble.BoardTiles()
+    boardTiles = new Scrabble.BoardTiles();
     playedWordsView = new Scrabble.PlayedWordsView();
 
     boardView = new Scrabble.BoardView({
@@ -32,7 +32,7 @@ describe('BoardView', function() {
       var boardSpy = sinon.spy(boardView, 'highlightCentreTile');
       boardView.highlightAvailableTiles();
 
-      expect(boardSpy.calledOnce).to.be(true)
+      expect(boardSpy.calledOnce).to.be(true);
       boardSpy.restore();
     });
 
@@ -42,7 +42,7 @@ describe('BoardView', function() {
       var boardSpy = sinon.spy(boardView, 'showHorizontalAndVertical');
       boardView.highlightAvailableTiles();
 
-      expect(boardSpy.calledOnce).to.be(true)
+      expect(boardSpy.calledOnce).to.be(true);
       boardSpy.restore();
     });
 
@@ -54,7 +54,7 @@ describe('BoardView', function() {
       var boardSpy = sinon.spy(boardView, 'showNextAvailableTiles');
       boardView.highlightAvailableTiles();
 
-      expect(boardSpy.calledOnce).to.be(true)
+      expect(boardSpy.calledOnce).to.be(true);
       boardSpy.restore();
     });
   });
@@ -64,7 +64,7 @@ describe('BoardView', function() {
       var highlightSpy = sinon.spy(boardTiles.centreTile, 'highlight');
       boardView.highlightCentreTile();
 
-      expect(highlightSpy.calledOnce).to.be(true)
+      expect(highlightSpy.calledOnce).to.be(true);
       highlightSpy.restore();
     });
   });
@@ -73,7 +73,7 @@ describe('BoardView', function() {
     it('calls highlight on tiles within one square', function() {
       boardView.placedLettersCollection.add(letter);
 
-      var tileIds = ['tile_7_6', 'tile_7_8', 'tile_6_7', 'tile_8_7']
+      var tileIds = ['tile_7_6', 'tile_7_8', 'tile_6_7', 'tile_8_7'];
       var spies = tileIds.map(function(id) {
         var tile = boardTiles.findWhere({ tileId: id });
         return sinon.spy(tile, 'highlight');

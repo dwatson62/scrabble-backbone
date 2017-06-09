@@ -56,7 +56,7 @@ describe('PlacedLetters Collection', function() {
       collection.add(new Scrabble.Letter({ tileNumber: 48 }));
       collection.add(new Scrabble.Letter({ tileNumber: 50 }));
 
-      expect(collection.pluck('tileNumber')).to.eql([48, 49, 50])
+      expect(collection.pluck('tileNumber')).to.eql([48, 49, 50]);
       collection.reset();
     });
   });
@@ -67,7 +67,7 @@ describe('PlacedLetters Collection', function() {
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_10', value: 'a' }));
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', value: 't' }));
 
-      expect(collection.assembleWord()).to.eql('cat')
+      expect(collection.assembleWord()).to.eql('cat');
       collection.reset();
     });
   });
@@ -78,7 +78,7 @@ describe('PlacedLetters Collection', function() {
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_10', points: 2 }));
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', points: 3 }));
 
-      expect(collection.calculatePoints()).to.eql(6)
+      expect(collection.calculatePoints()).to.eql(6);
       collection.reset();
     });
   });

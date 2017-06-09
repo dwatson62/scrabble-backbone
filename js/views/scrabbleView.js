@@ -53,7 +53,7 @@ Scrabble.ScrabbleView = Backbone.View.extend({
     var tiles = this.boardView.boardTilesCollection.allSurroundingLetters(firstLetter, direction);
 
     var letters = _.map(tiles, function(tile){
-      return this.boardView.boardTilesCollection.fetchTile(tile).letter
+      return this.boardView.boardTilesCollection.fetchTile(tile).letter;
     }, this);
 
     this.boardView.placedLettersCollection.add(letters);

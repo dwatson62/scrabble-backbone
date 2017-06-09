@@ -6,7 +6,7 @@ describe('PlayerLetters Collection', function() {
   beforeEach(function() {
     bag = new Scrabble.LettersBag();
     collection = new Scrabble.PlayerLetters();
-    collection.add(bag.retrieve(7))
+    collection.add(bag.retrieve(7));
     tile = new Scrabble.Tile({
             count: 0,
             x: 0,
@@ -38,7 +38,7 @@ describe('PlayerLetters Collection', function() {
         letter.place(tile);
       });
 
-      collection.removeUsed()
+      collection.removeUsed();
       expect(collection.length).to.eql(5);
     });
   });

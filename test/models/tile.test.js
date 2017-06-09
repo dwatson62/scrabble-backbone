@@ -36,7 +36,7 @@ describe('Tile', function() {
   describe('#receiveLetter()', function() {
     it('stores the letter and updates attributes', function() {
       var tile = new Scrabble.Tile({ x: 0, y: 1 });
-      tile.receiveLetter(letter)
+      tile.receiveLetter(letter);
 
       expect(tile.letter).to.eql(letter);
       expect(tile.get('status')).to.eql('placed');
@@ -47,7 +47,7 @@ describe('Tile', function() {
   describe('#returnLetter()', function() {
     it('returns the letter and updates attributes', function() {
       var tile = new Scrabble.Tile({ x: 0, y: 1 });
-      tile.returnLetter(letter)
+      tile.returnLetter(letter);
 
       expect(tile.letter).to.eql(undefined);
       expect(tile.get('status')).to.eql('empty');
