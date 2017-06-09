@@ -4,9 +4,7 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   el: '#player-dashboard',
 
   events: {
-    'click .cancel-btn': 'cancelButtonClicked',
-    'click .player-letter.unselected': 'letterClicked',
-    'click .player-letter.selected': 'selectedLetterClicked'
+    'click .cancel-btn': 'cancelButtonClicked'
   },
 
   initialize: function(context) {
@@ -27,7 +25,8 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
 
   renderLetter: function(letter) {
     var letterView = new Scrabble.LetterView({
-      model: letter
+      model: letter,
+      player: this.player
     });
     this.$el.find('#player-letters').append(letterView.render().el);
   },
@@ -35,21 +34,5 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   cancelButtonClicked: function() {
     this.collection.reset();
     Backbone.trigger('board:cancelPlacedLetters');
-  },
-
-  letterClicked: function(event) {
-    Backbone.trigger('board:letterClicked');
-
-    this.collection.unselectAll();
-
-    var uid = event.currentTarget.dataset.uid;
-    var letter = this.collection.fetchLetter(uid);
-    this.player.pickUpLetter(letter);
-  },
-
-  selectedLetterClicked: function() {
-    Backbone.trigger('board:highlightAllTiles');
-
-    this.player.replaceLetter();
   }
 });

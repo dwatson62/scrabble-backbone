@@ -2,7 +2,7 @@ var Scrabble = Scrabble || {};
 
 describe('BoardTiles Collection', function() {
   var collection;
-  var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_7' });
+  var letter = Scrabble.LetterFactory.create('a');
 
   beforeEach(function() {
     collection = new Scrabble.BoardTiles();

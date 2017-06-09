@@ -6,9 +6,13 @@ Scrabble.LetterView = Backbone.View.extend({
 
   template: _.template($('#letter-template').html()),
 
-  events: {},
+  events: {
+    'click .unselected': 'letterClicked',
+    'click .selected': 'selectedLetterClicked'
+  },
 
-  initialize: function() {
+  initialize: function(context) {
+    this.player = context.player;
     this.listenTo(this.model, 'change:status', this.render);
     this.model.bind('remove', this.removeView, this);
   },
@@ -21,5 +25,20 @@ Scrabble.LetterView = Backbone.View.extend({
   removeView: function() {
     this.unbind();
     this.remove();
+  },
+
+  letterClicked: function() {
+    this.model.collection.unselectAll();
+    this.model.choose();
+    this.player.pickUpLetter(this.model);
+
+    Backbone.trigger('board:letterClicked');
+  },
+
+  selectedLetterClicked: function() {
+    this.model.unselect();
+    this.player.replaceLetter();
+
+    Backbone.trigger('board:highlightAllTiles');
   }
 });
