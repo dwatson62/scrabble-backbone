@@ -3,7 +3,6 @@ var Scrabble = Scrabble || {};
 describe('BoardView', function() {
   var player;
   var boardTiles;
-  var playedWordsView;
   var boardView;
   var placedLetters;
   var letter;
@@ -11,12 +10,10 @@ describe('BoardView', function() {
   beforeEach(function() {
     player = new Scrabble.Player('Daryl');
     boardTiles = new Scrabble.BoardTiles();
-    playedWordsView = new Scrabble.PlayedWordsView();
 
     boardView = new Scrabble.BoardView({
       boardTiles: boardTiles,
       placedLettersCollection: new Scrabble.PlacedLetters(),
-      playedWordsView: playedWordsView,
       players: [player],
     });
 
@@ -40,6 +37,7 @@ describe('BoardView', function() {
 
     it('calls showHorizontalAndVertical when 1 letter has been placed', function() {
       boardView.placedLettersCollection.add(letter);
+      boardTiles.findWhere({ tileId: 'tile_7_7' }).receiveLetter(letter);
 
       var boardSpy = sinon.spy(boardView, 'showHorizontalAndVertical');
       boardView.highlightAvailableTiles();
@@ -49,9 +47,12 @@ describe('BoardView', function() {
     });
 
     it('calls showNextAvailableTiles when more than 1 letter has been placed', function() {
-      var secondLetter = new Scrabble.Letter({ tileId: 'tile_7_7' });
       boardView.placedLettersCollection.add(letter);
+      boardTiles.findWhere({ tileId: 'tile_7_7' }).receiveLetter(letter);
+
+      var secondLetter = new Scrabble.Letter({ tileId: 'tile_7_8' });
       boardView.placedLettersCollection.add(secondLetter);
+      boardTiles.findWhere({ tileId: 'tile_7_8' }).receiveLetter(secondLetter);
 
       var boardSpy = sinon.spy(boardView, 'showNextAvailableTiles');
       boardView.highlightAvailableTiles();
@@ -75,6 +76,7 @@ describe('BoardView', function() {
     it('calls highlight on tiles within one square', function() {
       boardView.placedLettersCollection.add(letter);
 
+
       var tileIds = ['tile_7_6', 'tile_7_8', 'tile_6_7', 'tile_8_7'];
       var spies = tileIds.map(function(id) {
         var tile = boardTiles.findWhere({ tileId: id });
@@ -92,8 +94,17 @@ describe('BoardView', function() {
 
   describe('#_nothingPlayed', function() {
     it('returns true when no letters or words have been played', function() {
-      // debugger
       expect(boardView._nothingPlayed()).to.be(true);
+    });
+
+    it('returns false if a tile has a letter placed', function() {
+      boardTiles.findWhere({ tileId: 'tile_7_7' }).receiveLetter(letter);
+      expect(boardView._nothingPlayed()).to.be(false);
+    });
+
+    it('returns false if a tile has a letter confirmed', function() {
+      boardTiles.findWhere({ tileId: 'tile_7_7' }).confirm();
+      expect(boardView._nothingPlayed()).to.be(false);
     });
   });
 });

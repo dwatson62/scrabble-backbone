@@ -33,6 +33,7 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   },
 
   cancelButtonClicked: function() {
+    this.collection.reset();
     Backbone.trigger('board:cancelPlacedLetters');
   },
 

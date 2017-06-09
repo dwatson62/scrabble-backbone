@@ -10,7 +10,6 @@ Scrabble.BoardView = Backbone.View.extend({
   initialize: function(context) {
     this.boardTilesCollection = context.boardTiles;
     this.placedLettersCollection = context.placedLettersCollection;
-    this.playedWordsView = context.playedWordsView;
     this.players = context.players;
     this.render();
 
@@ -38,13 +37,11 @@ Scrabble.BoardView = Backbone.View.extend({
 
   letterClicked: function() {
     this.unhighlightAllTiles();
-    this.highlightUsedTiles();
     this.highlightAvailableTiles();
   },
 
   cancelPlacedLetters: function() {
     this.boardTilesCollection.returnAllPlacedTiles();
-    this.placedLettersCollection.reset();
     this.highlightAllTiles();
   },
 
@@ -63,13 +60,6 @@ Scrabble.BoardView = Backbone.View.extend({
       this.placedLettersCollection.add(letter);
       this.highlightAllTiles();
     }
-  },
-
-  highlightUsedTiles: function() {
-    var self = this;
-    _.each(this.placedLettersCollection.models, function(tile) {
-      self.boardTilesCollection.findAndHighlight(tile);
-    });
   },
 
   highlightAvailableTiles: function() {
@@ -124,7 +114,8 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   _nothingPlayed: function() {
-    return this.playedWordsView.playedWordsCollection.length === 0 &&
-      this.placedLettersCollection.length === 0;
+    return _.every(this.boardTilesCollection.models, function(model) {
+      return model.get('status') === 'empty';
+    });
   }
 });
