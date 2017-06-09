@@ -1,0 +1,15 @@
+{
+  "curly": true,
+  "eqeqeq": true,
+  "undef": true,
+  "mocha": true,
+  "jquery": true,
+  "node": true,
+  "browser": true,
+  "globals": {
+    "Backbone": true,
+    "_": true,
+    "expect": true,
+    "sinon": true
+  }
+}
