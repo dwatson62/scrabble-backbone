@@ -47,14 +47,9 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
     this.player.pickUpLetter(letter);
   },
 
-  selectedLetterClicked: function(event) {
+  selectedLetterClicked: function() {
     Backbone.trigger('board:highlightAllTiles');
 
-    var uid = event.currentTarget.dataset.uid;
-    var letter = this.collection.fetchLetter(uid);
-
-    if (letter === this.player.selectedLetter) {
-      this.player.replaceLetter();
-    }
+    this.player.replaceLetter();
   }
 });
