@@ -19,11 +19,16 @@ module.exports = function(grunt) {
         files: 'scss/*.scss',
         tasks: ['sass']
       }
+    },
+
+    jshint: {
+      all: ['app.js', 'Gruntfile.js', 'js/**/*.js', 'test/**/*.js']
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.registerTask('default', ['watch']);
 
