@@ -4,8 +4,6 @@ Scrabble.ScrabbleView = Backbone.View.extend({
   el: '#scrabble-app',
 
   events: {
-    'click .player-letter.unselected': 'letterClicked',
-    'click .player-letter.selected': 'selectedLetterClicked',
     'click .play-word-btn': 'playWordButtonClicked'
   },
 
@@ -16,18 +14,6 @@ Scrabble.ScrabbleView = Backbone.View.extend({
     this.dictionary = new Scrabble.DictionaryHelper();
     this.playerDashboardView = this.context.playerDashboardView;
     this.playedWordsView = this.boardView.playedWordsView;
-  },
-
-  letterClicked: function(event) {
-    this.boardView.unhighlightAllTiles();
-    this.boardView.highlightUsedTiles();
-    this.boardView.highlightAvailableTiles();
-    this.playerDashboardView.letterClicked(event);
-  },
-
-  selectedLetterClicked: function(event) {
-    this.boardView.highlightAllTiles();
-    this.playerDashboardView.selectedLetterClicked(event);
   },
 
   playWordButtonClicked: function() {

@@ -4,7 +4,9 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   el: '#player-dashboard',
 
   events: {
-    'click .cancel-btn': 'cancelButtonClicked'
+    'click .cancel-btn': 'cancelButtonClicked',
+    'click .player-letter.unselected': 'letterClicked',
+    'click .player-letter.selected': 'selectedLetterClicked'
   },
 
   initialize: function(context) {
@@ -35,6 +37,8 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   },
 
   letterClicked: function(event) {
+    Backbone.trigger('board:letterClicked');
+
     this.collection.unselectAll();
 
     var uid = event.currentTarget.dataset.uid;
@@ -43,6 +47,8 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   },
 
   selectedLetterClicked: function(event) {
+    Backbone.trigger('board:highlightAllTiles');
+
     var uid = event.currentTarget.dataset.uid;
     var letter = this.collection.fetchLetter(uid);
 

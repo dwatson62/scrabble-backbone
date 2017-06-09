@@ -15,6 +15,8 @@ Scrabble.BoardView = Backbone.View.extend({
     this.render();
 
     this.listenTo(Backbone, 'board:cancelPlacedLetters', this.cancelPlacedLetters);
+    this.listenTo(Backbone, 'board:highlightAllTiles', this.highlightAllTiles);
+    this.listenTo(Backbone, 'board:letterClicked', this.letterClicked);
   },
 
   render: function() {
@@ -32,6 +34,12 @@ Scrabble.BoardView = Backbone.View.extend({
       model: tile
     });
     this.$el.find(domId).append(tileView.render().el);
+  },
+
+  letterClicked: function() {
+    this.unhighlightAllTiles();
+    this.highlightUsedTiles();
+    this.highlightAvailableTiles();
   },
 
   cancelPlacedLetters: function() {
