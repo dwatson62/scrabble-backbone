@@ -73,8 +73,8 @@ Scrabble.BoardView = Backbone.View.extend({
 
   fetchNewLettersFromBag: function() {
     var letterCount = this.placedLettersCollection.fetchPlaced().length;
-    this.placedLettersCollection.confirmAndClear();
     Backbone.trigger('playerDashboard:replaceLetters', letterCount);
+    this.placedLettersCollection.confirmAndClear();
   },
 
   cancelPlacedLetters: function() {
