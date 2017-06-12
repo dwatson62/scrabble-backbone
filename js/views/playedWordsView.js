@@ -5,25 +5,23 @@ Scrabble.PlayedWordsView = Backbone.View.extend({
 
   initialize: function(context) {
     this.collection = new Scrabble.PlayedWords();
-    this.helper = new Scrabble.LetterHelper();
     this.render();
+
+    this.listenTo(Backbone, 'playedWords:addWord', function(response) {
+      this.addWord(response);
+    }, this);
   },
 
-  playWord: function(response) {
-    var points = this.helper.calculatePoints(response.letters);
+  addWord: function(response) {
+    var newWord = this.collection.createWord(response);
+    this.renderWord(newWord);
+  },
 
-    var newWord = new Scrabble.Word({
-      meaning: response[0].text,
-      points: points,
-      value: response[0].word
-    });
-
+  renderWord: function(newWord) {
     var wordView = new Scrabble.WordView({
       model: newWord
     });
 
     this.$el.append(wordView.render().el);
-
-    this.collection.add(newWord);
   }
 });
