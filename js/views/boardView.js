@@ -11,9 +11,11 @@ Scrabble.BoardView = Backbone.View.extend({
     this.boardTilesCollection = context.boardTiles;
     this.placedLettersCollection = context.placedLettersCollection;
     this.players = context.players;
+    this.dictionary = new Scrabble.DictionaryHelper();
     this.render();
 
     this.listenTo(Backbone, 'board:cancelPlacedLetters', this.cancelPlacedLetters);
+    this.listenTo(Backbone, 'board:playWord', this.playWord);
     this.listenTo(Backbone, 'board:highlightAllTiles', this.highlightAllTiles);
     this.listenTo(Backbone, 'board:letterClicked', this.letterClicked);
   },
@@ -38,6 +40,38 @@ Scrabble.BoardView = Backbone.View.extend({
   letterClicked: function() {
     this.unhighlightAllTiles();
     this.highlightAvailableTiles();
+  },
+
+  playWord: function() {
+    this.addSurroundingLettersToWord();
+    var word = this.placedLettersCollection.assembleWord();
+    this.dictionary.playWord(word, this.validWord.bind(this), this.invalidWord);
+  },
+
+  addSurroundingLettersToWord: function() {
+    var firstLetter = this.placedLettersCollection.firstTileId();
+    var direction = this.placedLettersCollection.determineDirection();
+    var letters = this.boardTilesCollection.allSurroundingLetters(firstLetter, direction);
+
+    this.placedLettersCollection.add(letters);
+  },
+
+  validWord: function(response) {
+    this.boardTilesCollection.confirmAllPlacedTiles();
+    response.letters = this.placedLettersCollection.pluckPlacedValues();
+
+    this.fetchNewLettersFromBag();
+    Backbone.trigger('playedWords:addWord', response);
+  },
+
+  invalidWord: function(word) {
+    console.log(word + ' is not a word!');
+  },
+
+  fetchNewLettersFromBag: function() {
+    var letterCount = this.placedLettersCollection.fetchPlaced().length;
+    this.placedLettersCollection.confirmAndClear();
+    Backbone.trigger('playerDashboard:replaceLetters', letterCount);
   },
 
   cancelPlacedLetters: function() {

@@ -16,6 +16,7 @@ $(document).ready(function() {
   var player = new Scrabble.Player('Daryl');
 
   var playerDashboardView = new Scrabble.PlayerDashboardView({
+    bag: bag,
     collection: playerLetters,
     player: player
   });
@@ -26,9 +27,5 @@ $(document).ready(function() {
     placedLettersCollection: placedLettersCollection
   });
 
-  var scrabbleView = new Scrabble.ScrabbleView({
-    bag: bag,
-    boardView: boardView,
-    playerDashboardView: playerDashboardView
-  });
+  var scrabbleView = new Scrabble.ScrabbleView({});
 });
