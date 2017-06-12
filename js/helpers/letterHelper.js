@@ -41,10 +41,21 @@ Scrabble.LetterHelper = Backbone.Helper.extend({
     'tripleword': 3
   },
 
+  bingoBonus: 50,
+
   calculatePoints: function(letters) {
-    return _.reduce(this._convertToPoints(letters), function(memo, num) {
+    var subtotal = _.reduce(this._convertToPoints(letters), function(memo, num) {
       return memo + num;
     }, 0) * this._wordBonus(letters);
+    return subtotal + this._bingoBonus(letters);
+  },
+
+  _bingoBonus: function(letters) {
+    if (letters.length === 7) {
+      return this.bingoBonus;
+    } else {
+      return 0;
+    }
   },
 
   _convertToPoints: function(letters) {

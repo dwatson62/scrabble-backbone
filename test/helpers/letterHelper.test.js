@@ -45,5 +45,16 @@ describe('Letter Helper', function() {
                      { value: 't', bonus: undefined }];
       expect(helper.calculatePoints(letters)).to.eql(24);
     });
+
+    it('correctly calculates bingo bonus with other bonuses', function() {
+      var letters = [{ value: 'd', bonus: 'doubleletter' },
+                     { value: 'a', bonus: undefined },
+                     { value: 'z', bonus: 'tripleword' },
+                     { value: 'z', bonus: undefined },
+                     { value: 'l', bonus: undefined },
+                     { value: 'e', bonus: undefined },
+                     { value: 'd', bonus: undefined }];
+      expect(helper.calculatePoints(letters)).to.eql(137);
+    });
   });
 });
