@@ -7,13 +7,13 @@ Scrabble.PlayedWordsView = Backbone.View.extend({
     this.collection = new Scrabble.PlayedWords();
     this.render();
 
-    this.listenTo(Backbone, 'playedWords:addWord', function(response) {
-      this.addWord(response);
+    this.listenTo(Backbone, 'playedWords:addWord', function(data) {
+      this.addWord(data);
     }, this);
   },
 
-  addWord: function(response) {
-    var newWord = this.collection.createWord(response);
+  addWord: function(data) {
+    var newWord = this.collection.createWord(data);
     this.renderWord(newWord);
   },
 

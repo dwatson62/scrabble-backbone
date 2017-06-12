@@ -57,8 +57,11 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   validWord: function(response) {
+    response[0].placedLetters = _.map(this.placedLettersCollection.fetchPlaced(), function(letter) {
+      return { value: letter.get('value'), bonus: letter.get('bonusMultiplier') };
+    });
+
     this.boardTilesCollection.confirmAllPlacedTiles();
-    response[0].letters = this.placedLettersCollection.pluckPlacedValues();
 
     this.fetchNewLettersFromBag();
     Backbone.trigger('playedWords:addWord', response);

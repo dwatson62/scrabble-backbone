@@ -31,16 +31,32 @@ Scrabble.LetterHelper = Backbone.Helper.extend({
     "blank": { "points": 0, "tiles": 2}
   },
 
+  letterBonuses: {
+    'doubleletter': 2,
+    'tripleletter': 3
+  },
+
+  wordBonuses: {
+    'doubleword': 2,
+    'tripleword': 3
+  },
+
   calculatePoints: function(letters) {
     return _.reduce(this._convertToPoints(letters), function(memo, num) {
       return memo + num;
-    }, 0);
+    }, 0) * this._wordBonus(letters);
   },
 
   _convertToPoints: function(letters) {
     var self = this;
     return _.map(letters, function(letter) {
-      return self.letterValues[letter].points
+      var bonus = self.letterBonuses[letter.bonus] || 1;
+      return self.letterValues[letter.value].points * bonus;
     });
+  },
+
+  _wordBonus: function(letters) {
+    var bonus = _.intersection(_.keys(this.wordBonuses), _.pluck(letters, 'bonus')).join();
+    return this.wordBonuses[bonus] || 1;
   }
 });

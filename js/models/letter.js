@@ -22,6 +22,7 @@ Scrabble.Letter = Backbone.Model.extend({
   },
 
   place: function(tile) {
+    this.set('bonusMultiplier', tile.get('bonusMultiplier'));
     this.set('status', 'placed');
     this.set('tileId', tile.get('tileId'));
     this.set('tileNumber', tile.get('tileNumber'));
