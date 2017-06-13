@@ -22,6 +22,14 @@
         <div class='word-meaning'>{{ meaning }}</div>
       </div>
     </script>
+
+    <script id="player-template" type="text/template">
+      <div id='player-name'><h3 style='color: white;'> {{ name }} </h3></div>
+      <div id='player-score'><h4 style='color: white;'> {{ score }} </h4></div>
+      <div id='player-letters'></div>
+      <button class='cancel-btn'>Cancel</button>
+      <button class='play-word-btn'>Play Word</button>
+    </script>
   </head>
   <body id='scrabble-app'>
     <div class='container'>
@@ -30,11 +38,7 @@
           <% include board %>
         </section>
         <div class="col-md-4">
-          <section id='player-dashboard'>
-            <section id='player-letters'></section>
-            <button class='cancel-btn'>Cancel</button>
-            <button class='play-word-btn'>Play Word</button>
-          </section>
+          <section id='player-dashboard'></section>
 
           <section id='played-words-list'></section>
         </div>

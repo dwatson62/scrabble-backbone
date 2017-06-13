@@ -13,7 +13,7 @@ var setupPlayer = function(name, bag) {
   return new Scrabble.PlayerDashboardView({
     bag: bag,
     collection: playerLetters,
-    player: player
+    model: player
   });
 };
 

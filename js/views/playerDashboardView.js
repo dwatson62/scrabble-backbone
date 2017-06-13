@@ -2,6 +2,7 @@ var Scrabble = Scrabble || {};
 
 Scrabble.PlayerDashboardView = Backbone.View.extend({
   el: '#player-dashboard',
+  template: _.template($('#player-template').html()),
 
   events: {
     'click .play-word-btn': 'playWordButtonClicked',
@@ -11,7 +12,7 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   initialize: function(context) {
     this.bag = context.bag;
     this.collection = context.collection;
-    this.player = context.player;
+    this.model = context.model;
     this.render();
 
     this.collection.bind('add', this.renderLetter, this);
@@ -21,17 +22,18 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   },
 
   render: function() {
-    var self = this;
-    _.each(self.collection.models, function(letter) {
-      self.renderLetter(letter);
-    });
+    this.$el.html(this.template(this.model.attributes));
+
+    _.each(this.collection.models, function(letter) {
+      this.renderLetter(letter);
+    }, this);
     return this;
   },
 
   renderLetter: function(letter) {
     var letterView = new Scrabble.LetterView({
       model: letter,
-      player: this.player
+      player: this.model
     });
     this.$el.find('#player-letters').append(letterView.render().el);
   },

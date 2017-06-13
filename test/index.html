@@ -33,6 +33,14 @@
     </div>
   </script>
 
+  <script id="player-template" type="text/template">
+    <div id='player-name'><h3 style='color: white;'> {{ name }} </h3></div>
+    <div id='player-score'><h4 style='color: white;'> {{ score }} </h4></div>
+    <div id='player-letters'></div>
+    <button class='cancel-btn'>Cancel</button>
+    <button class='play-word-btn'>Play Word</button>
+  </script>
+
   <script>mocha.setup('bdd')</script>
   <script src="../bower_components/sinon-browser-only/sinon.js"></script>
   <script src="../vendor/index.js"></script>
