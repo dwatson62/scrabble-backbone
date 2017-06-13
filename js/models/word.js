@@ -8,5 +8,6 @@ Scrabble.Word = Backbone.Model.extend({
   initialize: function(context) {
     this.set('value', context.value);
     this.set('meaning', context.meaning);
+    this.set('player', context.player);
   }
 });

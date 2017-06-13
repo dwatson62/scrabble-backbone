@@ -22,6 +22,6 @@ Scrabble.PlayedWordsView = Backbone.View.extend({
       model: newWord
     });
 
-    this.$el.append(wordView.render().el);
+    this.$el.prepend(wordView.render().el);
   }
 });
