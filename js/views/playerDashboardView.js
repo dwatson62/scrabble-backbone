@@ -19,6 +19,7 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
       this.replaceLetters(letterCount);
     }, this);
     this.listenTo(this.model, 'change:active', this.render);
+    this.listenTo(this.model, 'change:score', this.render);
   },
 
   render: function() {

@@ -3,14 +3,17 @@ var Scrabble = Scrabble || {};
 describe('Played Words Collection', function() {
   var collection;
   var centreLetter;
+  var player;
 
   beforeEach(function() {
     collection = new Scrabble.PlayedWords();
+    player = new Scrabble.Player('Bob');
   });
 
   describe('#createWord', function() {
     it('creates a new Word instance and adds to the collection', function() {
       var data = [{
+        player: player,
         placedLetters: [{ value: 'c' },
                         { value: 'a' },
                         { value: 't' }],

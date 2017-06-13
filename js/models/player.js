@@ -29,5 +29,10 @@ Scrabble.Player = Backbone.Model.extend({
 
   deactivate: function() {
     this.set('active', false);
+  },
+
+  updateScore: function(points) {
+    var currentPoints = this.get('score');
+    this.set('score', currentPoints += points);
   }
 });

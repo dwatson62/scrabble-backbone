@@ -46,4 +46,12 @@ describe('Player', function() {
       expect(player.get('active')).to.be(false);
     });
   });
+
+  describe('#updateScore()', function() {
+    it('updates the players score', function() {
+      player.updateScore(5);
+
+      expect(player.get('score')).to.eql(5);
+    });
+  });
 });
