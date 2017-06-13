@@ -152,16 +152,15 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     var setTwo;
 
     if (direction === 'horizontal') {
-      setOne = this._yieldLetter([], tileId, 'oneTileToLeft');
-      setTwo = this._yieldLetter([], tileId, 'oneTileToRight');
+      setOne = this._yieldHorizontally(tileId);
     } else if (direction === 'vertical') {
-      setOne = this._yieldLetter([], tileId, 'oneTileAbove');
-      setTwo = this._yieldLetter([], tileId, 'oneTileBelow');
+      setOne = this._yieldVertically(tileId);
     } else {
-      return [tileId];
+      setOne = this._yieldHorizontally(tileId);
+      setTwo = this._yieldVertically(tileId);
     }
 
-    return _.union([tileId], setOne, setTwo);
+    return _.flatten(_.union([tileId], setOne, setTwo));
   },
 
   _firstAvailableTile: function(tileId, fn) {
@@ -171,6 +170,20 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
     } else {
       return tile;
     }
+  },
+
+  _yieldHorizontally: function(tileId) {
+    return [
+      this._yieldLetter([], tileId, 'oneTileToLeft'),
+      this._yieldLetter([], tileId, 'oneTileToRight')
+    ];
+  },
+
+  _yieldVertically: function(tileId) {
+    return [
+      this._yieldLetter([], tileId, 'oneTileAbove'),
+      this._yieldLetter([], tileId, 'oneTileBelow')
+    ];
   },
 
   _yieldLetter: function(tiles, tileId, fn) {
