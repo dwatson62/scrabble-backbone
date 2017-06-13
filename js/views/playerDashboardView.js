@@ -1,7 +1,6 @@
 var Scrabble = Scrabble || {};
 
 Scrabble.PlayerDashboardView = Backbone.View.extend({
-  el: '#player-dashboard',
   template: _.template($('#player-template').html()),
 
   events: {

@@ -27,8 +27,9 @@
       <div id='player-name'><h3 style='color: white;'> {{ name }} </h3></div>
       <div id='player-score'><h4 style='color: white;'> {{ score }} </h4></div>
       <div id='player-letters'></div>
-      <button class='cancel-btn'>Cancel</button>
-      <button class='play-word-btn'>Play Word</button>
+      <button class='cancel-btn {{ active === false ? "hidden": "" }}'>Cancel</button>
+      <button class='play-word-btn {{ active === false ? "hidden": "" }}'>Play Word</button>
+
     </script>
   </head>
   <body id='scrabble-app'>
@@ -38,7 +39,8 @@
           <% include board %>
         </section>
         <div class="col-md-4">
-          <section id='player-dashboard'></section>
+          <section id='player-dashboard-0'></section>
+          <section id='player-dashboard-1'></section>
 
           <section id='played-words-list'></section>
         </div>

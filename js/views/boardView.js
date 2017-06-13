@@ -81,7 +81,7 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   currentPlayer: function() {
-    return this.players[0];
+    return this.players.currentPlayer();
   },
 
   emptyTileClicked: function(event) {

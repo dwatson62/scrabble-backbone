@@ -1,29 +1,20 @@
 var Scrabble = Scrabble || {};
 
 describe('BoardView', function() {
-  var player;
   var boardTiles;
   var boardView;
   var placedLetters;
   var letter;
 
   beforeEach(function() {
-    player = new Scrabble.Player('Daryl');
     boardTiles = new Scrabble.BoardTiles();
 
     boardView = new Scrabble.BoardView({
       boardTiles: boardTiles,
-      placedLettersCollection: new Scrabble.PlacedLetters(),
-      players: [player],
+      placedLettersCollection: new Scrabble.PlacedLetters()
     });
 
     letter = new Scrabble.Letter({ tileId: 'tile_7_7' });
-  });
-
-  describe('#currentPlayer', function() {
-    it('returns the current player', function() {
-      expect(boardView.currentPlayer()).to.eql(player);
-    });
   });
 
   describe('#highlightAvailableTiles', function() {
