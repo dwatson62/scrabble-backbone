@@ -15,6 +15,12 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     return this.where({ status: 'placed' });
   },
 
+  valueWithBonus: function() {
+    return _.map(this.models, function(letter) {
+      return { value: letter.get('value'), bonus: letter.get('bonusMultiplier') };
+    });
+  },
+
   direction: function() {
     this.determineDirection();
   },

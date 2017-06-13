@@ -38,7 +38,6 @@ describe('PlacedLetters Collection', function() {
       collection.add(letter);
 
       expect(collection.determineDirection()).to.eql('horizontal');
-      collection.reset();
     });
 
     it('can calculate when tiles are placed vertically', function() {
@@ -48,7 +47,6 @@ describe('PlacedLetters Collection', function() {
       collection.add(letter);
 
       expect(collection.determineDirection()).to.eql('vertical');
-      collection.reset();
     });
   });
 
@@ -70,7 +68,20 @@ describe('PlacedLetters Collection', function() {
       collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', value: 't' }));
 
       expect(collection.assembleWord()).to.eql('cat');
-      collection.reset();
+    });
+  });
+
+  describe('#valueWithBonus', function() {
+    it('converts to object with value and bonus', function() {
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_9', value: 'c' }));
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_10', value: 'a' }));
+      collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', value: 't', bonusMultiplier: 'doubleletter' }));
+
+      expect(collection.valueWithBonus()).to.eql([
+        { value: 'c', bonus: undefined },
+        { value: 'a', bonus: undefined },
+        { value: 't', bonus: 'doubleletter' }
+      ]);
     });
   });
 });
