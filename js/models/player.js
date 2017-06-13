@@ -2,6 +2,7 @@ var Scrabble = Scrabble || {};
 
 Scrabble.Player = Backbone.Model.extend({
   defaults: {
+    'active': false,
     'score': 0
   },
 
@@ -20,5 +21,13 @@ Scrabble.Player = Backbone.Model.extend({
 
   replaceLetter: function() {
     this.selectedLetter = undefined;
+  },
+
+  activate: function() {
+    this.set('active', true);
+  },
+
+  deactivate: function() {
+    this.set('active', false);
   }
 });

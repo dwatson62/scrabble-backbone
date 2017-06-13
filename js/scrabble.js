@@ -22,9 +22,10 @@ $(document).ready(function() {
   var bag = new Scrabble.LettersBag();
   var playedWordsView = new Scrabble.PlayedWordsView();
 
-  var players = new Scrabble.Players();
-  players.add(setupPlayer('Daryl', bag).player);
-  players.add(setupPlayer('Brian', bag).player);
+  var players = new Scrabble.Players([
+    setupPlayer('Daryl', bag).model,
+    setupPlayer('Brian', bag).model
+  ]);
 
   var boardView = new Scrabble.BoardView({
     boardTiles: board,

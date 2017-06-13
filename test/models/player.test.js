@@ -30,4 +30,20 @@ describe('Player', function() {
       expect(player.selectedLetter).to.eql(undefined);
     });
   });
+
+  describe('#activate()', function() {
+    it('sets active to true', function() {
+      player.activate();
+      expect(player.get('active')).to.be(true);
+    });
+  });
+
+  describe('#deactivate()', function() {
+    it('sets active to false', function() {
+      player.activate();
+      player.deactivate();
+
+      expect(player.get('active')).to.be(false);
+    });
+  });
 });
