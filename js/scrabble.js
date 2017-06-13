@@ -4,28 +4,31 @@ _.templateSettings = {
   interpolate : /\{\{(.+?)\}\}/g
 };
 
-$(document).ready(function() {
-  var placedLettersCollection = new Scrabble.PlacedLetters();
-  var playedWordsView = new Scrabble.PlayedWordsView();
+var setupPlayer = function(name, bag) {
+  var player = new Scrabble.Player(name);
 
-  var board = new Scrabble.BoardTiles();
-  var bag = new Scrabble.LettersBag();
   var playerLetters = new Scrabble.PlayerLetters();
   playerLetters.add(bag.retrieve(7));
 
-  var player = new Scrabble.Player('Daryl');
-
-  var playerDashboardView = new Scrabble.PlayerDashboardView({
+  return new Scrabble.PlayerDashboardView({
     bag: bag,
     collection: playerLetters,
     player: player
   });
+};
+
+$(document).ready(function() {
+  var board = new Scrabble.BoardTiles();
+  var bag = new Scrabble.LettersBag();
+  var playedWordsView = new Scrabble.PlayedWordsView();
+
+  var players = new Scrabble.Players();
+  players.add(setupPlayer('Daryl', bag).player);
+  players.add(setupPlayer('Brian', bag).player);
 
   var boardView = new Scrabble.BoardView({
-    players: [player],
     boardTiles: board,
-    placedLettersCollection: placedLettersCollection
+    placedLettersCollection: new Scrabble.PlacedLetters(),
+    players: players
   });
-
-  var scrabbleView = new Scrabble.ScrabbleView({});
 });
