@@ -15,6 +15,18 @@ Scrabble.LetterView = Backbone.View.extend({
     this.player = context.player;
     this.listenTo(this.model, 'change:status', this.render);
     this.model.bind('remove', this.removeView, this);
+
+    this.listenTo(this.player, 'change:active', this.updateEventDelegation);
+
+    this.updateEventDelegation(this.player);
+  },
+
+  updateEventDelegation: function(player) {
+    if (player.get('active')) {
+      this.delegateEvents();
+    } else {
+      this.undelegateEvents();
+    }
   },
 
   render: function() {

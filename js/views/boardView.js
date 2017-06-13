@@ -62,6 +62,7 @@ Scrabble.BoardView = Backbone.View.extend({
     this.boardTilesCollection.confirmAllPlacedTiles();
 
     this.fetchNewLettersFromBag();
+    this.currentPlayer().collection.nextPlayerTurn();
     Backbone.trigger('playedWords:addWord', response);
   },
 
