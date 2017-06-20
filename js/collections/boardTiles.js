@@ -1,25 +1,20 @@
 var Scrabble = Scrabble || {};
 
 Scrabble.BoardTiles = Backbone.Collection.extend({
-  model: Scrabble.Tile,
-
   initialize: function() {
-    this.models = this.createBoard();
+    this.reset(this.createBoard());
     this.helper = new Scrabble.TileHelper();
     this.centreTile = this.findWhere({ tileId: 'tile_7_7' });
   },
 
   createBoard: function() {
     var board = [];
-    var count = 0;
     for (var x = 0; x < 15; x ++) {
       for (var y = 0; y < 15; y ++) {
         board.push(new Scrabble.Tile({
-          count: count,
           x: x,
           y: y
         }));
-        count += 1;
       }
     }
     return board;

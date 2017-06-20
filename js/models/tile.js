@@ -2,26 +2,24 @@ var Scrabble = Scrabble || {};
 
 Scrabble.Tile = Backbone.Model.extend({
   baseSrc: '/images/tiles/',
-  letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'M', 'N', 'O', 'P', 'Q'],
+  boardSize: 15,
 
   board: {
-    'A1': 'tripleword', 'A4': 'doubleletter', 'A8': 'tripleword', 'A12': 'doubleletter', 'A15': 'tripleword',
-    'B2': 'doubleword', 'B6': 'tripleletter', 'B10': 'tripleletter', 'B14': 'doubleword',
-    'C3': 'doubleword', 'C7': 'doubleletter', 'C9': 'doubleletter', 'C13': 'doubleword',
-    'D1': 'doubleletter', 'D4': 'doubleword', 'D8': 'doubleletter', 'D12': 'doubleword', 'D15': 'doubleletter',
-    'E5': 'doubleword', 'E11': 'doubleword',
-    'F2': 'tripleletter', 'F6': 'tripleletter', 'F10': 'tripleletter', 'F14': 'tripleletter',
-    'G3': 'doubleletter', 'G7': 'doubleletter', 'G9': 'doubleletter', 'G13': 'doubleletter',
-    'H1': 'tripleword', 'H4': 'doubleletter', 'H8': 'star', 'H12': 'doubleletter', 'H15': 'tripleword',
-    'I3': 'doubleletter', 'I7': 'doubleletter', 'I9': 'doubleletter', 'I13': 'doubleletter',
-    'J2': 'tripleletter', 'J6': 'tripleletter', 'J10': 'tripleletter', 'J14': 'tripleletter',
-    'K5': 'doubleword', 'K11': 'doubleword',
-
-    'M1': 'doubleletter', 'M4': 'doubleword', 'M8': 'doubleletter', 'M12': 'doubleword', 'M15': 'doubleletter',
-    'N3': 'doubleword', 'N7': 'doubleletter', 'N9': 'doubleletter', 'N13': 'doubleword',
-    'O2': 'doubleword', 'O6': 'tripleletter', 'O10': 'tripleletter', 'O14': 'doubleword',
-    'P1': 'tripleword', 'P4': 'doubleletter', 'P8': 'tripleword', 'P12': 'doubleletter', 'P15': 'tripleword',
-    'Q1': 'tripleword', 'Q4': 'doubleletter', 'Q8': 'tripleword', 'Q12': 'doubleletter', 'Q15': 'tripleword'
+    '0': 'tripleword', '3': 'doubleletter', '7': 'tripleword', '11': 'doubleletter', '14': 'tripleword',
+    '16': 'doubleword', '20': 'tripleletter', '24': 'tripleletter', '28': 'doubleword',
+    '32': 'doubleword', '36': 'doubleletter', '38': 'doubleletter', '42': 'doubleword',
+    '45': 'doubleletter', '48': 'doubleword', '52': 'doubleletter', '56': 'doubleword', '59': 'doubleletter',
+    '64': 'doubleword', '70': 'doubleword',
+    '76': 'tripleletter', '80': 'tripleletter', '84': 'tripleletter', '88': 'tripleletter',
+    '92': 'doubleletter', '96': 'doubleletter', '98': 'doubleletter', '102': 'doubleletter',
+    '105': 'tripleword', '108': 'doubleletter', '112': 'star', '116': 'doubleletter', '119': 'tripleword',
+    '122': 'doubleletter', '126': 'doubleletter', '128': 'doubleletter', '132': 'doubleletter',
+    '136': 'tripleletter', '140': 'tripleletter', '144': 'tripleletter', '148': 'tripleletter',
+    '154': 'doubleword', '160': 'doubleword',
+    '165': 'doubleletter', '168': 'doubleword', '172': 'doubleletter', '176': 'doubleword', '179': 'doubleletter',
+    '182': 'doubleword', '186': 'doubleletter', '188': 'doubleletter', '192': 'doubleword',
+    '196': 'doubleword', '200': 'tripleletter', '204': 'tripleletter', '208': 'doubleword',
+    '210': 'tripleword', '213': 'doubleletter', '217': 'tripleword', '221': 'doubleletter', '224': 'tripleword'
   },
 
   defaults: {
@@ -31,34 +29,11 @@ Scrabble.Tile = Backbone.Model.extend({
 
   initialize: function(options) {
     this.options = options;
-    this.set('tileId', this.generateTileId());
-    this.set('tileNumber', options.count);
-    this.set('coords', this.convertToCoords());
-    this.set('defaultTileSrc', this.baseSrc + this.fetchTile() + '.png');
+    this.set('tileId', this._generateTileId());
+    this.set('tileNumber', this._generateTileNumber());
+    this.set('defaultTileSrc', this.baseSrc + this._fetchTile() + '.png');
     this.set('tileSrc', this.get('defaultTileSrc'));
-    this.set('bonusMultiplier', this.fetchTile());
-  },
-
-  generateTileId: function() {
-    return 'tile_' + this.options.x.toString() + '_' + this.options.y.toString();
-  },
-
-  convertToCoords: function() {
-    var x = this.options.x;
-    var y = this.options.y;
-    return this.letters[x] + String(y + 1);
-  },
-
-  fetchTile: function() {
-    var tile = this.board[this.get('coords')];
-    if (tile === null) { return; }
-    if (tile === undefined) { return 'empty'; }
-    if (tile.length === 1 || tile === 'blank') { return 'letter-' + tile; }
-    return tile;
-  },
-
-  isCentreTile: function() {
-    return this.get('coords') === 'H8';
+    this.set('bonusMultiplier', this._fetchTile());
   },
 
   receiveLetter: function(letter) {
@@ -95,5 +70,21 @@ Scrabble.Tile = Backbone.Model.extend({
 
   isUnavailable: function() {
     return this.isPlaced() || this.isConfirmed();
+  },
+
+  _fetchTile: function() {
+    var tile = this.board[this.get('tileNumber')];
+    if (tile === null) { return; }
+    if (tile === undefined) { return 'empty'; }
+    if (tile.length === 1 || tile === 'blank') { return 'letter-' + tile; }
+    return tile;
+  },
+
+  _generateTileNumber: function() {
+    return (this.boardSize * this.options.x) + this.options.y;
+  },
+
+  _generateTileId: function() {
+    return 'tile_' + this.options.x.toString() + '_' + this.options.y.toString();
   }
 });
