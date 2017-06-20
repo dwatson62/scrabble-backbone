@@ -9,3 +9,12 @@
 - ```npm start``` starts server on port 3000
 - ```grunt sass``` compiles all files in scss/ into .css in public/stylesheets
 - ```grunt watch``` watches all files in scss/ for changes and then runs grunt sass
+
+#### Todo
+
+- Allow hook words
+- Allow blank tiles
+- Styling for played words collection
+- Better styling for player dashboard
+- Better handling for when a player submits an invalid word
+- Handle end game
