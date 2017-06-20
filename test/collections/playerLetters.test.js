@@ -16,13 +16,6 @@ describe('PlayerLetters Collection', function() {
           });
   });
 
-  describe('#fetchLetter', function() {
-    it('fetches letter from collection using uid', function() {
-      var letter = collection.first();
-      expect(collection.fetchLetter(letter.get('uid'))).to.eql(letter);
-    });
-  });
-
   describe('#unselectAll', function() {
     it('unselects all selected letters', function() {
       _.first(collection.models).choose();

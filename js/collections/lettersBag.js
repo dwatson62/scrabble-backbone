@@ -5,17 +5,14 @@ Scrabble.LettersBag = Backbone.Collection.extend({
     var helper = new Scrabble.LetterHelper();
     var letters = _.keys(helper.letterValues);
     var self = this;
-    var count = 1;
 
     for (var letter in letters) {
       for (var i = 0; i < helper.letterValues[letters[letter]].tiles; i ++) {
         var newLetter = new Scrabble.Letter({
           points: helper.letterValues[letters[letter]].points,
-          uid: count,
           value: letters[letter]
         });
         self.add(newLetter);
-        count += 1;
       }
     }
 

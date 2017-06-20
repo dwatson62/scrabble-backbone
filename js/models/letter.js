@@ -8,7 +8,6 @@ Scrabble.Letter = Backbone.Model.extend({
 
   initialize: function(context) {
     this.set('value', context.value);
-    this.set('uid', context.uid);
     this.set('imageSrc', '/images/tiles/letter-' + this.get('value') + '.png');
     this.set('points', context.points);
   },
