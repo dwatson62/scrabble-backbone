@@ -30,5 +30,12 @@ Scrabble.Letter = Backbone.Model.extend({
 
   confirm: function() {
     this.set('status', 'confirmed');
+  },
+
+  resetState: function() {
+    this.unselect();
+    this.set('bonusMultiplier', null);
+    this.set('tileId', null);
+    this.set('tileNumber', 0);
   }
 });

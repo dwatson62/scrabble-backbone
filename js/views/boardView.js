@@ -78,6 +78,7 @@ Scrabble.BoardView = Backbone.View.extend({
   },
 
   cancelPlacedLetters: function() {
+    this.placedLettersCollection.reset()
     this.boardTilesCollection.returnAllPlacedTiles();
     this.highlightAllTiles();
   },
