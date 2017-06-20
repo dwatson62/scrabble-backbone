@@ -3,9 +3,7 @@ var Scrabble = Scrabble || {};
 Scrabble.BoardView = Backbone.View.extend({
   el: '#scrabble-board',
 
-  events: {
-    'click .board-tile.empty.highlight': 'emptyTileClicked'
-  },
+  events: {},
 
   initialize: function(context) {
     this.boardTilesCollection = context.boardTiles;
@@ -32,7 +30,8 @@ Scrabble.BoardView = Backbone.View.extend({
     var domId = '#' + tile.get('tileId');
     var tileView = new Scrabble.TileView({
       el: $(domId),
-      model: tile
+      model: tile,
+      parentView: this
     });
     this.$el.find(domId).append(tileView.render().el);
   },
@@ -85,19 +84,6 @@ Scrabble.BoardView = Backbone.View.extend({
 
   currentPlayer: function() {
     return this.players.currentPlayer();
-  },
-
-  emptyTileClicked: function(event) {
-    var letter = this.currentPlayer().selectedLetter;
-
-    if (letter) {
-      var tileId = event.currentTarget.dataset.tileId;
-      var tile = this.boardTilesCollection.fetchTile(tileId);
-      tile.receiveLetter(letter);
-      this.currentPlayer().putDownLetter(tile);
-      this.placedLettersCollection.add(letter);
-      this.highlightAllTiles();
-    }
   },
 
   highlightAvailableTiles: function() {
