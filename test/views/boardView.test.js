@@ -3,7 +3,6 @@ var Scrabble = Scrabble || {};
 describe('BoardView', function() {
   var boardTiles;
   var boardView;
-  var placedLetters;
   var letter;
 
   beforeEach(function() {
@@ -80,6 +79,22 @@ describe('BoardView', function() {
         expect(spy.calledOnce).to.be(true);
         spy.restore();
       });
+    });
+  });
+
+  describe('#cancelPlacedLetters', function() {
+    it('resets placedLettersCollection, returns all placedTiles and highlights the board', function() {
+      var boardTilesSpy = sinon.spy(boardTiles, 'returnAllPlacedTiles');
+      var boardViewSpy = sinon.spy(boardView, 'highlightAllTiles');
+
+      boardView.cancelPlacedLetters();
+
+      expect(boardView.placedLettersCollection.length).to.eql(0);
+      expect(boardTilesSpy.calledOnce).to.be(true);
+      expect(boardViewSpy.calledOnce).to.be(true);
+
+      boardTilesSpy.restore();
+      boardViewSpy.restore();
     });
   });
 
