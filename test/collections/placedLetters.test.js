@@ -6,12 +6,12 @@ describe('PlacedLetters Collection', function() {
 
   beforeEach(function() {
     collection = new Scrabble.PlacedLetters();
-    centreLetter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_7' });
+    centreLetter = new Scrabble.Letter({ value: 'a', tileId: 'tile_7_7' });
   });
 
   describe('First and Last tileids', function() {
     beforeEach(function() {
-      var letter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_7_8' });
+      var letter = new Scrabble.Letter({ value: 'b', tileId: 'tile_7_8' });
 
       collection.add(centreLetter);
       collection.add(letter);
@@ -32,7 +32,7 @@ describe('PlacedLetters Collection', function() {
     });
 
     it('can calculate when tiles are placed horizontally', function() {
-      var letter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_7_8' });
+      var letter = new Scrabble.Letter({ value: 'b', tileId: 'tile_7_8' });
 
       collection.add(centreLetter);
       collection.add(letter);
@@ -41,7 +41,7 @@ describe('PlacedLetters Collection', function() {
     });
 
     it('can calculate when tiles are placed vertically', function() {
-      var letter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_6_7' });
+      var letter = new Scrabble.Letter({ value: 'b', tileId: 'tile_6_7' });
 
       collection.add(centreLetter);
       collection.add(letter);

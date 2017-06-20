@@ -1,7 +1,7 @@
 var Scrabble = Scrabble || {};
 
 describe('Letter', function() {
-  var letter = Scrabble.LetterFactory.create('a');
+  var letter = Scrabble.LetterFactory.create();
 
   describe('#choose()', function() {
     it('updates status to selected', function() {

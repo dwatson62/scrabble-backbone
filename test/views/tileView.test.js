@@ -10,7 +10,7 @@ describe('Tile View', function() {
   var parentView;
 
   beforeEach(function() {
-    letter = Scrabble.LetterFactory.create('a');
+    letter = Scrabble.LetterFactory.create();
     collection = new Scrabble.PlacedLetters();
     player = new Scrabble.Player();
     playerCollection = new Scrabble.Players([player]);

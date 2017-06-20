@@ -1,43 +1,42 @@
 var Scrabble = Scrabble || {};
 
 describe('Tile', function() {
-  var tile = new Scrabble.Tile({ x: 0, y: 0 });
-  var letter = Scrabble.LetterFactory.create('a');
+  var tile = Scrabble.TileFactory.create();
+  var letter = Scrabble.LetterFactory.create();
 
   describe('#_generateTileId()', function() {
     it('generates the correct tile id based on array indices', function() {
-      var tile = new Scrabble.Tile({ x: 1, y: 2 });
+      var tile = Scrabble.TileFactory.create({ x: 1, y: 2 });
       expect(tile._generateTileId()).to.eql('tile_1_2');
     });
   });
 
   describe('#_generateTileNumber()', function() {
     it('generates the correct tile id based on array indices', function() {
-      var tile = new Scrabble.Tile({ x: 1, y: 2 });
+      var tile = Scrabble.TileFactory.create({ x: 1, y: 2 });
       expect(tile._generateTileNumber()).to.eql(17);
     });
   });
 
   describe('#_fetchTile()', function() {
     it('returns no bonus', function() {
-      var tile = new Scrabble.Tile({ x: 0, y: 1 });
+      var tile = Scrabble.TileFactory.create({ y: 1 });
       expect(tile._fetchTile()).to.eql('empty');
     });
 
     it('returns correct tripleword bonus', function() {
-      var tile = new Scrabble.Tile({ x: 0, y: 0 });
+      var tile = Scrabble.TileFactory.create();
       expect(tile._fetchTile()).to.eql('tripleword');
     });
 
     it('returns correct doubleletter bonus', function() {
-      var tile = new Scrabble.Tile({ x: 0, y: 3 });
+      var tile = Scrabble.TileFactory.create({ y: 3 });
       expect(tile._fetchTile()).to.eql('doubleletter');
     });
   });
 
   describe('#receiveLetter()', function() {
     it('stores the letter and updates attributes', function() {
-      var tile = new Scrabble.Tile({ x: 0, y: 1 });
       tile.receiveLetter(letter);
 
       expect(tile.letter).to.eql(letter);
@@ -48,7 +47,6 @@ describe('Tile', function() {
 
   describe('#returnLetter()', function() {
     it('returns the letter and updates attributes', function() {
-      var tile = new Scrabble.Tile({ x: 0, y: 1 });
       tile.returnLetter(letter);
 
       expect(tile.letter).to.eql(undefined);
@@ -59,7 +57,6 @@ describe('Tile', function() {
 
   describe('#highlight()', function() {
     it('sets highlight attribute', function() {
-      var tile = new Scrabble.Tile({ x: 0, y: 1 });
 
       tile.highlight();
       expect(tile.get('highlight')).to.eql('highlight');
@@ -68,7 +65,6 @@ describe('Tile', function() {
 
   describe('#unhighlight()', function() {
     it('sets unhighlight attribute', function() {
-      var tile = new Scrabble.Tile({ x: 0, y: 1 });
 
       tile.unhighlight();
       expect(tile.get('highlight')).to.eql('unhighlight');

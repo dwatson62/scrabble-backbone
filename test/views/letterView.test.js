@@ -7,7 +7,7 @@ describe('Letter View', function() {
   var view;
 
   beforeEach(function() {
-    letter = Scrabble.LetterFactory.create('a');
+    letter = Scrabble.LetterFactory.create();
     collection = new Scrabble.PlayerLetters();
     collection.add(letter);
     player = new Scrabble.Player();

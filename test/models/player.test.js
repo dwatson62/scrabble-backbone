@@ -2,7 +2,7 @@ var Scrabble = Scrabble || {};
 
 describe('Player', function() {
   var player = new Scrabble.Player('Bob');
-  var letter = Scrabble.LetterFactory.create('a');
+  var letter = Scrabble.LetterFactory.create();
 
   describe('#pickUpLetter()', function() {
     it('the selectedLetter gets updated', function() {
