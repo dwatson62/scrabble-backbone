@@ -1,6 +1,8 @@
 var Scrabble = Scrabble || {};
 
-Scrabble.TileView = Backbone.View.extend({
+Scrabble.TileView = Backbone.View
+  .extend(letterSelection)
+  .extend({
   template: _.template($('#tile-template').html()),
   events: {
     'click .empty.highlight': 'emptyTileClicked'
@@ -19,21 +21,13 @@ Scrabble.TileView = Backbone.View.extend({
   },
 
   emptyTileClicked: function() {
-    var letter = this._selectedLetter();
+    var letter = letterSelection.putdown();
 
     if (letter) {
       this.model.receiveLetter(letter);
-      this._currentPlayer().putDownLetter(this.model);
+      letter.place(this.model);
       this.parentView.placedLettersCollection.add(letter);
       this.parentView.highlightAllTiles();
     }
-  },
-
-  _currentPlayer: function() {
-    return this.parentView.currentPlayer();
-  },
-
-  _selectedLetter: function() {
-    return this._currentPlayer().selectedLetter;
   }
 });

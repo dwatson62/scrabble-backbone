@@ -1,6 +1,8 @@
 var Scrabble = Scrabble || {};
 
-Scrabble.BoardView = Backbone.View.extend({
+Scrabble.BoardView = Backbone.View
+  .extend(letterSelection)
+  .extend({
   el: '#scrabble-board',
 
   events: {},

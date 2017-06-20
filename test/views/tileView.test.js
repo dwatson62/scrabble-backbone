@@ -12,14 +12,11 @@ describe('Tile View', function() {
   beforeEach(function() {
     letter = Scrabble.LetterFactory.create();
     collection = new Scrabble.PlacedLetters();
-    player = new Scrabble.Player();
-    playerCollection = new Scrabble.Players([player]);
     tile = new Scrabble.TileFactory.create();
 
     parentView = new Scrabble.BoardView({
       boardTiles: new Scrabble.BoardTiles(),
-      placedLettersCollection: collection,
-      players: playerCollection
+      placedLettersCollection: collection
     });
 
     view = new Scrabble.TileView({
@@ -30,8 +27,7 @@ describe('Tile View', function() {
 
   describe('#emptyTileClicked', function() {
     it('places letter on tile', function() {
-      player.pickUpLetter(letter);
-
+      letterSelection.pickup(letter);
       view.emptyTileClicked();
 
       expect(tile.letter).to.eql(letter);

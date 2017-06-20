@@ -1,6 +1,8 @@
 var Scrabble = Scrabble || {};
 
-Scrabble.LetterView = Backbone.View.extend({
+Scrabble.LetterView = Backbone.View
+  .extend(letterSelection)
+  .extend({
   tagName: 'div',
   className: 'letter-container',
 
@@ -42,14 +44,14 @@ Scrabble.LetterView = Backbone.View.extend({
   letterClicked: function() {
     this.model.collection.unselectAll();
     this.model.choose();
-    this.player.pickUpLetter(this.model);
+    letterSelection.pickup(this.model);
 
     Backbone.trigger('board:letterClicked');
   },
 
   selectedLetterClicked: function() {
     this.model.unselect();
-    this.player.replaceLetter();
+    letterSelection.putdown();
 
     Backbone.trigger('board:highlightAllTiles');
   }

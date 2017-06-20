@@ -7,9 +7,9 @@ describe('Letter View', function() {
   var view;
 
   beforeEach(function() {
+    letterSelection.reset();
     letter = Scrabble.LetterFactory.create();
-    collection = new Scrabble.PlayerLetters();
-    collection.add(letter);
+    collection = new Scrabble.PlayerLetters([letter]);
     player = new Scrabble.Player();
     view = new Scrabble.LetterView({
       model: letter,
@@ -18,11 +18,11 @@ describe('Letter View', function() {
   });
 
   describe('#letterClicked', function() {
-    it('selects letter and player picks up letter', function() {
+    it('selects letter and adds to letterSelection', function() {
       view.letterClicked();
 
       expect(letter.get('status')).to.eql('selected');
-      expect(player.selectedLetter).to.eql(letter);
+      expect(letterSelection.letters).to.eql([letter]);
     });
   });
 
@@ -32,7 +32,7 @@ describe('Letter View', function() {
       view.selectedLetterClicked();
 
       expect(letter.get('status')).to.eql('unselected');
-      expect(player.selectedLetter).to.be(undefined);
+      expect(letterSelection.letters).to.eql([]);
     });
   });
 });
