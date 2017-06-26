@@ -2,6 +2,7 @@ var Scrabble = Scrabble || {};
 
 Scrabble.BoardView = Backbone.View
   .extend(letterSelection)
+  .extend(tileHighlighter)
   .extend({
   el: '#scrabble-board',
 
@@ -88,19 +89,6 @@ Scrabble.BoardView = Backbone.View
     return this.players.currentPlayer();
   },
 
-  highlightAvailableTiles: function() {
-    this.highlightAllPlacedAndConfirmedTiles();
-    if (this._nothingPlayed()) {
-      this.highlightCentreTile();
-    } else if (this.placedLettersCollection.length === 0) {
-      this.showAllNeighbourTiles();
-    } else if (this.placedLettersCollection.length === 1) {
-      this.showHorizontalAndVertical();
-    } else {
-      this.showNextAvailableTiles();
-    }
-  },
-
   highlightAllPlacedAndConfirmedTiles: function() {
     this.boardTilesCollection.highlightAllPlacedTiles();
     this.boardTilesCollection.highlightAllConfirmedTiles();
@@ -139,9 +127,4 @@ Scrabble.BoardView = Backbone.View
     this.boardTilesCollection.unhighlightAllTiles();
   },
 
-  _nothingPlayed: function() {
-    return _.every(this.boardTilesCollection.models, function(model) {
-      return model.get('status') === 'empty';
-    });
-  }
 });
