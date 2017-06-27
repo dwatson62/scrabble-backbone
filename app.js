@@ -12,13 +12,13 @@ var mongoose = require('mongoose');
 var mongoUri = process.env.MONGODB_URI ||
                'mongodb://localhost/scrabble' + process.env.NODE_ENV;
 
-mongoose.connect(mongoUri, function(err) {
-  if (err) {
-    console.log('Connection error:', err);
-  } else {
-    console.log('Connection to ' + process.env.NODE_ENV + ' database was successful!');
-  }
-});
+// mongoose.connect(mongoUri, function(err) {
+//   if (err) {
+//     console.log('Connection error:', err);
+//   } else {
+//     console.log('Connection to ' + process.env.NODE_ENV + ' database was successful!');
+//   }
+// });
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
