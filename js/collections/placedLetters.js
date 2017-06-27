@@ -16,6 +16,18 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     return _.last(this.models).get('tileId');
   },
 
+  nextTileId: function(current) {
+    var currentIndex = _.map(this.models, function(model) {
+                         return model.get('tileId')
+                       }).indexOf(current);
+
+    if (currentIndex === this.length - 1) {
+      return;
+    } else {
+      return this.at(currentIndex + 1).get('tileId');
+    }
+  },
+
   fetchPlaced: function() {
     return this.where({ status: 'placed' });
   },
@@ -27,11 +39,11 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
   },
 
   direction: function() {
-    this.determineDirection();
+    return this.determineDirection();
   },
 
   oppositeDirection: function() {
-    return this.oppositeDirections[this.direction];
+    return this.oppositeDirections[this.direction()];
   },
 
   determineDirection: function() {

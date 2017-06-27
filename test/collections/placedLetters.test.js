@@ -9,9 +9,11 @@ describe('PlacedLetters Collection', function() {
     centreLetter = new Scrabble.Letter({ value: 'a', tileId: 'tile_7_7' });
   });
 
-  describe('First and Last tileids', function() {
+  describe('tileid getters', function() {
+    var letter;
+
     beforeEach(function() {
-      var letter = new Scrabble.Letter({ value: 'b', tileId: 'tile_7_8' });
+      letter = new Scrabble.Letter({ value: 'b', tileId: 'tile_7_8' });
 
       collection.add(centreLetter);
       collection.add(letter);
@@ -23,6 +25,14 @@ describe('PlacedLetters Collection', function() {
 
     it('#lastTileId returns tileId of last letter', function() {
       expect(collection.lastTileId()).to.eql('tile_7_8');
+    });
+
+    it('#nextTileId returns tileId of next letter', function() {
+      expect(collection.nextTileId(centreLetter.get('tileId'))).to.eql('tile_7_8');
+    });
+
+    it('#nextTileId returns undefined if at end of collection of next letter', function() {
+      expect(collection.nextTileId(letter.get('tileId'))).to.be(undefined);
     });
   });
 

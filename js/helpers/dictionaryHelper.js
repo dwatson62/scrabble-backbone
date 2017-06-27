@@ -9,6 +9,8 @@ var dictionaryHelper = {
     var mainWord = this.prepareMainWord();
     this.wordSubmissions.push(mainWord);
 
+    this.prepareHookWords();
+
     this._submitAllWords(this.wordSubmissions.pop());
   },
 
@@ -19,6 +21,29 @@ var dictionaryHelper = {
 
     var newWord = letterSet.assembleWord();
     return newWord;
+  },
+
+  prepareHookWords: function() {
+    var direction = this.placedLettersCollection.oppositeDirection();
+    if (direction) {
+      var firstTile = this.placedLettersCollection.firstTileId();
+      this.checkSurroundingTilesForHookWord(firstTile, direction);
+    }
+  },
+
+  checkSurroundingTilesForHookWord: function(currentTile, direction) {
+    if (currentTile) {
+      var letters = this.boardTilesCollection.allSurroundingLetters(currentTile, direction);
+      if (letters.length > 1) {
+
+        var newHook = _.flatten([this.boardTilesCollection.fetchLetter(currentTile), letters])
+        var newWord = new Scrabble.PlacedLetters();
+        newWord.reset(newHook);
+        this.wordSubmissions.push(newWord.assembleWord());
+      }
+      var nextLetter = this.placedLettersCollection.nextTileId(currentTile);
+      this.checkSurroundingTilesForHookWord(nextLetter, direction);
+    }
   },
 
   addSurroundingLettersToMainWord: function() {
