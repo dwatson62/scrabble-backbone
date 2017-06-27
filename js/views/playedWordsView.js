@@ -17,7 +17,7 @@ Scrabble.PlayedWordsView = Backbone.View.extend({
     _.each(data, function(newWordData) {
       var newWord = self.collection.createWord(newWordData);
       self.renderWord(newWord);
-    })
+    });
   },
 
   renderWord: function(newWord) {

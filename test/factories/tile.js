@@ -2,7 +2,7 @@ var Scrabble = Scrabble || {};
 
 Scrabble.TileFactory = Backbone.Model.extend(_, {
   create: function(context) {
-    var context = context || {};
+    context = context || {};
 
     return new Scrabble.Tile({
       x: context.x || 0,

@@ -1,4 +1,5 @@
 var Scrabble = Scrabble || {};
+var letterSelection = letterSelection;
 
 describe('Tile View', function() {
   var letter;

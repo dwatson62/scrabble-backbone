@@ -37,11 +37,11 @@ describe('Dictionary Helper', function() {
 
       var s = Scrabble.LetterFactory.create({ value: 's', tileId: 'tile_7_9', tileNumber: 114 });
       placeLetter(s);
-      confirmLetter(s)
+      confirmLetter(s);
 
       var o = Scrabble.LetterFactory.create({ value: 'o', tileId: 'tile_7_5', tileNumber: 110 });
       placeLetter(o);
-      confirmLetter(o)
+      confirmLetter(o);
 
       expect(boardView.prepareMainWord()).to.eql('ocats');
     });

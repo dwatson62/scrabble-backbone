@@ -1,4 +1,5 @@
 var Scrabble = Scrabble || {};
+var letterSelection = letterSelection;
 
 describe('Letter View', function() {
   var letter;

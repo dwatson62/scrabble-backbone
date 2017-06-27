@@ -1,4 +1,5 @@
 var Scrabble = Scrabble || {};
+var letterSelection = letterSelection;
 
 Scrabble.TileView = Backbone.View
   .extend(letterSelection)

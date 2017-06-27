@@ -8,7 +8,7 @@ describe('PlayerLetters Collection', function() {
   beforeEach(function() {
     bag = new Scrabble.LettersBag();
     collection = new Scrabble.PlayerLetters(bag.retrieve(7));
-    tile = Scrabble.TileFactory.create()
+    tile = Scrabble.TileFactory.create();
   });
 
   describe('#unselectAll', function() {

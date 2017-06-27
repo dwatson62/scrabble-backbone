@@ -1,4 +1,7 @@
 var Scrabble = Scrabble || {};
+var letterSelection = letterSelection;
+var tileHighlighter = tileHighlighter;
+var dictionaryHelper = dictionaryHelper;
 
 Scrabble.BoardView = Backbone.View
   .extend(letterSelection)

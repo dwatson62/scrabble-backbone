@@ -36,7 +36,7 @@ var dictionaryHelper = {
       var letters = this.boardTilesCollection.allSurroundingLetters(currentTile, direction);
       if (letters.length > 1) {
 
-        var newHook = _.flatten([this.boardTilesCollection.fetchLetter(currentTile), letters])
+        var newHook = _.flatten([this.boardTilesCollection.fetchLetter(currentTile), letters]);
         var newWord = new Scrabble.PlacedLetters();
         newWord.reset(newHook);
         this.wordSubmissions.push(newWord.assembleWord());
