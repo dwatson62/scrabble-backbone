@@ -3,6 +3,11 @@ var Scrabble = Scrabble || {};
 Scrabble.PlacedLetters = Backbone.Collection.extend({
   comparator: 'tileNumber',
 
+  oppositeDirections: {
+    'vertical': 'horizontal',
+    'horizontal': 'vertical'
+  },
+
   firstTileId: function() {
     return this.first().get('tileId');
   },
@@ -23,6 +28,10 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
 
   direction: function() {
     this.determineDirection();
+  },
+
+  oppositeDirection: function() {
+    return this.oppositeDirections[this.direction];
   },
 
   determineDirection: function() {
