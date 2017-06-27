@@ -1,6 +1,4 @@
-var Scrabble = Scrabble || {};
-
-Scrabble.TileHelper = Backbone.Helper.extend({
+var tileHelper = {
   oneTileBelow: function(tileId) {
     var splitId = tileId.split('_');
     splitId[1] = String(parseInt(splitId[1]) + 1);
@@ -24,4 +22,4 @@ Scrabble.TileHelper = Backbone.Helper.extend({
     splitId[2] = String(parseInt(splitId[2]) + 1);
     return splitId.join('_');
   }
-});
+};

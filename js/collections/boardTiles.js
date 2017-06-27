@@ -1,10 +1,12 @@
 var Scrabble = Scrabble || {};
 
-Scrabble.BoardTiles = Backbone.Collection.extend({
+Scrabble.BoardTiles = Backbone.Collection
+  .extend(tileHelper)
+  .extend({
+
   initialize: function() {
     this.reset(this.createBoard());
-    this.helper = new Scrabble.TileHelper();
-    this.centreTile = this.findWhere({ tileId: 'tile_7_7' });
+    this.centreTile = this.findWhere({ tileNumber: 112 });
   },
 
   createBoard: function() {
@@ -159,7 +161,7 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
   },
 
   _firstAvailableTile: function(tileId, fn) {
-    var tile = this.helper[fn](tileId);
+    var tile = this[fn](tileId);
     if (this.findWhere({ tileId: tile }).isUnavailable()) {
       return this._firstAvailableTile(tile, fn);
     } else {
@@ -182,7 +184,7 @@ Scrabble.BoardTiles = Backbone.Collection.extend({
   },
 
   _yieldLetter: function(tiles, tileId, fn) {
-    var nextTileId = this.helper[fn](tileId);
+    var nextTileId = this[fn](tileId);
     var nextTile = this.fetchTile(nextTileId);
     if (nextTile.isUnavailable()) {
       tiles.push(nextTileId);
