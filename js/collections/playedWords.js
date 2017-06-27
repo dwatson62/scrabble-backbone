@@ -12,13 +12,13 @@ Scrabble.PlayedWords = Backbone.Collection.extend({
   },
 
   createWord: function(data) {
-    var points = this.helper.calculatePoints(data[0].placedLetters);
-    var player = data[0].player;
+    var points = this.helper.calculatePoints(data.placedLetters);
+    var player = data.player;
     var word = new Scrabble.Word({
-      meaning: data[0].text,
+      meaning: data.text,
       player: player.get('name'),
       points: points,
-      value: data[0].word
+      value: data.word
     });
     this.add(word);
     player.updateScore(points);

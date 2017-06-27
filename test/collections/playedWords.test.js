@@ -12,14 +12,14 @@ describe('Played Words Collection', function() {
 
   describe('#createWord', function() {
     it('creates a new Word instance and adds to the collection', function() {
-      var data = [{
+      var data = {
         player: player,
         placedLetters: [{ value: 'c' },
                         { value: 'a' },
                         { value: 't' }],
         text: 'House pet',
         word: 'cat'
-      }];
+      };
       var newWord = collection.createWord(data);
 
       expect(collection.length).to.eql(1);

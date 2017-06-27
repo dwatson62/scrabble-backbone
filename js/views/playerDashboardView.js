@@ -40,7 +40,7 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   },
 
   playWordButtonClicked: function() {
-    Backbone.trigger('board:playWord');
+    Backbone.trigger('board:playWordClicked');
   },
 
   cancelButtonClicked: function() {

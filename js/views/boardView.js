@@ -3,6 +3,7 @@ var Scrabble = Scrabble || {};
 Scrabble.BoardView = Backbone.View
   .extend(letterSelection)
   .extend(tileHighlighter)
+  .extend(dictionaryHelper)
   .extend({
   el: '#scrabble-board',
 
@@ -12,11 +13,10 @@ Scrabble.BoardView = Backbone.View
     this.boardTilesCollection = context.boardTiles;
     this.placedLettersCollection = context.placedLettersCollection;
     this.players = context.players;
-    this.dictionary = new Scrabble.DictionaryHelper();
     this.render();
 
     this.listenTo(Backbone, 'board:cancelPlacedLetters', this.cancelPlacedLetters);
-    this.listenTo(Backbone, 'board:playWord', this.playWord);
+    this.listenTo(Backbone, 'board:playWordClicked', this.playWordClicked);
     this.listenTo(Backbone, 'board:highlightAllTiles', this.highlightAllTiles);
     this.listenTo(Backbone, 'board:letterClicked', this.letterClicked);
   },
@@ -44,48 +44,13 @@ Scrabble.BoardView = Backbone.View
     this.highlightAvailableTiles();
   },
 
-  playWord: function() {
-    this.addSurroundingLettersToWord();
-    var word = this.placedLettersCollection.assembleWord();
-    this.dictionary.playWord(word, this.validWord.bind(this), this.invalidWord);
-  },
-
-  addSurroundingLettersToWord: function() {
-    var firstLetter = this.placedLettersCollection.firstTileId();
-    var direction = this.placedLettersCollection.determineDirection();
-    var letters = this.boardTilesCollection.allSurroundingLetters(firstLetter, direction);
-
-    this.placedLettersCollection.add(letters);
-  },
-
-  validWord: function(response) {
-    response[0].placedLetters = this.placedLettersCollection.valueWithBonus();
-    response[0].player = this.currentPlayer();
-
-    this.boardTilesCollection.confirmAllPlacedTiles();
-
-    this.fetchNewLettersFromBag();
-    this.currentPlayer().collection.nextPlayerTurn();
-    Backbone.trigger('playedWords:addWord', response);
-  },
-
-  invalidWord: function(word) {
-    console.log(word + ' is not a word!');
-  },
-
-  fetchNewLettersFromBag: function() {
-    var letterCount = this.placedLettersCollection.fetchPlaced().length;
-    Backbone.trigger('playerDashboard:replaceLetters', letterCount);
-    this.placedLettersCollection.confirmAndClear();
+  playWordClicked: function() {
+    this.prepareWordsForSubmission();
   },
 
   cancelPlacedLetters: function() {
     this.placedLettersCollection.reset();
     this.boardTilesCollection.returnAllPlacedTiles();
     this.highlightAllTiles();
-  },
-
-  currentPlayer: function() {
-    return this.players.currentPlayer();
   }
 });
