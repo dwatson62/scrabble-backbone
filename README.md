@@ -12,7 +12,6 @@
 
 #### Todo
 
-- Allow hook words
 - Allow blank tiles
 - Styling for played words collection
 - Better styling for player dashboard
