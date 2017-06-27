@@ -56,6 +56,13 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     this.reset();
   },
 
+  resetStateAndClear: function() {
+    _.each(this.models, function(model) {
+      model.resetState();
+    });
+    this.reset();
+  },
+
   _splitIds: function() {
     return this.pluck('tileId').map(function(tileId) {
       return tileId.split('_');
