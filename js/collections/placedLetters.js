@@ -16,15 +16,15 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     return _.last(this.models).get('tileNumber');
   },
 
-  nextTileId: function(current) {
+  nextTileNumber: function(current) {
     var currentIndex = _.map(this.models, function(model) {
-                         return model.get('tileId');
+                         return model.get('tileNumber');
                        }).indexOf(current);
 
     if (currentIndex === this.length - 1) {
       return;
     } else {
-      return this.at(currentIndex + 1).get('tileId');
+      return this.at(currentIndex + 1).get('tileNumber');
     }
   },
 

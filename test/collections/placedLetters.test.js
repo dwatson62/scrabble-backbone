@@ -6,33 +6,33 @@ describe('PlacedLetters Collection', function() {
 
   beforeEach(function() {
     collection = new Scrabble.PlacedLetters();
-    centreLetter = new Scrabble.Letter({ value: 'a', tileId: 'tile_7_7' });
+    centreLetter = Scrabble.LetterFactory.create({ tileNumber: 112 });
   });
 
   describe('tileid getters', function() {
     var letter;
 
     beforeEach(function() {
-      letter = new Scrabble.Letter({ value: 'b', tileId: 'tile_7_8' });
+      letter = Scrabble.LetterFactory.create({ tileNumber: 113 });
 
       collection.add(centreLetter);
       collection.add(letter);
     });
 
-    it('#firstTileId returns tileId of first letter', function() {
-      expect(collection.firstTileId()).to.eql('tile_7_7');
+    it('#firstTileNumber returns tileNumber of first letter', function() {
+      expect(collection.firstTileNumber()).to.eql(112);
     });
 
-    it('#lastTileId returns tileId of last letter', function() {
-      expect(collection.lastTileId()).to.eql('tile_7_8');
+    it('#lastTileNumber returns tileNumber of last letter', function() {
+      expect(collection.lastTileNumber()).to.eql(113);
     });
 
-    it('#nextTileId returns tileId of next letter', function() {
-      expect(collection.nextTileId(centreLetter.get('tileId'))).to.eql('tile_7_8');
+    it('#nextTileNumber returns tileId of next letter', function() {
+      expect(collection.nextTileNumber(112)).to.eql(113);
     });
 
-    it('#nextTileId returns undefined if at end of collection of next letter', function() {
-      expect(collection.nextTileId(letter.get('tileId'))).to.be(undefined);
+    it('#nextTileNumber returns undefined if at end of collection of next letter', function() {
+      expect(collection.nextTileNumber(113)).to.be(undefined);
     });
   });
 
@@ -42,7 +42,7 @@ describe('PlacedLetters Collection', function() {
     });
 
     it('can calculate when tiles are placed horizontally', function() {
-      var letter = new Scrabble.Letter({ value: 'b', tileId: 'tile_7_8' });
+      var letter = Scrabble.LetterFactory.create({ tileNumber: 113 });
 
       collection.add(centreLetter);
       collection.add(letter);
@@ -51,7 +51,7 @@ describe('PlacedLetters Collection', function() {
     });
 
     it('can calculate when tiles are placed vertically', function() {
-      var letter = new Scrabble.Letter({ value: 'b', tileId: 'tile_6_7' });
+      var letter = Scrabble.LetterFactory.create({ tileNumber: 97 });
 
       collection.add(centreLetter);
       collection.add(letter);
@@ -62,9 +62,9 @@ describe('PlacedLetters Collection', function() {
 
   describe('#comparator', function() {
     it('correctly sorts based on tileNumber', function() {
-      collection.add(new Scrabble.Letter({ tileNumber: 49 }));
-      collection.add(new Scrabble.Letter({ tileNumber: 48 }));
-      collection.add(new Scrabble.Letter({ tileNumber: 50 }));
+      collection.add(Scrabble.LetterFactory.create({ tileNumber: 49 }));
+      collection.add(Scrabble.LetterFactory.create({ tileNumber: 48 }));
+      collection.add(Scrabble.LetterFactory.create({ tileNumber: 50 }));
 
       expect(collection.pluck('tileNumber')).to.eql([48, 49, 50]);
       collection.reset();
@@ -73,9 +73,9 @@ describe('PlacedLetters Collection', function() {
 
   describe('#assembleWord', function() {
     it('correctly assembles the word', function() {
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_9', value: 'c' }));
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_10', value: 'a' }));
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', value: 't' }));
+      collection.add(Scrabble.LetterFactory.create({ tileNumber: 98, value: 'c' }));
+      collection.add(Scrabble.LetterFactory.create({ tileNumber: 99, value: 'a' }));
+      collection.add(Scrabble.LetterFactory.create({ tileNumber: 100, value: 't' }));
 
       expect(collection.assembleWord()).to.eql('cat');
     });
@@ -83,9 +83,9 @@ describe('PlacedLetters Collection', function() {
 
   describe('#valueWithBonus', function() {
     it('converts to object with value and bonus', function() {
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_9', value: 'c' }));
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_10', value: 'a' }));
-      collection.add(new Scrabble.Letter({ tileId: 'tile_6_11', value: 't', bonusMultiplier: 'doubleletter' }));
+      collection.add(Scrabble.LetterFactory.create({ tileId: 98, value: 'c' }));
+      collection.add(Scrabble.LetterFactory.create({ tileId: 99, value: 'a' }));
+      collection.add(Scrabble.LetterFactory.create({ tileId: 100, value: 't', bonusMultiplier: 'doubleletter' }));
 
       expect(collection.valueWithBonus()).to.eql([
         { value: 'c', bonus: undefined },
