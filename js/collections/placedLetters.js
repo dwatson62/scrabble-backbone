@@ -8,12 +8,12 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     'horizontal': 'vertical'
   },
 
-  firstTileId: function() {
-    return this.first().get('tileId');
+  firstTileNumber: function() {
+    return this.first().get('tileNumber');
   },
 
-  lastTileId: function() {
-    return _.last(this.models).get('tileId');
+  lastTileNumber: function() {
+    return _.last(this.models).get('tileNumber');
   },
 
   nextTileId: function(current) {
@@ -51,9 +51,8 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
       return null;
     }
 
-    var ids = this._splitIds();
-
-    if (parseInt(ids[0][2]) !== parseInt(ids[1][2])) {
+    var tileNumbers = this.pluck('tileNumber');
+    if ((tileNumbers[0] + 1) === tileNumbers[1]) {
       return 'horizontal';
     } else {
       return 'vertical';
@@ -82,11 +81,5 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
       model.resetState();
     });
     this.reset();
-  },
-
-  _splitIds: function() {
-    return this.pluck('tileId').map(function(tileId) {
-      return tileId.split('_');
-    });
   }
 });

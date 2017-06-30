@@ -13,7 +13,7 @@ describe('Tile Highlighter Helper', function() {
       placedLettersCollection: new Scrabble.PlacedLetters()
     });
 
-    letter = new Scrabble.Letter({ tileId: 'tile_7_7' });
+    letter = Scrabble.LetterFactory.create({ tileNumber: 112 });
   });
 
   describe('#highlightAvailableTiles', function() {
@@ -27,7 +27,7 @@ describe('Tile Highlighter Helper', function() {
 
     it('calls showHorizontalAndVertical when 1 letter has been placed', function() {
       boardView.placedLettersCollection.add(letter);
-      boardTiles.findWhere({ tileId: 'tile_7_7' }).receiveLetter(letter);
+      boardTiles.findWhere({ tileNumber: 112 }).receiveLetter(letter);
 
       var boardSpy = sinon.spy(boardView, 'showHorizontalAndVertical');
       boardView.highlightAvailableTiles();
@@ -38,11 +38,11 @@ describe('Tile Highlighter Helper', function() {
 
     it('calls showNextAvailableTiles when more than 1 letter has been placed', function() {
       boardView.placedLettersCollection.add(letter);
-      boardTiles.findWhere({ tileId: 'tile_7_7' }).receiveLetter(letter);
+      boardTiles.findWhere({ tileNumber: 112 }).receiveLetter(letter);
 
-      var secondLetter = new Scrabble.Letter({ tileId: 'tile_7_8' });
+      var secondLetter = Scrabble.LetterFactory.create({ tileNumber: 113 });
       boardView.placedLettersCollection.add(secondLetter);
-      boardTiles.findWhere({ tileId: 'tile_7_8' }).receiveLetter(secondLetter);
+      boardTiles.findWhere({ tileNumber: 113 }).receiveLetter(secondLetter);
 
       var boardSpy = sinon.spy(boardView, 'showNextAvailableTiles');
       boardView.highlightAvailableTiles();
@@ -104,12 +104,12 @@ describe('Tile Highlighter Helper', function() {
     });
 
     it('returns false if a tile has a letter placed', function() {
-      boardTiles.findWhere({ tileId: 'tile_7_7' }).receiveLetter(letter);
+      boardTiles.findWhere({ tileNumber: 112 }).receiveLetter(letter);
       expect(boardView._nothingPlayed()).to.be(false);
     });
 
     it('returns false if a tile has a letter confirmed', function() {
-      boardTiles.findWhere({ tileId: 'tile_7_7' }).confirm();
+      boardTiles.findWhere({ tileNumber: 112 }).confirm();
       expect(boardView._nothingPlayed()).to.be(false);
     });
   });

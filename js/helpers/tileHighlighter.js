@@ -28,16 +28,16 @@ var tileHighlighter = {
   },
 
   showHorizontalAndVertical: function() {
-    var firstTileId = this.placedLettersCollection.firstTileId();
-    this.boardTilesCollection.showHorizontalAndVertical(firstTileId);
+    var firstTileNumber = this.placedLettersCollection.firstTileNumber();
+    this.boardTilesCollection.showHorizontalAndVertical(firstTileNumber);
   },
 
   showNextAvailableTiles: function() {
-    var firstTileId = this.placedLettersCollection.firstTileId();
-    var lastTileId = this.placedLettersCollection.lastTileId();
+    var firstTileNumber = this.placedLettersCollection.firstTileNumber();
+    var lastTileNumber = this.placedLettersCollection.lastTileNumber();
     var direction = this.placedLettersCollection.determineDirection();
 
-    this.boardTilesCollection.showNextAvailableTiles(direction, firstTileId, lastTileId);
+    this.boardTilesCollection.showNextAvailableTiles(direction, firstTileNumber, lastTileNumber);
   },
 
   highlightCentreTile: function() {
