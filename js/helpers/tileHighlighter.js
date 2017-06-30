@@ -22,8 +22,8 @@ var tileHighlighter = {
   showAllNeighbourTiles: function() {
     var self = this;
     _.each(this.boardTilesCollection.allConfirmedTiles(), function(tile) {
-      var tileId = tile.get('tileId');
-      self.boardTilesCollection.showHorizontalAndVertical(tileId);
+      var tileNumber = tile.get('tileNumber');
+      self.boardTilesCollection.showHorizontalAndVertical(tileNumber);
     });
   },
 

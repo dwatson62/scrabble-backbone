@@ -26,8 +26,8 @@ Scrabble.BoardTiles = Backbone.Collection
     return this.findWhere({ tileNumber: tileNumber });
   },
 
-  fetchLetter: function(tileId) {
-    return this.fetchTile(tileId).letter;
+  fetchLetter: function(tileNumber) {
+    return this.fetchTile(tileNumber).letter;
   },
 
   allPlacedTiles: function() {
@@ -64,7 +64,7 @@ Scrabble.BoardTiles = Backbone.Collection
   },
 
   findAndHighlight: function(tile) {
-    this.findWhere({ tileId: tile.get('tileId') }).highlight();
+    this.findWhere({ tileNumber: tile.get('tileNumber') }).highlight();
   },
 
   highlightCentreTile: function() {
@@ -100,21 +100,21 @@ Scrabble.BoardTiles = Backbone.Collection
   },
 
   showHorizontalTiles: function(firstTile, lastTile) {
-    var tileIds = [
+    var tileNumbers = [
       this._firstAvailableTile(firstTile, 'oneTileToLeft'),
       this._firstAvailableTile(lastTile, 'oneTileToRight')
     ];
 
-    this.highlightTiles(tileIds);
+    this.highlightTiles(tileNumbers);
   },
 
   showVerticalTiles: function(firstTile, lastTile) {
-    var tileIds = [
+    var tileNumbers = [
       this._firstAvailableTile(firstTile, 'oneTileAbove'),
       this._firstAvailableTile(lastTile, 'oneTileBelow')
     ];
 
-    this.highlightTiles(tileIds);
+    this.highlightTiles(tileNumbers);
   },
 
   highlightTiles: function(tileNumbers) {
@@ -144,20 +144,20 @@ Scrabble.BoardTiles = Backbone.Collection
     }, this);
   },
 
-  _allSurroundingTiles: function(tileId, direction) {
+  _allSurroundingTiles: function(tileNumber, direction) {
     var setOne;
     var setTwo;
 
     if (direction === 'horizontal') {
-      setOne = this._yieldHorizontally(tileId);
+      setOne = this._yieldHorizontally(tileNumber);
     } else if (direction === 'vertical') {
-      setOne = this._yieldVertically(tileId);
+      setOne = this._yieldVertically(tileNumber);
     } else {
-      setOne = this._yieldHorizontally(tileId);
-      setTwo = this._yieldVertically(tileId);
+      setOne = this._yieldHorizontally(tileNumber);
+      setTwo = this._yieldVertically(tileNumber);
     }
 
-    return _.flatten(_.union([tileId], setOne, setTwo));
+    return _.flatten(_.union([tileNumber], setOne, setTwo));
   },
 
   _firstAvailableTile: function(tileNumber, fn) {
@@ -169,26 +169,26 @@ Scrabble.BoardTiles = Backbone.Collection
     }
   },
 
-  _yieldHorizontally: function(tileId) {
+  _yieldHorizontally: function(tileNumber) {
     return [
-      this._yieldLetter([], tileId, 'oneTileToLeft'),
-      this._yieldLetter([], tileId, 'oneTileToRight')
+      this._yieldLetter([], tileNumber, 'oneTileToLeft'),
+      this._yieldLetter([], tileNumber, 'oneTileToRight')
     ];
   },
 
-  _yieldVertically: function(tileId) {
+  _yieldVertically: function(tileNumber) {
     return [
-      this._yieldLetter([], tileId, 'oneTileAbove'),
-      this._yieldLetter([], tileId, 'oneTileBelow')
+      this._yieldLetter([], tileNumber, 'oneTileAbove'),
+      this._yieldLetter([], tileNumber, 'oneTileBelow')
     ];
   },
 
-  _yieldLetter: function(tiles, tileId, fn) {
-    var nextTileId = this[fn](tileId);
-    var nextTile = this.fetchTile(nextTileId);
+  _yieldLetter: function(tiles, tileNumber, fn) {
+    var nextTileNumber = this[fn](tileNumber);
+    var nextTile = this.fetchTile(nextTileNumber);
     if (nextTile.isUnavailable()) {
-      tiles.push(nextTileId);
-      return this._yieldLetter(tiles, nextTileId, fn);
+      tiles.push(nextTileNumber);
+      return this._yieldLetter(tiles, nextTileNumber, fn);
     } else {
       return tiles;
     }

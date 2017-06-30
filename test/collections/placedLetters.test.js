@@ -27,7 +27,7 @@ describe('PlacedLetters Collection', function() {
       expect(collection.lastTileNumber()).to.eql(113);
     });
 
-    it('#nextTileNumber returns tileId of next letter', function() {
+    it('#nextTileNumber returns tileNumber of next letter', function() {
       expect(collection.nextTileNumber(112)).to.eql(113);
     });
 
@@ -83,9 +83,9 @@ describe('PlacedLetters Collection', function() {
 
   describe('#valueWithBonus', function() {
     it('converts to object with value and bonus', function() {
-      collection.add(Scrabble.LetterFactory.create({ tileId: 98, value: 'c' }));
-      collection.add(Scrabble.LetterFactory.create({ tileId: 99, value: 'a' }));
-      collection.add(Scrabble.LetterFactory.create({ tileId: 100, value: 't', bonusMultiplier: 'doubleletter' }));
+      collection.add(Scrabble.LetterFactory.create({ tileNumber: 98, value: 'c' }));
+      collection.add(Scrabble.LetterFactory.create({ tileNumber: 99, value: 'a' }));
+      collection.add(Scrabble.LetterFactory.create({ tileNumber: 100, value: 't', bonusMultiplier: 'doubleletter' }));
 
       expect(collection.valueWithBonus()).to.eql([
         { value: 'c', bonus: undefined },

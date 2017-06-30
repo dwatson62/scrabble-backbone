@@ -41,7 +41,7 @@ var dictionaryHelper = {
         newWord.reset(newHook);
         this.wordSubmissions.push(newWord.assembleWord());
       }
-      var nextLetter = this.placedLettersCollection.nextTileId(currentTile);
+      var nextLetter = this.placedLettersCollection.nextTileNumber(currentTile);
       this.checkSurroundingTilesForHookWord(nextLetter, direction);
     }
   },

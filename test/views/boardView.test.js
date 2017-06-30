@@ -12,7 +12,5 @@ describe('BoardView', function() {
       boardTiles: boardTiles,
       placedLettersCollection: new Scrabble.PlacedLetters()
     });
-
-    letter = new Scrabble.Letter({ tileId: 'tile_7_7' });
   });
 });

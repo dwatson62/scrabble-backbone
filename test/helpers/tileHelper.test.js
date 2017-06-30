@@ -4,7 +4,7 @@ describe('Tile Helper', function() {
   var helper = tileHelper;
 
   describe('#oneTileBelow', function() {
-    it('returns the tile immediately below the given tileId', function() {
+    it('returns the tile immediately below the given tileNumber', function() {
       expect(helper.oneTileBelow(112)).to.eql(127);
     });
 
@@ -14,7 +14,7 @@ describe('Tile Helper', function() {
   });
 
   describe('#oneTileAbove', function() {
-    it('returns the tile immediately above the given tileId', function() {
+    it('returns the tile immediately above the given tileNumber', function() {
       expect(helper.oneTileAbove(112)).to.eql(97);
     });
 
@@ -24,7 +24,7 @@ describe('Tile Helper', function() {
   });
 
   describe('#oneTileToLeft', function() {
-    it('returns the tile immediately above the given tileId', function() {
+    it('returns the tile immediately above the given tileNumber', function() {
       expect(helper.oneTileToLeft(112)).to.eql(111);
     });
 
@@ -34,7 +34,7 @@ describe('Tile Helper', function() {
   });
 
   describe('#oneTileToRight', function() {
-    it('returns the tile immediately above the given tileId', function() {
+    it('returns the tile immediately above the given tileNumber', function() {
       expect(helper.oneTileToRight(111)).to.eql(112);
     });
 

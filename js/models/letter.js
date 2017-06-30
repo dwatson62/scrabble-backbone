@@ -23,7 +23,6 @@ Scrabble.Letter = Backbone.Model.extend({
   place: function(tile) {
     this.set('bonusMultiplier', tile.get('bonusMultiplier'));
     this.set('status', 'placed');
-    this.set('tileId', tile.get('tileId'));
     this.set('tileNumber', tile.get('tileNumber'));
   },
 
@@ -34,7 +33,6 @@ Scrabble.Letter = Backbone.Model.extend({
   resetState: function() {
     this.unselect();
     this.set('bonusMultiplier', null);
-    this.set('tileId', null);
-    this.set('tileNumber', 0);
+    this.set('tileNumber', null);
   }
 });

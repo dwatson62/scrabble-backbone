@@ -168,7 +168,7 @@ describe('BoardTiles Collection', function() {
   });
 
   describe('#allSurroundingLetters', function() {
-    it('returns all letters surrounding a tileId when direction is horizontal', function() {
+    it('returns all letters surrounding a tileNumber when direction is horizontal', function() {
       var firstTile = collection.fetchTile(112);
       firstTile.receiveLetter(letter);
 
@@ -181,7 +181,7 @@ describe('BoardTiles Collection', function() {
       expect(letters).to.eql([letter, secondLetter]);
     });
 
-    it('returns all letters surrounding a tileId when direction is vertical', function() {
+    it('returns all letters surrounding a tileNumber when direction is vertical', function() {
       var firstTile = collection.fetchTile(112);
       firstTile.receiveLetter(letter);
 
@@ -196,7 +196,7 @@ describe('BoardTiles Collection', function() {
   });
 
   describe('#_mapTileIdsToLetter', function() {
-    it('converts given tileIds to their associated letter', function() {
+    it('converts given tileNumbers to their associated letter', function() {
       var firstTile = collection.fetchTile(112);
       firstTile.receiveLetter(letter);
 
