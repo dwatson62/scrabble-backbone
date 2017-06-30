@@ -8,6 +8,10 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     'horizontal': 'vertical'
   },
 
+  initialize: function() {
+    this.on('add', this.determineDirection);
+  },
+
   firstTileNumber: function() {
     return this.first().get('tileNumber');
   },
@@ -38,24 +42,18 @@ Scrabble.PlacedLetters = Backbone.Collection.extend({
     });
   },
 
-  direction: function() {
-    return this.determineDirection();
-  },
-
   oppositeDirection: function() {
     return this.oppositeDirections[this.direction()];
   },
 
   determineDirection: function() {
-    if (this.length < 2) {
-      return null;
-    }
-
-    var tileNumbers = this.pluck('tileNumber');
-    if ((tileNumbers[0] + 1) === tileNumbers[1]) {
-      return 'horizontal';
-    } else {
-      return 'vertical';
+    if (this.length === 2) {
+      var tileNumbers = this.pluck('tileNumber');
+      if ((tileNumbers[0] + 1) === tileNumbers[1]) {
+        this.direction = 'horizontal';
+      } else {
+        this.direction = 'vertical';
+      }
     }
   },
 

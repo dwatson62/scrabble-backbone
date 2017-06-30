@@ -35,7 +35,7 @@ var tileHighlighter = {
   showNextAvailableTiles: function() {
     var firstTileNumber = this.placedLettersCollection.firstTileNumber();
     var lastTileNumber = this.placedLettersCollection.lastTileNumber();
-    var direction = this.placedLettersCollection.determineDirection();
+    var direction = this.placedLettersCollection.direction;
 
     this.boardTilesCollection.showNextAvailableTiles(direction, firstTileNumber, lastTileNumber);
   },

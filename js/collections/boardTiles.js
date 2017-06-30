@@ -1,4 +1,5 @@
 var Scrabble = Scrabble || {};
+var tileHelper = tileHelper || {};
 
 Scrabble.BoardTiles = Backbone.Collection
   .extend(tileHelper)

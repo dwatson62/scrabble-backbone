@@ -48,7 +48,7 @@ var dictionaryHelper = {
 
   addSurroundingLettersToMainWord: function() {
     var firstLetter = this.placedLettersCollection.firstTileNumber();
-    var direction = this.placedLettersCollection.determineDirection();
+    var direction = this.placedLettersCollection.direction;
     var letters = this.boardTilesCollection.allSurroundingLetters(firstLetter, direction);
 
     return letters;

@@ -37,26 +37,27 @@ describe('PlacedLetters Collection', function() {
   });
 
   describe('#determineDirection', function() {
-    it('returns null if less than two letters have been played', function() {
-      expect(collection.determineDirection()).to.eql(null);
+    it('returns undefined if less than two letters have been played', function() {
+      expect(collection.determineDirection()).to.be(undefined);
     });
 
-    it('can calculate when tiles are placed horizontally', function() {
-      var letter = Scrabble.LetterFactory.create({ tileNumber: 113 });
+    describe('calculates correct direction when two letters have been added', function() {
+      it('can calculate when tiles are placed horizontally', function() {
+        var letter = Scrabble.LetterFactory.create({ tileNumber: 113 });
 
-      collection.add(centreLetter);
-      collection.add(letter);
+        collection.add(centreLetter);
+        collection.add(letter);
+        expect(collection.direction).to.eql('horizontal');
+      });
 
-      expect(collection.determineDirection()).to.eql('horizontal');
-    });
+      it('can calculate when tiles are placed vertically', function() {
+        var letter = Scrabble.LetterFactory.create({ tileNumber: 97 });
 
-    it('can calculate when tiles are placed vertically', function() {
-      var letter = Scrabble.LetterFactory.create({ tileNumber: 97 });
+        collection.add(centreLetter);
+        collection.add(letter);
 
-      collection.add(centreLetter);
-      collection.add(letter);
-
-      expect(collection.determineDirection()).to.eql('vertical');
+        expect(collection.direction).to.eql('vertical');
+      });
     });
   });
 
