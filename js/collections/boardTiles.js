@@ -64,10 +64,6 @@ Scrabble.BoardTiles = Backbone.Collection
     });
   },
 
-  findAndHighlight: function(tile) {
-    this.findWhere({ tileNumber: tile.get('tileNumber') }).highlight();
-  },
-
   highlightCentreTile: function() {
     this.centreTile.highlight();
   },

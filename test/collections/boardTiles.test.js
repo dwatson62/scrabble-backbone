@@ -73,16 +73,6 @@ describe('BoardTiles Collection', function() {
     });
   });
 
-  describe('#findAndHighlight', function() {
-    it('highlights given tile', function() {
-      var tile = collection.findWhere({ tileNumber: 113 });
-      tile.unhighlight();
-
-      collection.findAndHighlight(tile);
-      expect(tile.get('highlight')).to.eql('highlight');
-    });
-  });
-
   describe('#highlightCentreTile', function() {
     it('highlights the centre tile', function() {
       var tile = collection.centreTile;
