@@ -26,7 +26,7 @@ var dictionaryHelper = {
   prepareHookWords: function() {
     var direction = this.placedLettersCollection.oppositeDirection();
     if (direction) {
-      var firstTile = this.placedLettersCollection.firstTileId();
+      var firstTile = this.placedLettersCollection.firstTileNumber();
       this.checkSurroundingTilesForHookWord(firstTile, direction);
     }
   },
@@ -47,7 +47,7 @@ var dictionaryHelper = {
   },
 
   addSurroundingLettersToMainWord: function() {
-    var firstLetter = this.placedLettersCollection.firstTileId();
+    var firstLetter = this.placedLettersCollection.firstTileNumber();
     var direction = this.placedLettersCollection.determineDirection();
     var letters = this.boardTilesCollection.allSurroundingLetters(firstLetter, direction);
 
