@@ -8,7 +8,6 @@ Scrabble.LetterFactory = Backbone.Model.extend(_, {
       bonusMultiplier: context.bonusMultiplier,
       points: context.points || 1,
       tileNumber: context.tileNumber || 112,
-      tileId: context.tileId || 'tile_7_7',
       value: context.value || 'a'
     });
   }
