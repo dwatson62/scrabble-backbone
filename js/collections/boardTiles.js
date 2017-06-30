@@ -22,8 +22,8 @@ Scrabble.BoardTiles = Backbone.Collection
     return board;
   },
 
-  fetchTile: function(tileId) {
-    return this.findWhere({ tileId: tileId });
+  fetchTile: function(tileNumber) {
+    return this.findWhere({ tileNumber: tileNumber });
   },
 
   fetchLetter: function(tileId) {
@@ -83,63 +83,63 @@ Scrabble.BoardTiles = Backbone.Collection
     });
   },
 
-  showNextAvailableTiles: function(direction, firstTileId, lastTileId) {
+  showNextAvailableTiles: function(direction, firstTile, lastTile) {
     if (direction === 'horizontal') {
-      this.showHorizontalTiles(firstTileId, lastTileId);
+      this.showHorizontalTiles(firstTile, lastTile);
     } else {
-      this.showVerticalTiles(firstTileId, lastTileId);
+      this.showVerticalTiles(firstTile, lastTile);
     }
   },
 
   showAllNeighbourTiles: function() {
     var self = this;
     _.each(this.allPlacedTiles(), function(tile) {
-      var tileId = tile.get('tileId');
-      self.showHorizontalAndVertical(tileId);
+      var tileNumber = tile.get('tileNumber');
+      self.showHorizontalAndVertical(tileNumber);
     });
   },
 
-  showHorizontalTiles: function(firstTileId, lastTileId) {
+  showHorizontalTiles: function(firstTile, lastTile) {
     var tileIds = [
-      this._firstAvailableTile(firstTileId, 'oneTileToLeft'),
-      this._firstAvailableTile(lastTileId, 'oneTileToRight')
+      this._firstAvailableTile(firstTile, 'oneTileToLeft'),
+      this._firstAvailableTile(lastTile, 'oneTileToRight')
     ];
 
     this.highlightTiles(tileIds);
   },
 
-  showVerticalTiles: function(firstTileId, lastTileId) {
+  showVerticalTiles: function(firstTile, lastTile) {
     var tileIds = [
-      this._firstAvailableTile(firstTileId, 'oneTileAbove'),
-      this._firstAvailableTile(lastTileId, 'oneTileBelow')
+      this._firstAvailableTile(firstTile, 'oneTileAbove'),
+      this._firstAvailableTile(lastTile, 'oneTileBelow')
     ];
 
     this.highlightTiles(tileIds);
   },
 
-  highlightTiles: function(tileIds) {
+  highlightTiles: function(tileNumbers) {
     var self = this;
-    _.each(tileIds, function(id) {
-      self.findWhere({ tileId: id }).highlight();
+    _.each(tileNumbers, function(tileNumber) {
+      self.findWhere({ tileNumber: tileNumber }).highlight();
     });
   },
 
-  showHorizontalAndVertical: function(firstTileId) {
-    var leftTile = this._firstAvailableTile(firstTileId, 'oneTileToLeft');
-    var rightTile = this._firstAvailableTile(firstTileId, 'oneTileToRight');
-    var aboveTile = this._firstAvailableTile(firstTileId, 'oneTileAbove');
-    var belowTile = this._firstAvailableTile(firstTileId, 'oneTileBelow');
+  showHorizontalAndVertical: function(firstTile) {
+    var leftTile = this._firstAvailableTile(firstTile, 'oneTileToLeft');
+    var rightTile = this._firstAvailableTile(firstTile, 'oneTileToRight');
+    var aboveTile = this._firstAvailableTile(firstTile, 'oneTileAbove');
+    var belowTile = this._firstAvailableTile(firstTile, 'oneTileBelow');
 
     this.highlightTiles([leftTile, rightTile, aboveTile, belowTile]);
   },
 
-  allSurroundingLetters: function(tileId, direction) {
-    var surroundingTileIds = this._allSurroundingTiles(tileId, direction);
-    return this._mapTileIdsToLetter(surroundingTileIds);
+  allSurroundingLetters: function(tileNumber, direction) {
+    var surroundingTileNumbers = this._allSurroundingTiles(tileNumber, direction);
+    return this._mapTileIdsToLetter(surroundingTileNumbers);
   },
 
-  _mapTileIdsToLetter: function(surroundingTileIds) {
-    return _.map(surroundingTileIds, function(tile) {
+  _mapTileIdsToLetter: function(surroundingTileNumbers) {
+    return _.map(surroundingTileNumbers, function(tile) {
       return this.fetchLetter(tile);
     }, this);
   },
@@ -160,9 +160,9 @@ Scrabble.BoardTiles = Backbone.Collection
     return _.flatten(_.union([tileId], setOne, setTwo));
   },
 
-  _firstAvailableTile: function(tileId, fn) {
-    var tile = this[fn](tileId);
-    if (this.findWhere({ tileId: tile }).isUnavailable()) {
+  _firstAvailableTile: function(tileNumber, fn) {
+    var tile = this[fn](tileNumber);
+    if (this.findWhere({ tileNumber: tile }).isUnavailable()) {
       return this._firstAvailableTile(tile, fn);
     } else {
       return tile;

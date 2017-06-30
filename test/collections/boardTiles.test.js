@@ -16,28 +16,28 @@ describe('BoardTiles Collection', function() {
   });
 
   describe('#fetchTile', function() {
-    it('finds the tile from a collection when passed a tileId', function() {
-      var tile = collection.fetchTile('tile_7_7');
-      expect(tile.get('tileId')).to.eql('tile_7_7');
+    it('finds the tile from a collection when passed a tileNumber', function() {
+      var tile = collection.fetchTile(112);
+      expect(tile.get('tileNumber')).to.eql(112);
     });
   });
 
   describe('#fetchLetter', function() {
-    it('finds the letter on a tile when passed a tileId', function() {
-      var tile = collection.fetchTile('tile_7_7');
+    it('finds the letter on a tile when passed a tileNumber', function() {
+      var tile = collection.fetchTile(112);
       tile.receiveLetter(letter);
 
-      expect(collection.fetchLetter('tile_7_7')).to.eql(letter);
+      expect(collection.fetchLetter(112)).to.eql(letter);
     });
 
     it('returns undefined when no tile is present', function() {
-      expect(collection.fetchLetter('tile_7_8')).to.be(undefined);
+      expect(collection.fetchLetter(113)).to.be(undefined);
     });
   });
 
   describe('#allPlacedTiles', function() {
     it('returns all tiles that have a letter placed on it', function() {
-      collection.findWhere({ tileId: 'tile_7_7' }).receiveLetter(letter);
+      collection.findWhere({ tileNumber: 112 }).receiveLetter(letter);
 
       expect(collection.allPlacedTiles().length).to.eql(1);
     });
@@ -45,7 +45,7 @@ describe('BoardTiles Collection', function() {
 
   describe('#allConfirmedTiles', function() {
     it('returns all tiles that have a letter confirmed', function() {
-      collection.findWhere({ tileId: 'tile_7_7' }).confirm();
+      collection.findWhere({ tileNumber: 112 }).confirm();
 
       expect(collection.allConfirmedTiles().length).to.eql(1);
     });
@@ -53,7 +53,7 @@ describe('BoardTiles Collection', function() {
 
   describe('#returnAllPlacedTiles', function() {
     it('clears all tiles and replaces all letters that have been letter', function() {
-      var tile = collection.findWhere({ tileId: 'tile_7_7' });
+      var tile = collection.findWhere({ tileNumber: 112 });
       tile.receiveLetter(letter);
 
       collection.returnAllPlacedTiles();
@@ -65,7 +65,7 @@ describe('BoardTiles Collection', function() {
 
   describe('#confirmAllPlacedTiles', function() {
     it('confirms all tiles with a placed letter', function() {
-      var tile = collection.findWhere({ tileId: 'tile_7_7' });
+      var tile = collection.findWhere({ tileNumber: 112 });
       tile.receiveLetter(letter);
 
       collection.confirmAllPlacedTiles();
@@ -75,7 +75,7 @@ describe('BoardTiles Collection', function() {
 
   describe('#findAndHighlight', function() {
     it('highlights given tile', function() {
-      var tile = collection.findWhere({ tileId: 'tile_7_8' });
+      var tile = collection.findWhere({ tileNumber: 113 });
       tile.unhighlight();
 
       collection.findAndHighlight(tile);
@@ -95,7 +95,7 @@ describe('BoardTiles Collection', function() {
 
   describe('#highlightAllPlacedTiles', function() {
     it('highlights all placed tiles', function() {
-      var placedTile = collection.findWhere({ tileId: 'tile_7_7' });
+      var placedTile = collection.findWhere({ tileNumber: 112 });
       placedTile.receiveLetter(letter);
 
       collection.highlightAllPlacedTiles();
@@ -105,7 +105,7 @@ describe('BoardTiles Collection', function() {
 
   describe('#highlightUsedTiles', function() {
     it('highlights all placed tiles', function() {
-      var placedTile = collection.findWhere({ tileId: 'tile_7_7' });
+      var placedTile = collection.findWhere({ tileNumber: 112 });
       placedTile.receiveLetter(letter);
 
       collection.highlightAllPlacedTiles();
@@ -144,52 +144,52 @@ describe('BoardTiles Collection', function() {
     it('calls showHorizontalTiles when given direction of horizontal', function() {
       var collectionSpy = sinon.spy(collection, 'showHorizontalTiles');
 
-      collection.showNextAvailableTiles('horizontal', 'tile_7_7', 'tile_7_7');
+      collection.showNextAvailableTiles('horizontal', 112, 113);
       expect(collectionSpy.calledOnce).to.be(true);
     });
 
     it('calls showVerticalTiles when given direction of vertical', function() {
       var collectionSpy = sinon.spy(collection, 'showVerticalTiles');
 
-      collection.showNextAvailableTiles('vertical', 'tile_7_7', 'tile_7_7');
+      collection.showNextAvailableTiles('vertical', 112, 127);
       expect(collectionSpy.calledOnce).to.be(true);
     });
   });
 
   describe('#showAllNeighbourTiles', function() {
     it('calls showHorizontalAndVertical on all placed tiles', function() {
-      var tile = collection.fetchTile('tile_7_7');
+      var tile = collection.centreTile;
       tile.receiveLetter(letter);
       var collectionSpy = sinon.spy(collection, 'showHorizontalAndVertical');
 
       collection.showAllNeighbourTiles();
-      expect(collectionSpy.calledWith('tile_7_7')).to.be(true);
+      expect(collectionSpy.calledWith(tile.get('tileNumber'))).to.be(true);
     });
   });
 
   describe('#allSurroundingLetters', function() {
     it('returns all letters surrounding a tileId when direction is horizontal', function() {
-      var firstTile = collection.fetchTile('tile_7_7');
+      var firstTile = collection.fetchTile(112);
       firstTile.receiveLetter(letter);
 
-      var secondTile = collection.fetchTile('tile_7_8');
-      var secondLetter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_7_8' });
+      var secondTile = collection.fetchTile(113);
+      var secondLetter = Scrabble.LetterFactory.create({ tileNumber: 113 });
       secondTile.receiveLetter(secondLetter);
 
-      var letters = collection.allSurroundingLetters('tile_7_7', 'horizontal');
+      var letters = collection.allSurroundingLetters(112, 'horizontal');
 
       expect(letters).to.eql([letter, secondLetter]);
     });
 
     it('returns all letters surrounding a tileId when direction is vertical', function() {
-      var firstTile = collection.fetchTile('tile_7_7');
+      var firstTile = collection.fetchTile(112);
       firstTile.receiveLetter(letter);
 
-      var secondTile = collection.fetchTile('tile_8_7');
-      var secondLetter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_8_7' });
+      var secondTile = collection.fetchTile(127);
+      var secondLetter = Scrabble.LetterFactory.create({ tileNumber: 127 });
       secondTile.receiveLetter(secondLetter);
 
-      var letters = collection.allSurroundingLetters('tile_7_7', 'vertical');
+      var letters = collection.allSurroundingLetters(112, 'vertical');
 
       expect(letters).to.eql([letter, secondLetter]);
     });
@@ -197,34 +197,34 @@ describe('BoardTiles Collection', function() {
 
   describe('#_mapTileIdsToLetter', function() {
     it('converts given tileIds to their associated letter', function() {
-      var firstTile = collection.fetchTile('tile_7_7');
+      var firstTile = collection.fetchTile(112);
       firstTile.receiveLetter(letter);
 
-      var secondTile = collection.fetchTile('tile_7_8');
-      var secondLetter = new Scrabble.Letter({ value: 'b', uid: 2, tileId: 'tile_7_6' });
+      var secondTile = collection.fetchTile(113);
+      var secondLetter = Scrabble.LetterFactory.create({ tileNumber: 111 });
       secondTile.receiveLetter(secondLetter);
 
-      collection._mapTileIdsToLetter([firstTile.get('tileId'), secondTile.get('tileId')]);
+      collection._mapTileIdsToLetter([firstTile.get('tileNumber'), secondTile.get('tileNumber')]);
     });
   });
 
   describe('#_firstAvailableTile', function() {
     it('returns the first tile that is not unavailable going left', function() {
-      var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_6' });
-      collection.findWhere({ tileId: 'tile_7_6' }).receiveLetter(letter);
-      letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_5' });
-      collection.findWhere({ tileId: 'tile_7_5' }).receiveLetter(letter);
+      var letter = Scrabble.LetterFactory.create({ tileNumber: 111 });
+      collection.findWhere({ tileNumber: 111 }).receiveLetter(letter);
+      letter = Scrabble.LetterFactory.create({ tileNumber: 110 });
+      collection.findWhere({ tileNumber: 110 }).receiveLetter(letter);
 
-      expect(collection._firstAvailableTile('tile_7_7', 'oneTileToLeft')).to.eql('tile_7_4');
+      expect(collection._firstAvailableTile(112, 'oneTileToLeft')).to.eql(109);
     });
 
     it('returns the first tile that is not unavailable going right', function() {
-      var letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_8' });
-      collection.findWhere({ tileId: 'tile_7_8' }).receiveLetter(letter);
-      letter = new Scrabble.Letter({ value: 'a', uid: 1, tileId: 'tile_7_9' });
-      collection.findWhere({ tileId: 'tile_7_9' }).receiveLetter(letter);
+      var letter = Scrabble.LetterFactory.create({ tileNumber: 113 });
+      collection.findWhere({ tileNumber: 113 }).receiveLetter(letter);
+      letter = Scrabble.LetterFactory.create({ tileNumber: 114 });
+      collection.findWhere({ tileNumber: 114 }).receiveLetter(letter);
 
-      expect(collection._firstAvailableTile('tile_7_7', 'oneTileToRight')).to.eql('tile_7_10');
+      expect(collection._firstAvailableTile(112, 'oneTileToRight')).to.eql(115);
     });
   });
 });
