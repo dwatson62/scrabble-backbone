@@ -12,8 +12,9 @@
 
 #### Todo
 
-- Allow blank tiles
 - Styling for played words collection
 - Better styling for player dashboard
 - Better handling for when a player submits an invalid word
 - Handle end game
+- Deploy
+- Setup CI
