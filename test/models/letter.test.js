@@ -23,4 +23,16 @@ describe('Letter', function() {
       expect(letter.get('status')).to.eql('placed');
     });
   });
+
+  describe('#isBlankTile()', function() {
+    it('returns true if is a blank tile', function() {
+      var letter = Scrabble.LetterFactory.create({ value: 'blank' });
+      expect(letter.isBlankTile()).to.be(true);
+    });
+
+    it('returns false if not a blank tile', function() {
+      var letter = Scrabble.LetterFactory.create({ value: 'a' });
+      expect(letter.isBlankTile()).to.be(false);
+    });
+  });
 });

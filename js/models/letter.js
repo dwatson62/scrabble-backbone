@@ -34,5 +34,9 @@ Scrabble.Letter = Backbone.Model.extend({
     this.unselect();
     this.set('bonusMultiplier', null);
     this.set('tileNumber', null);
+  },
+
+  isBlankTile: function() {
+    return this.get('value') === 'blank';
   }
 });
