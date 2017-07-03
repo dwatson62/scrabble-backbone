@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/dwatson62/scrabble-backbone/badges/gpa.svg)](https://codeclimate.com/github/dwatson62/scrabble-backbone)
+
 #### Scrabble Backbone
 =================================
 
