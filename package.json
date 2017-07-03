@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "postinstall": "bower install",
     "build-css": "./bin/build-css",
     "watch-css": "./bin/watch-css",
     "test": "mocha"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
+    "bower": "^1.8.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "dotenv": "^4.0.0",
