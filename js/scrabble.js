@@ -8,6 +8,7 @@ $(document).ready(function() {
   var board = new Scrabble.BoardTiles();
   var bag = new Scrabble.LettersBag();
   var playedWordsView = new Scrabble.PlayedWordsView();
+  var blankLetterView = new Scrabble.BlankLetterView();
 
   var players = new Scrabble.Players([
     new Scrabble.Player('Daryl'),
