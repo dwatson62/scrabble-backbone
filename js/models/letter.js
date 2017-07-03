@@ -8,8 +8,9 @@ Scrabble.Letter = Backbone.Model.extend({
 
   initialize: function(context) {
     this.set('value', context.value);
-    this.set('imageSrc', '/images/tiles/letter-' + this.get('value') + '.png');
+    this.set('imageSrc', this._imageSrc());
     this.set('points', context.points);
+    this.set('blank', this.isBlankTile());
   },
 
   choose: function() {
@@ -38,5 +39,17 @@ Scrabble.Letter = Backbone.Model.extend({
 
   isBlankTile: function() {
     return this.get('value') === 'blank';
+  },
+
+  updateValue: function(value) {
+    this.set('value', value);
+  },
+
+  updateImageSrc: function() {
+    this.set('imageSrc', this._imageSrc());
+  },
+
+  _imageSrc: function() {
+    return '/images/tiles/letter-' + this.get('value') + '.png';
   }
 });

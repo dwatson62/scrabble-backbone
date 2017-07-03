@@ -26,22 +26,10 @@ Scrabble.TileView = Backbone.View
     var letter = letterSelection.putdown();
 
     if (letter) {
-      if (letter.isBlankTile()) {
-        this.displayBlankTileModal();
-      } else {
-        this.placeLetterOnTile(letter);
-      }
+      letter.place(this.model);
+      this.parentView.placedLettersCollection.add(letter);
+      this.parentView.highlightAllTiles();
+      this.model.receiveLetter(letter);
     }
-  },
-
-  displayBlankTileModal: function() {
-    Backbone.trigger('blanks:displayModal');
-  },
-
-  placeLetterOnTile: function(letter) {
-    letter.place(this.model);
-    this.parentView.placedLettersCollection.add(letter);
-    this.parentView.highlightAllTiles();
-    this.model.receiveLetter(letter);
   }
 });

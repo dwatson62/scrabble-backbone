@@ -6,7 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/main.css' />
 
     <script id="letter-template" type="text/template">
-      <div class='player-letter {{ status }}'>
+      <div class='player-letter {{ status }} {{ blank === true ? "blank": "" }}'>
         <img class='letter-tile' src='{{ imageSrc }}' />
       </div>
     </script>
@@ -15,7 +15,7 @@
       <div class='modal-dialog modal-sm' role='document'>
         <div class='modal-content'>
           Enter a letter:
-          <input length='1' min-length='1' maxlength='1' />
+          <input id='update-blank-value' length='1' min-length='1' maxlength='1' />
           <input type='button' value='Go' id='update-blank-letter' />
         </div>
       </div>

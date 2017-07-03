@@ -11,14 +11,16 @@ Scrabble.LetterView = Backbone.View
 
   events: {
     'click .unselected': 'letterClicked',
+    'click .unselected.blank': 'blankLetterClicked',
     'click .selected': 'selectedLetterClicked'
   },
 
   initialize: function(context) {
     this.player = context.player;
-    this.listenTo(this.model, 'change:status', this.render);
     this.model.bind('remove', this.removeView, this);
 
+    this.listenTo(this.model, 'change:status', this.render);
+    this.listenTo(this.model, 'letter:placeLetter', this.letterClicked);
     this.listenTo(this.player, 'change:active', this.updateEventDelegation);
 
     this.updateEventDelegation(this.player);
@@ -48,6 +50,10 @@ Scrabble.LetterView = Backbone.View
     letterSelection.pickup(this.model);
 
     Backbone.trigger('board:letterClicked');
+  },
+
+  blankLetterClicked: function() {
+    Backbone.trigger('blanks:displayModal', this.model);
   },
 
   selectedLetterClicked: function() {
