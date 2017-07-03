@@ -1,6 +1,8 @@
 #### Scrabble Backbone
 =================================
 
+Available at [https://scrabble-backbone.herokuapp.com/](https://scrabble-backbone.herokuapp.com/)
+
 ![scrabble-logo](https://github.com/dwatson62/scrabble-backbone/blob/master/public/images/scrabble-logo.jpg)
 
 #### Scripts
@@ -16,5 +18,4 @@
 - Better styling for player dashboard
 - Better handling for when a player submits an invalid word
 - Handle end game
-- Deploy
 - Setup CI
