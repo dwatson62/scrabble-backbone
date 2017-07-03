@@ -22,7 +22,7 @@ describe('Blank Letter View', function() {
   describe('#updateBlankLetter', function() {
     it('hides modal, updates letter with given value and triggers the correct event', function() {
       var viewSpy = sinon.stub(view, 'hideModal');
-      var letterSpy = sinon.spy(letter, 'trigger')
+      var letterSpy = sinon.spy(letter, 'trigger');
       view.model = letter;
 
       view.updateBlankLetter('x');
