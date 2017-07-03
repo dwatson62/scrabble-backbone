@@ -2,6 +2,7 @@ var Scrabble = Scrabble || {};
 
 Scrabble.Letter = Backbone.Model.extend({
   defaults: {
+    blank: false,
     tileNumber: 0,
     status: 'unselected'
   },
@@ -10,7 +11,7 @@ Scrabble.Letter = Backbone.Model.extend({
     this.set('value', context.value);
     this.set('imageSrc', this._imageSrc());
     this.set('points', context.points);
-    this.set('blank', this.isBlankTile());
+    this.set('blank', context.value === 'blank');
   },
 
   choose: function() {
@@ -35,10 +36,11 @@ Scrabble.Letter = Backbone.Model.extend({
     this.unselect();
     this.set('bonusMultiplier', null);
     this.set('tileNumber', null);
-  },
 
-  isBlankTile: function() {
-    return this.get('value') === 'blank';
+    if (this.get('blank') === true) {
+      this.set('value', 'blank');
+      this.updateImageSrc();
+    }
   },
 
   updateValue: function(value) {

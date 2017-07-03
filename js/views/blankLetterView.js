@@ -8,13 +8,12 @@ Scrabble.BlankLetterView = Backbone.View
   template: _.template($('#blank-letter-modal-template').html()),
 
   events: {
-    'hidden': 'hideModal',
     'click #update-blank-letter': 'updateBlankLetter'
   },
 
   initialize: function(context) {
     this.$el.html(this.template());
-    this.$el.modal({ show: false });
+    this.$el.modal({ backdrop: 'static', show: false });
     this.$input = this.$el.find('#update-blank-value');
 
     this.listenTo(Backbone, 'blanks:displayModal',  function(letter) {
@@ -29,6 +28,7 @@ Scrabble.BlankLetterView = Backbone.View
 
   render: function() {
     this.$el.modal('show');
+    this.$input.focus();
   },
 
   hideModal: function() {

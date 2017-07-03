@@ -20,6 +20,7 @@ Scrabble.LetterView = Backbone.View
     this.model.bind('remove', this.removeView, this);
 
     this.listenTo(this.model, 'change:status', this.render);
+    this.listenTo(this.model, 'change:imageSrc', this.render);
     this.listenTo(this.model, 'letter:placeLetter', this.letterClicked);
     this.listenTo(this.player, 'change:active', this.updateEventDelegation);
 

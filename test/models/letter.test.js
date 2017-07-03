@@ -17,22 +17,30 @@ describe('Letter', function() {
     });
   });
 
+  describe('#resetState()', function() {
+    it('resets all states', function() {
+      letter.place(letter);
+      letter.resetState();
+
+      expect(letter.get('status')).to.eql('unselected');
+      expect(letter.get('bonusMultiplier')).to.eql(null);
+      expect(letter.get('tileNumber')).to.eql(null);
+    });
+
+    it('if letter is a blank, returns to default setting', function() {
+      var blank = Scrabble.LetterFactory.create({ value: 'blank' });
+      blank.updateValue('b');
+
+      blank.resetState();
+
+      expect(blank.get('value')).to.eql('blank');
+    });
+  });
+
   describe('#place()', function() {
     it('updates status to placed', function() {
       letter.place(letter);
       expect(letter.get('status')).to.eql('placed');
-    });
-  });
-
-  describe('#isBlankTile()', function() {
-    it('returns true if is a blank tile', function() {
-      var letter = Scrabble.LetterFactory.create({ value: 'blank' });
-      expect(letter.isBlankTile()).to.be(true);
-    });
-
-    it('returns false if not a blank tile', function() {
-      var letter = Scrabble.LetterFactory.create({ value: 'a' });
-      expect(letter.isBlankTile()).to.be(false);
     });
   });
 });
