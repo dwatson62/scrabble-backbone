@@ -25,6 +25,16 @@
     </div>
   </script>
 
+  <script id="blank-letter-modal-template" type="text/template">
+    <div class='modal-dialog modal-sm' role='document'>
+      <div class='modal-content'>
+        Enter a letter:
+        <input id='update-blank-value' length='1' min-length='1' maxlength='1' />
+        <input type='button' value='Go' id='update-blank-letter' />
+      </div>
+    </div>
+  </script>
+
   <script id="word-template" type="text/template">
     <div>
       <div class='word-value'>{{ value }}</div>
@@ -43,6 +53,7 @@
 
   <script>mocha.setup('bdd')</script>
   <script src="../bower_components/sinon-browser-only/sinon.js"></script>
+  <script src="../bower_components/bootstrap/js/modal.js"></script>
   <script src="../vendor/index.js"></script>
   <script src='../js/backbone.helper.js'></script>
   <script src="../js/helpers/dictionaryHelper.js"></script>
@@ -50,6 +61,7 @@
   <script src="../js/helpers/tileHelper.js"></script>
   <script src="../js/helpers/tileHighlighter.js"></script>
   <script src="../js/views/boardView.js"></script>
+  <script src="../js/views/blankLetterView.js"></script>
   <script src="../js/views/letterView.js"></script>
   <script src="../js/views/playedWordsView.js"></script>
   <script src="../js/views/playerDashboardView.js"></script>
@@ -81,6 +93,7 @@
   <script src="models/player.test.js"></script>
   <script src="models/tile.test.js"></script>
   <script src="views/boardView.test.js"></script>
+  <script src="views/blankLetterView.test.js"></script>
   <script src="views/letterView.test.js"></script>
   <script src="views/tileView.test.js"></script>
   <script src="helpers/dictionaryHelper.test.js"></script>

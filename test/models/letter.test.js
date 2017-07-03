@@ -43,4 +43,11 @@ describe('Letter', function() {
       expect(letter.get('status')).to.eql('placed');
     });
   });
+
+  describe('#updateValue()', function() {
+    it('updates value', function() {
+      letter.updateValue('x');
+      expect(letter.get('value')).to.eql('x');
+    });
+  });
 });

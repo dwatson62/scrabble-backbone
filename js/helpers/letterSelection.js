@@ -17,12 +17,5 @@ var letterSelection = {
 
   reset: function() {
     this.letters = [];
-  },
-
-  updateValue: function(value) {
-    if (this.currentLetter()) {
-      this.currentLetter().updateValue(value);
-      this.currentLetter().updateImageSrc();
-    }
   }
 };

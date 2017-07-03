@@ -1,19 +1,16 @@
 var Scrabble = Scrabble || {};
 
-Scrabble.BlankLetterView = Backbone.View
-  .extend(letterSelection)
-  .extend({
+Scrabble.BlankLetterView = Backbone.View.extend({
 
   el: '#blank-letter-modal',
   template: _.template($('#blank-letter-modal-template').html()),
 
   events: {
-    'click #update-blank-letter': 'updateBlankLetter'
+    'click #update-blank-letter': 'updateClicked'
   },
 
   initialize: function(context) {
     this.$el.html(this.template());
-    this.$el.modal({ backdrop: 'static', show: false });
     this.$input = this.$el.find('#update-blank-value');
 
     this.listenTo(Backbone, 'blanks:displayModal',  function(letter) {
@@ -27,6 +24,7 @@ Scrabble.BlankLetterView = Backbone.View
   },
 
   render: function() {
+    this.$el.modal({ backdrop: 'static' });
     this.$el.modal('show');
     this.$input.focus();
   },
@@ -35,9 +33,14 @@ Scrabble.BlankLetterView = Backbone.View
     this.$el.modal('hide');
   },
 
-  updateBlankLetter: function() {
+  updateClicked: function() {
     var value = this.$input.val();
-    this.updateValue(value);
+    this.updateBlankLetter(value);
+  },
+
+  updateBlankLetter: function(value) {
+    this.model.updateValue(value);
+    this.model.updateImageSrc();
     this.hideModal();
 
     this.model.trigger('letter:placeLetter');
