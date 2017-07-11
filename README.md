@@ -17,6 +17,6 @@ Available at [https://scrabble-backbone.herokuapp.com/](https://scrabble-backbon
 #### Todo
 
 - Better styling for player dashboard
-- Better handling for when a player submits an invalid word
+- Style modals
 - Handle end game
 - Setup CI
