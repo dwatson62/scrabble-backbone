@@ -102,7 +102,9 @@ var dictionaryHelper = {
   },
 
   _failedTurn: function() {
+    this.boardTilesCollection.returnAllPlacedTiles()
     this.placedLettersCollection.resetStateAndClear();
+
     Backbone.trigger('invalid:displayModal', this.failedWords);
   },
 
