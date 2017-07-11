@@ -20,6 +20,12 @@ body {
 ::-webkit-scrollbar {
   width: 0; }
 
+.centre-aligned {
+  text-align: center; }
+
+.large-margin-top {
+  margin-top: 30px; }
+
 .board-tile {
   height: 50px; }
   .board-tile.highlight {
@@ -69,5 +75,9 @@ body {
 
 .word-meaning {
   margin-bottom: 15px; }
+
+.modal-content {
+  background-color: #f2f2f2;
+  padding: 30px; }
 
 /*# sourceMappingURL=main.css.map */

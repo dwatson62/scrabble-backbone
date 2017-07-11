@@ -1,5 +1,9 @@
 $medium-padding: 15px;
+$large-padding: 30px;
 $medium-margin: 15px;
+$large-margin: 30px;
+
+$modal-grey: #f2f2f2;
 
 body {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#627d4d+0,1f3b08+100;Olive+3D */
@@ -15,6 +19,14 @@ body {
 
 ::-webkit-scrollbar {
   width: 0;
+}
+
+.centre-aligned {
+  text-align: center;
+}
+
+.large-margin-top {
+  margin-top: $large-margin;
 }
 
 .board-tile {
@@ -72,4 +84,9 @@ body {
 
 .word-meaning {
   margin-bottom: $medium-margin;
+}
+
+.modal-content {
+  background-color: $modal-grey;
+  padding: $large-padding;
 }

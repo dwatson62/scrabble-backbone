@@ -14,9 +14,17 @@
     <script id="blank-letter-modal-template" type="text/template">
       <div class='modal-dialog modal-sm' role='document'>
         <div class='modal-content'>
-          Enter a letter:
-          <input id='update-blank-value' length='1' min-length='1' maxlength='1' />
-          <input type='button' value='Go' id='update-blank-letter' />
+          <h3 class='centre-aligned'>Please enter a letter</h3>
+          <div class='row large-margin-top'>
+            <div class='form-group col-sm-offset-4 col-sm-4'>
+              <input class='form-control input-lg centre-aligned' id='update-blank-value' length='1' min-length='1' maxlength='1' />
+            </div>
+          </div>
+          <div class='row centre-aligned large-margin-top'>
+            <div class='col-sm-offset-4 col-sm-4'>
+              <input class='btn btn-lg btn-primary' type='button' value='Go' id='update-blank-letter' />
+            </div>
+          </div>
         </div>
       </div>
     </script>
@@ -24,9 +32,11 @@
     <script id="invalid-word-modal-template" type="text/template">
       <div class='modal-dialog modal-sm' role='document'>
         <div class='modal-content'>
-          {{ words }}
-          {{ wordLength === 1 ? "is not a valid word.": "are not valid." }}
-          <input type='button' value='OK' id='ok-button' />
+          <h3 class='centre-aligned'>{{ words }}</h3>
+          <h5 class='centre-aligned large-margin-top'>{{ wordLength === 1 ? "is not a valid word.": "are not valid." }}</h3>
+          <div class='row centre-aligned large-margin-top'>
+            <input class='btn btn-lg btn-primary'  type='button' value='OK' id='ok-button' />
+          </div>
         </div>
       </div>
     </script>
