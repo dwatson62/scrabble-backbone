@@ -17,6 +17,9 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#627d4d', endColorstr='#1f3b08',GradientType=1 );
   /* IE6-9 fallback on horizontal gradient */ }
 
+::-webkit-scrollbar {
+  width: 0; }
+
 .board-tile {
   height: 50px; }
   .board-tile.highlight {
