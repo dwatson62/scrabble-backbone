@@ -1,6 +1,6 @@
 var Scrabble = Scrabble || {};
 
-Scrabble.BlankLetterView = Backbone.View.extend({
+Scrabble.InvalidWordView = Backbone.View.extend({
 
   el: '#modal',
   template: _.template($('#blank-letter-modal-template').html()),
