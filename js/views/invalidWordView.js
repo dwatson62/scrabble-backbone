@@ -5,7 +5,9 @@ Scrabble.InvalidWordView = Backbone.View.extend({
   el: '#modal',
   template: _.template($('#invalid-word-modal-template').html()),
 
-  events: {},
+  events: {
+    'click #ok-button': 'hideModal'
+  },
 
   initialize: function(context) {
     this.listenTo(Backbone, 'invalid:displayModal',  function(words) {

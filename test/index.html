@@ -35,6 +35,16 @@
     </div>
   </script>
 
+  <script id="invalid-word-modal-template" type="text/template">
+    <div class='modal-dialog modal-sm' role='document'>
+      <div class='modal-content'>
+        {{ words }}
+        {{ wordLength === 1 ? "is not a valid word.": "are not valid." }}
+        <input type='button' value='OK' id='ok-button' />
+      </div>
+    </div>
+  </script>
+
   <script id="word-template" type="text/template">
     <div>
       <div class='word-value'>{{ value }}</div>
@@ -62,6 +72,7 @@
   <script src="../js/helpers/tileHighlighter.js"></script>
   <script src="../js/views/boardView.js"></script>
   <script src="../js/views/blankLetterView.js"></script>
+  <script src="../js/views/invalidWordView.js"></script>
   <script src="../js/views/letterView.js"></script>
   <script src="../js/views/playedWordsView.js"></script>
   <script src="../js/views/playerDashboardView.js"></script>
@@ -94,6 +105,7 @@
   <script src="models/tile.test.js"></script>
   <script src="views/boardView.test.js"></script>
   <script src="views/blankLetterView.test.js"></script>
+  <script src="views/invalidWordView.test.js"></script>
   <script src="views/letterView.test.js"></script>
   <script src="views/tileView.test.js"></script>
   <script src="helpers/dictionaryHelper.test.js"></script>
