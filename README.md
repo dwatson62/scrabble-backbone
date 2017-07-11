@@ -16,7 +16,6 @@ Available at [https://scrabble-backbone.herokuapp.com/](https://scrabble-backbon
 
 #### Todo
 
-- Styling for played words collection
 - Better styling for player dashboard
 - Better handling for when a player submits an invalid word
 - Handle end game
