@@ -32,4 +32,15 @@ describe('Blank Letter View', function() {
       expect(viewSpy.calledOnce).to.be(true);
     });
   });
+
+  describe('#valid', function() {
+    it('returns true if input is a letter', function() {
+      expect(view.valid('a')).to.be(true);
+    });
+
+    it('returns false if input is not a letter', function() {
+      expect(view.valid('1')).to.be(false);
+      expect(view.valid('.')).to.be(false);
+    });
+  });
 });

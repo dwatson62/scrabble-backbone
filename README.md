@@ -17,6 +17,5 @@ Available at [https://scrabble-backbone.herokuapp.com/](https://scrabble-backbon
 #### Todo
 
 - Better styling for player dashboard
-- Style modals
 - Handle end game
 - Setup CI
