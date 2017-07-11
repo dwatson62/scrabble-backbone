@@ -1,8 +1,6 @@
 var Scrabble = Scrabble || {};
 
-Scrabble.InvalidWordView = Backbone.View.extend({
-
-  el: '#modal',
+Scrabble.InvalidWordView = Scrabble.BaseModalView.extend({
   template: _.template($('#invalid-word-modal-template').html()),
 
   events: {
@@ -22,16 +20,6 @@ Scrabble.InvalidWordView = Backbone.View.extend({
     };
 
     var template = this.template(context);
-    this.$el.html(template);
-    this.render();
-  },
-
-  render: function() {
-    this.$el.modal({ backdrop: 'static' });
-    this.$el.modal('show');
-  },
-
-  hideModal: function() {
-    this.$el.modal('hide');
+    this.render(template);
   }
 });

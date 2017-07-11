@@ -1,8 +1,6 @@
 var Scrabble = Scrabble || {};
 
-Scrabble.BlankLetterView = Backbone.View.extend({
-
-  el: '#modal',
+Scrabble.BlankLetterView = Scrabble.BaseModalView.extend({
   template: _.template($('#blank-letter-modal-template').html()),
 
   events: {
@@ -16,25 +14,12 @@ Scrabble.BlankLetterView = Backbone.View.extend({
   },
 
   displayModal: function(letter) {
-    this.$el.html(this.template());
-    this.$input = this.$el.find('#update-blank-value');
-
     this.model = letter;
-    this.render();
-  },
-
-  render: function() {
-    this.$el.modal({ backdrop: 'static' });
-    this.$el.modal('show');
-    this.$input.focus();
-  },
-
-  hideModal: function() {
-    this.$el.modal('hide');
+    this.render(this.template());
   },
 
   updateClicked: function() {
-    var value = this.$input.val();
+    var value = this.$el.find('#update-blank-value').val();
     this.updateBlankLetter(value);
   },
 
