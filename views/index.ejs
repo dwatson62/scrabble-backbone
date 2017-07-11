@@ -21,6 +21,15 @@
       </div>
     </script>
 
+    <script id="invalid-word-modal-template" type="text/template">
+      <div class='modal-dialog modal-sm' role='document'>
+        <div class='modal-content'>
+          {{ words }}
+          {{ wordLength === 1 ? "is not a valid word.": "are not valid." }}
+        </div>
+      </div>
+    </script>
+
     <script id="tile-template" type="text/template">
       <img class='board-tile {{ status }} {{ highlight }}' src='{{ tileSrc }}' />
     </script>
@@ -73,6 +82,7 @@
     <script src='js/views/blankLetterView.js'></script>
     <script src='js/views/boardView.js'></script>
     <script src='js/views/letterView.js'></script>
+    <script src='js/views/invalidWordView.js'></script>
     <script src='js/views/tileView.js'></script>
     <script src='js/views/playerDashboardView.js'></script>
     <script src='js/views/playedWordsView.js'></script>

@@ -102,8 +102,8 @@ var dictionaryHelper = {
   },
 
   _failedTurn: function() {
-    console.log(this.failedWords + ' is not a word!');
     this.placedLettersCollection.resetStateAndClear();
+    Backbone.trigger('invalid:displayModal', this.failedWords);
   },
 
   _endTurn: function() {

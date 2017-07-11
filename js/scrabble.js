@@ -9,6 +9,7 @@ $(document).ready(function() {
   var bag = new Scrabble.LettersBag();
   var playedWordsView = new Scrabble.PlayedWordsView();
   var blankLetterView = new Scrabble.BlankLetterView();
+  var invalidWordView = new Scrabble.InvalidWordView();
 
   var players = new Scrabble.Players([
     new Scrabble.Player('Daryl'),
