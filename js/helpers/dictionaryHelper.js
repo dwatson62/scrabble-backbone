@@ -6,8 +6,7 @@ var dictionaryHelper = {
   failedWords: [],
 
   prepareWordsForSubmission: function() {
-    var mainWord = this.prepareMainWord();
-    this.wordSubmissions.push(mainWord);
+    this.prepareMainWord();
 
     this.prepareHookWords();
 
@@ -20,6 +19,7 @@ var dictionaryHelper = {
     letterSet.add(surroundingLetters);
 
     var newWord = letterSet.assembleWord();
+    this.wordSubmissions.push(newWord);
     return newWord;
   },
 

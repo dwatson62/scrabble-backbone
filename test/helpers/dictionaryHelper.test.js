@@ -11,7 +11,8 @@ describe('Dictionary Helper', function() {
 
     boardView = new Scrabble.BoardView({
       boardTiles: boardTiles,
-      placedLettersCollection: placedLetters
+      placedLettersCollection: placedLetters,
+      players: new Scrabble.Players([new Scrabble.Player('Daryl')])
     });
   });
 
@@ -42,10 +43,10 @@ describe('Dictionary Helper', function() {
     });
 
     it('assembles placed letters with surrounding letters', function() {
-      var c = Scrabble.LetterFactory.create({ value: 'a' });
-      placeLetter(c, 112);
-      var a = Scrabble.LetterFactory.create({ value: 'c' });
-      placeLetter(a, 111);
+      var a = Scrabble.LetterFactory.create({ value: 'a' });
+      placeLetter(a, 112);
+      var c = Scrabble.LetterFactory.create({ value: 'c' });
+      placeLetter(c, 111);
       var t = Scrabble.LetterFactory.create({ value: 't' });
       placeLetter(t, 113);
 
@@ -58,6 +59,34 @@ describe('Dictionary Helper', function() {
       confirmLetter(o);
 
       expect(boardView.prepareMainWord()).to.eql('ocats');
+    });
+  });
+
+  describe('scenario', function() {
+    it('bug', function() {
+      var a = Scrabble.LetterFactory.create({ value: 'a' });
+      placeLetter(a, 112);
+      confirmLetter(a);
+      var c = Scrabble.LetterFactory.create({ value: 'c' });
+      placeLetter(c, 111);
+      confirmLetter(c);
+      var t = Scrabble.LetterFactory.create({ value: 't' });
+      placeLetter(t, 113);
+      confirmLetter(t);
+
+      boardView.placedLettersCollection.confirmAndClear();
+      boardView._endTurn();
+
+      expect(boardView.placedLettersCollection.length).to.eql(0);
+
+      var p = Scrabble.LetterFactory.create({ value: 'p' });
+      placeLetter(p, 97);
+      var l = Scrabble.LetterFactory.create({ value: 'l' });
+      placeLetter(l, 127);
+
+      boardView.prepareMainWord();
+      boardView.prepareHookWords();
+      expect(boardView.wordSubmissions).to.eql(['pal']);
     });
   });
 });
