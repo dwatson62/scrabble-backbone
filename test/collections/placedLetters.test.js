@@ -13,8 +13,8 @@ describe('PlacedLetters Collection', function() {
     var letter;
 
     beforeEach(function() {
-      letter = Scrabble.LetterFactory.create({ tileNumber: 113 });
-
+      letter = Scrabble.LetterFactory.create({ tileNumber: 113, status: 'placed' });
+      centreLetter.set('status', 'placed');
       collection.add(centreLetter);
       collection.add(letter);
     });
@@ -27,12 +27,12 @@ describe('PlacedLetters Collection', function() {
       expect(collection.lastTileNumber()).to.eql(113);
     });
 
-    it('#nextTileNumber returns tileNumber of next letter', function() {
-      expect(collection.nextTileNumber(112)).to.eql(113);
+    it('#nextPlacedTileNumber returns tileNumber of next placed letter', function() {
+      expect(collection.nextPlacedTileNumber(112)).to.eql(113);
     });
 
-    it('#nextTileNumber returns undefined if at end of collection of next letter', function() {
-      expect(collection.nextTileNumber(113)).to.be(undefined);
+    it('#nextPlacedTileNumber returns undefined if at end of collection of next letter', function() {
+      expect(collection.nextPlacedTileNumber(113)).to.be(undefined);
     });
   });
 

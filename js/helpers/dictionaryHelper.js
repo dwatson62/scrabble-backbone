@@ -6,8 +6,7 @@ var dictionaryHelper = {
   failedWords: [],
 
   prepareWordsForSubmission: function() {
-    var mainWord = this.prepareMainWord();
-    this.wordSubmissions.push(mainWord);
+    this.prepareMainWord();
 
     this.prepareHookWords();
 
@@ -20,6 +19,7 @@ var dictionaryHelper = {
     letterSet.add(surroundingLetters);
 
     var newWord = letterSet.assembleWord();
+    this.wordSubmissions.push(newWord);
     return newWord;
   },
 
@@ -41,7 +41,8 @@ var dictionaryHelper = {
         newWord.reset(newHook);
         this.wordSubmissions.push(newWord.assembleWord());
       }
-      var nextLetter = this.placedLettersCollection.nextTileNumber(currentTile);
+
+      var nextLetter = this.placedLettersCollection.nextPlacedTileNumber(currentTile);
       this.checkSurroundingTilesForHookWord(nextLetter, direction);
     }
   },
@@ -102,7 +103,7 @@ var dictionaryHelper = {
   },
 
   _failedTurn: function() {
-    this.boardTilesCollection.returnAllPlacedTiles()
+    this.boardTilesCollection.returnAllPlacedTiles();
     this.placedLettersCollection.resetStateAndClear();
 
     Backbone.trigger('invalid:displayModal', this.failedWords);

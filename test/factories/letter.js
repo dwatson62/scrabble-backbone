@@ -7,6 +7,7 @@ Scrabble.LetterFactory = Backbone.Model.extend(_, {
     return new Scrabble.Letter({
       bonusMultiplier: context.bonusMultiplier,
       points: context.points || 1,
+      status: context.status || 'unselected',
       tileNumber: context.tileNumber || 112,
       value: context.value || 'a'
     });
