@@ -46,5 +46,14 @@ describe('Player Dashboard View', function() {
       expect(collection.first()).to.eql(letter1);
       expect(player1.get('active')).to.eql(true);
     });
+
+    it('cannot switch if any letters have been placed', function() {
+      letterSelection.pickup(letter2);
+      var tile = Scrabble.TileFactory.create();
+      letter1.place(tile);
+      view.switchLetterButtonClicked();
+
+      expect(player1.get('active')).to.eql(true);
+    });
   });
 });

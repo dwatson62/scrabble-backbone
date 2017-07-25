@@ -12,7 +12,7 @@ describe('Tile View', function() {
   beforeEach(function() {
     letter = Scrabble.LetterFactory.create();
     collection = new Scrabble.PlacedLetters();
-    tile = new Scrabble.TileFactory.create();
+    tile = Scrabble.TileFactory.create();
 
     parentView = new Scrabble.BoardView({
       boardTiles: new Scrabble.BoardTiles(),

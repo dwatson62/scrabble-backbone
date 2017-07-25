@@ -22,6 +22,18 @@ describe('PlayerLetters Collection', function() {
     });
   });
 
+  describe('#nothingPlaced', function() {
+    it('returns true if no letters have been placed', function() {
+      expect(collection.nothingPlaced()).to.be(true);
+    });
+
+    it('returns false if any letters have been placed', function() {
+      var letter = collection.first();
+      letter.place(tile);
+      expect(collection.nothingPlaced()).to.be(false);
+    });
+  });
+
   describe('#removeUsed', function() {
     it('removes all letters that have been placed', function() {
       _.each(collection.first(2), function(letter) {

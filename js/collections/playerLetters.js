@@ -7,6 +7,10 @@ Scrabble.PlayerLetters = Backbone.Collection.extend({
     });
   },
 
+  nothingPlaced: function() {
+    return this.where({ status: 'placed'}).length === 0;
+  },
+
   removeUsed: function() {
     this.remove(this.where({ status: 'placed' }));
   },

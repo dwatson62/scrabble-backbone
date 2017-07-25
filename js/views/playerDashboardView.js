@@ -47,11 +47,12 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
 
   cancelButtonClicked: function() {
     this.collection.resetAllStates();
+    letterSelection.reset();
     Backbone.trigger('board:cancelPlacedLetters');
   },
 
   switchLetterButtonClicked: function() {
-    if (letterSelection.notEmpty()) {
+    if (letterSelection.notEmpty() && this.collection.nothingPlaced()) {
       var selected = letterSelection.putdown();
       this.collection.remove(selected);
       this.replaceLetters(1);
