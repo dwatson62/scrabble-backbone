@@ -1,11 +1,13 @@
 var Scrabble = Scrabble || {};
+var letterSelection = letterSelection;
 
 Scrabble.PlayerDashboardView = Backbone.View.extend({
   template: _.template($('#player-template').html()),
 
   events: {
     'click .play-word-btn': 'playWordButtonClicked',
-    'click .cancel-btn': 'cancelButtonClicked'
+    'click .cancel-btn': 'cancelButtonClicked',
+    'click .switch-letter-btn': 'switchLetterButtonClicked',
   },
 
   initialize: function(context) {
@@ -46,6 +48,15 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   cancelButtonClicked: function() {
     this.collection.resetAllStates();
     Backbone.trigger('board:cancelPlacedLetters');
+  },
+
+  switchLetterButtonClicked: function() {
+    var selected = letterSelection.putdown();
+    this.collection.remove(selected);
+    this.replaceLetters(1);
+    this.model.collection.nextPlayerTurn();
+
+    Backbone.trigger('board:highlightAllTiles');
   },
 
   replaceLetters: function(letterCount) {
