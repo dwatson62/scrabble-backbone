@@ -39,5 +39,12 @@ describe('Player Dashboard View', function() {
       expect(player1.get('active')).to.eql(false);
       expect(player2.get('active')).to.eql(true);
     });
+
+    it('cannot switch a letter if nothing is selected', function() {
+      view.switchLetterButtonClicked();
+
+      expect(collection.first()).to.eql(letter1);
+      expect(player1.get('active')).to.eql(true);
+    });
   });
 });

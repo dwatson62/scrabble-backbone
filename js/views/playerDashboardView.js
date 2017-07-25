@@ -51,12 +51,14 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   },
 
   switchLetterButtonClicked: function() {
-    var selected = letterSelection.putdown();
-    this.collection.remove(selected);
-    this.replaceLetters(1);
-    this.model.collection.nextPlayerTurn();
+    if (letterSelection.notEmpty()) {
+      var selected = letterSelection.putdown();
+      this.collection.remove(selected);
+      this.replaceLetters(1);
+      this.model.collection.nextPlayerTurn();
 
-    Backbone.trigger('board:highlightAllTiles');
+      Backbone.trigger('board:highlightAllTiles');
+    }
   },
 
   replaceLetters: function(letterCount) {
