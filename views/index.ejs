@@ -58,8 +58,11 @@
       <div id='player-name'><h3 style='color: white;'> {{ name }} </h3></div>
       <div id='player-score'><h4 style='color: white;'> {{ score }} </h4></div>
       <div id='player-letters'></div>
-      <button class='cancel-btn {{ active === false ? "hidden": "" }}'>Cancel</button>
-      <button class='play-word-btn {{ active === false ? "hidden": "" }}'>Play Word</button>
+        <div class='large-margin-top'>
+        <button class='btn btn-warning cancel-btn {{ active === false ? "hidden": "" }}'>Cancel</button>
+        <button class='btn btn-success play-word-btn {{ active === false ? "hidden": "" }}'>Play Word</button>
+        <button class='btn btn-primary switch-letter-btn {{ active === false ? "hidden": "" }}'>Switch Letter</button>
+      </div>
 
     </script>
   </head>
