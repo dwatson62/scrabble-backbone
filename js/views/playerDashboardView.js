@@ -42,7 +42,11 @@ Scrabble.PlayerDashboardView = Backbone.View.extend({
   },
 
   playWordButtonClicked: function() {
-    Backbone.trigger('board:playWordClicked');
+    if (this.collection.nothingPlaced()) {
+      return false;
+    } else {
+      Backbone.trigger('board:playWordClicked');
+    }
   },
 
   cancelButtonClicked: function() {

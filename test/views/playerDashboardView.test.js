@@ -30,6 +30,22 @@ describe('Player Dashboard View', function() {
     });
   });
 
+  describe('#playWordButtonClicked', function() {
+    it('returns false if no letters have been placed', function() {
+      expect(view.playWordButtonClicked()).to.be(false);
+    });
+
+    it('triggers event if letters have been placed', function() {
+      var tile = Scrabble.TileFactory.create();
+      letter1.place(tile);
+
+      var viewSpy = sinon.stub(Backbone, 'trigger');
+      view.playWordButtonClicked();
+
+      expect(viewSpy.calledOnce).to.be(true);
+    });
+  });
+
   describe('#switchLetterButtonClicked', function() {
     it('replaces the currently selected letter and ends players turn', function() {
       letterSelection.pickup(letter1);
