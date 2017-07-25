@@ -11,7 +11,7 @@ describe('Letter View', function() {
     letterSelection.reset();
     letter = Scrabble.LetterFactory.create();
     collection = new Scrabble.PlayerLetters([letter]);
-    player = new Scrabble.Player();
+    player = Scrabble.PlayerFactory.create();
     view = new Scrabble.LetterView({
       model: letter,
       player: player

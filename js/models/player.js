@@ -6,8 +6,8 @@ Scrabble.Player = Backbone.Model.extend({
     'score': 0
   },
 
-  initialize: function(name) {
-    this.set('name', name);
+  initialize: function(context) {
+    this.set('name', context.name);
   },
 
   activate: function() {

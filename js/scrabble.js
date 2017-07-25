@@ -12,8 +12,8 @@ $(document).ready(function() {
   var invalidWordView = new Scrabble.InvalidWordView();
 
   var players = new Scrabble.Players([
-    new Scrabble.Player('Daryl'),
-    new Scrabble.Player('Brian')
+    new Scrabble.Player({ name: 'Daryl' }),
+    new Scrabble.Player({ name: 'Brian' })
   ]);
 
   players.each(function(player) {

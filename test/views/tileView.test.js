@@ -6,7 +6,6 @@ describe('Tile View', function() {
   var tile;
   var collection;
   var playerCollection;
-  var player;
   var view;
   var parentView;
 
