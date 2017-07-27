@@ -2,26 +2,20 @@ var Scrabble = Scrabble || {};
 var letterSelection = letterSelection;
 
 describe('Tile View', function() {
+  var boardView;
   var letter;
   var tile;
-  var collection;
-  var playerCollection;
   var view;
-  var parentView;
 
   beforeEach(function() {
     letter = Scrabble.LetterFactory.create();
-    collection = new Scrabble.PlacedLetters();
     tile = Scrabble.TileFactory.create();
 
-    parentView = new Scrabble.BoardView({
-      boardTiles: new Scrabble.BoardTiles(),
-      placedLettersCollection: collection
-    });
+    boardView = Scrabble.BoardViewFactory.create();
 
     view = new Scrabble.TileView({
       model: tile,
-      parentView: parentView
+      parentView: boardView
     });
   });
 

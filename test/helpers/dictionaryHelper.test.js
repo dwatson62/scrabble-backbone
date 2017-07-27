@@ -6,14 +6,9 @@ describe('Dictionary Helper', function() {
   var placedLetters;
 
   beforeEach(function() {
-    boardTiles = new Scrabble.BoardTiles();
-    placedLetters = new Scrabble.PlacedLetters();
-
-    boardView = new Scrabble.BoardView({
-      boardTiles: boardTiles,
-      placedLettersCollection: placedLetters,
-      players: new Scrabble.Players([new Scrabble.Player('Daryl')])
-    });
+    boardView = Scrabble.BoardViewFactory.create();
+    boardTiles = boardView.boardTilesCollection;
+    placedLetters = boardView.placedLettersCollection;
   });
 
   var placeLetter = function(letter, tileNumber) {
@@ -62,8 +57,8 @@ describe('Dictionary Helper', function() {
     });
   });
 
-  describe('scenario', function() {
-    it('bug', function() {
+  describe('Hook words', function() {
+    it('does not look up from letters that are already confirmed', function() {
       var a = Scrabble.LetterFactory.create({ value: 'a' });
       placeLetter(a, 112);
       confirmLetter(a);
