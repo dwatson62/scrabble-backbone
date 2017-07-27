@@ -6,7 +6,9 @@ Scrabble.BoardViewFactory = Backbone.View.extend(_, {
 
     var boardTiles = context.boardTiles || new Scrabble.BoardTiles();
     var placedLettersCollection = context.boardTiles || new Scrabble.PlacedLetters();
-    var players = context.players || new Scrabble.Players([Scrabble.PlayerFactory.create()]);
+    var players = context.players || new Scrabble.Players(
+      [Scrabble.PlayerFactory.create(), Scrabble.PlayerFactory.create()]
+    );
 
     return new Scrabble.BoardView({
       boardTiles: boardTiles,

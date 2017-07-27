@@ -2,11 +2,13 @@ var Scrabble = Scrabble || {};
 var letterSelection = letterSelection;
 var tileHighlighter = tileHighlighter;
 var dictionaryHelper = dictionaryHelper;
+var playerTurnHelper = playerTurnHelper;
 
 Scrabble.BoardView = Backbone.View
   .extend(letterSelection)
   .extend(tileHighlighter)
   .extend(dictionaryHelper)
+  .extend(playerTurnHelper)
   .extend({
   el: '#scrabble-board',
 
@@ -48,7 +50,8 @@ Scrabble.BoardView = Backbone.View
   },
 
   playWordClicked: function() {
-    this.prepareWordsForSubmission();
+    var wordSubmissions = this.prepareWordsForSubmission();
+    this.playWords(wordSubmissions);
   },
 
   cancelPlacedLetters: function() {

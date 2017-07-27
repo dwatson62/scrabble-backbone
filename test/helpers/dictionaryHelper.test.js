@@ -70,7 +70,7 @@ describe('Dictionary Helper', function() {
       confirmLetter(t);
 
       boardView.placedLettersCollection.confirmAndClear();
-      boardView._endTurn();
+      boardView.endTurn();
 
       expect(boardView.placedLettersCollection.length).to.eql(0);
 
