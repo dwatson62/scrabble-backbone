@@ -1,11 +1,8 @@
-/*global define*/
-var Scrabble = Scrabble || {};
-
 define([
   'underscore',
-  'backbone'
-], function (_, Backbone) {
-  'use strict';
+  'backbone',
+  'scrabble'
+], function (_, Backbone, Scrabble) {
 
   Scrabble.Letter = Backbone.Model.extend({
     defaults: {

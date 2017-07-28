@@ -1,62 +1,69 @@
-var Scrabble = Scrabble || {};
-var letterSelection = letterSelection;
-var tileHighlighter = tileHighlighter;
-var dictionaryHelper = dictionaryHelper;
-var playerTurnHelper = playerTurnHelper;
+define([
+  'underscore',
+  'backbone',
+  'scrabble',
+  'letterSelection',
+  'tileHighlighter',
+  'dictionaryHelper',
+  'playerTurnHelper',
+], function (_, Backbone, Scrabble, letterSelection, tileHighlighter, dictionaryHelper, playerTurnHelper) {
 
-Scrabble.BoardView = Backbone.View
-  .extend(letterSelection)
-  .extend(tileHighlighter)
-  .extend(dictionaryHelper)
-  .extend(playerTurnHelper)
-  .extend({
-  el: '#scrabble-board',
+  Scrabble.BoardView = Backbone.View
+    .extend(letterSelection)
+    .extend(tileHighlighter)
+    .extend(dictionaryHelper)
+    .extend(playerTurnHelper)
+    .extend({
+    el: '#scrabble-board',
 
-  events: {},
+    events: {},
 
-  initialize: function(context) {
-    this.boardTilesCollection = context.boardTiles;
-    this.placedLettersCollection = context.placedLettersCollection;
-    this.players = context.players;
-    this.render();
+    initialize: function(context) {
+      this.boardTilesCollection = context.boardTiles;
+      this.placedLettersCollection = context.placedLettersCollection;
+      this.players = context.players;
+      this.render();
 
-    this.listenTo(Backbone, 'board:cancelPlacedLetters', this.cancelPlacedLetters);
-    this.listenTo(Backbone, 'board:playWordClicked', this.playWordClicked);
-    this.listenTo(Backbone, 'board:highlightAllTiles', this.highlightAllTiles);
-    this.listenTo(Backbone, 'board:letterClicked', this.letterClicked);
-  },
+      this.listenTo(Backbone, 'board:cancelPlacedLetters', this.cancelPlacedLetters);
+      this.listenTo(Backbone, 'board:playWordClicked', this.playWordClicked);
+      this.listenTo(Backbone, 'board:highlightAllTiles', this.highlightAllTiles);
+      this.listenTo(Backbone, 'board:letterClicked', this.letterClicked);
+    },
 
-  render: function() {
-    var self = this;
-    _.each(self.boardTilesCollection.models, function(tile) {
-      self.renderTile(tile);
-    });
-    return this;
-  },
+    render: function() {
+      var self = this;
+      _.each(self.boardTilesCollection.models, function(tile) {
+        self.renderTile(tile);
+      });
+      return this;
+    },
 
-  renderTile: function(tile) {
-    var domId = '#' + tile.get('tileId');
-    var tileView = new Scrabble.TileView({
-      el: $(domId),
-      model: tile,
-      parentView: this
-    });
-    this.$el.find(domId).append(tileView.render().el);
-  },
+    renderTile: function(tile) {
+      var domId = '#' + tile.get('tileId');
+      var tileView = new Scrabble.TileView({
+        el: $(domId),
+        model: tile,
+        parentView: this
+      });
+      this.$el.find(domId).append(tileView.render().el);
+    },
 
-  letterClicked: function() {
-    this.unhighlightAllTiles();
-    this.highlightAvailableTiles();
-  },
+    letterClicked: function() {
+      this.unhighlightAllTiles();
+      this.highlightAvailableTiles();
+    },
 
-  playWordClicked: function() {
-    var wordSubmissions = this.prepareWordsForSubmission();
-    this.playWords(wordSubmissions);
-  },
+    playWordClicked: function() {
+      var wordSubmissions = this.prepareWordsForSubmission();
+      this.playWords(wordSubmissions);
+    },
 
-  cancelPlacedLetters: function() {
-    this.placedLettersCollection.reset();
-    this.boardTilesCollection.returnAllPlacedTiles();
-    this.highlightAllTiles();
-  }
+    cancelPlacedLetters: function() {
+      this.placedLettersCollection.reset();
+      this.boardTilesCollection.returnAllPlacedTiles();
+      this.highlightAllTiles();
+    }
+  });
+
+  return Scrabble.BoardView;
 });
