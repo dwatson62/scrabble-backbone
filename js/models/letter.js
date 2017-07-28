@@ -1,57 +1,67 @@
+/*global define*/
 var Scrabble = Scrabble || {};
 
-Scrabble.Letter = Backbone.Model.extend({
-  defaults: {
-    blank: false,
-    tileNumber: 0,
-    status: 'unselected'
-  },
+define([
+  'underscore',
+  'backbone'
+], function (_, Backbone) {
+  'use strict';
 
-  initialize: function(context) {
-    this.set('value', context.value);
-    this.set('imageSrc', this._imageSrc());
-    this.set('points', context.points);
-    this.set('blank', context.value === 'blank');
-  },
+  Scrabble.Letter = Backbone.Model.extend({
+    defaults: {
+      blank: false,
+      tileNumber: 0,
+      status: 'unselected'
+    },
 
-  choose: function() {
-    this.set('status', 'selected');
-  },
+    initialize: function(context) {
+      this.set('value', context.value);
+      this.set('imageSrc', this._imageSrc());
+      this.set('points', context.points);
+      this.set('blank', context.value === 'blank');
+    },
 
-  unselect: function() {
-    this.set('status', 'unselected');
-  },
+    choose: function() {
+      this.set('status', 'selected');
+    },
 
-  place: function(tile) {
-    this.set('bonusMultiplier', tile.get('bonusMultiplier'));
-    this.set('status', 'placed');
-    this.set('tileNumber', tile.get('tileNumber'));
-  },
+    unselect: function() {
+      this.set('status', 'unselected');
+    },
 
-  confirm: function() {
-    this.set('status', 'confirmed');
-  },
+    place: function(tile) {
+      this.set('bonusMultiplier', tile.get('bonusMultiplier'));
+      this.set('status', 'placed');
+      this.set('tileNumber', tile.get('tileNumber'));
+    },
 
-  resetState: function() {
-    this.unselect();
-    this.set('bonusMultiplier', null);
-    this.set('tileNumber', null);
+    confirm: function() {
+      this.set('status', 'confirmed');
+    },
 
-    if (this.get('blank') === true) {
-      this.set('value', 'blank');
-      this.updateImageSrc();
+    resetState: function() {
+      this.unselect();
+      this.set('bonusMultiplier', null);
+      this.set('tileNumber', null);
+
+      if (this.get('blank') === true) {
+        this.set('value', 'blank');
+        this.updateImageSrc();
+      }
+    },
+
+    updateValue: function(value) {
+      this.set('value', value);
+    },
+
+    updateImageSrc: function() {
+      this.set('imageSrc', this._imageSrc());
+    },
+
+    _imageSrc: function() {
+      return '/images/tiles/letter-' + this.get('value') + '.png';
     }
-  },
+  });
 
-  updateValue: function(value) {
-    this.set('value', value);
-  },
-
-  updateImageSrc: function() {
-    this.set('imageSrc', this._imageSrc());
-  },
-
-  _imageSrc: function() {
-    return '/images/tiles/letter-' + this.get('value') + '.png';
-  }
+  return Scrabble.Letter;
 });
