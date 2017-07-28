@@ -30,6 +30,12 @@ require.config({
     tile: '../models/tile',
     word: '../models/word',
 
+    boardViewFactory: '../factories/boardView',
+    letterFactory: '../factories/letter',
+    lettersBagFactory: '../factories/lettersBag',
+    playerFactory: '../factories/player',
+    tileFactory: '../factories/tile',
+
     baseModalView: '../views/baseModalView',
     blankLetterView: '../views/blankLetterView',
     boardView: '../views/boardView',
@@ -51,6 +57,8 @@ require([
   'playerTurnHelper',
 
   'letter', 'tile', 'word', 'player',
+
+  'boardViewFactory','letterFactory','lettersBagFactory','playerFactory','tileFactory',
 
   'baseModalView', 'blankLetterView', 'boardView', 'invalidWordView', 'letterView', 'playedWordsView',
   'playerDashboardView','tileView', 'wordView',

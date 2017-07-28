@@ -1,98 +1,103 @@
-var Scrabble = Scrabble || {};
+define([
+  'underscore',
+  'backbone',
+  'scrabble',
+], function (_, Backbone, Scrabble) {
 
-describe('PlacedLetters Collection', function() {
-  var collection;
-  var centreLetter;
-
-  beforeEach(function() {
-    collection = new Scrabble.PlacedLetters();
-    centreLetter = Scrabble.LetterFactory.create({ tileNumber: 112 });
-  });
-
-  describe('tileid getters', function() {
-    var letter;
+  describe('PlacedLetters Collection', function() {
+    var collection;
+    var centreLetter;
 
     beforeEach(function() {
-      letter = Scrabble.LetterFactory.create({ tileNumber: 113, status: 'placed' });
-      centreLetter.set('status', 'placed');
-      collection.add(centreLetter);
-      collection.add(letter);
+      collection = new Scrabble.PlacedLetters();
+      centreLetter = Scrabble.LetterFactory.create({ tileNumber: 112 });
     });
 
-    it('#firstTileNumber returns tileNumber of first letter', function() {
-      expect(collection.firstTileNumber()).to.eql(112);
-    });
+    describe('tileid getters', function() {
+      var letter;
 
-    it('#lastTileNumber returns tileNumber of last letter', function() {
-      expect(collection.lastTileNumber()).to.eql(113);
-    });
-
-    it('#nextPlacedTileNumber returns tileNumber of next placed letter', function() {
-      expect(collection.nextPlacedTileNumber(112)).to.eql(113);
-    });
-
-    it('#nextPlacedTileNumber returns undefined if at end of collection of next letter', function() {
-      expect(collection.nextPlacedTileNumber(113)).to.be(undefined);
-    });
-  });
-
-  describe('#determineDirection', function() {
-    it('returns undefined if less than two letters have been played', function() {
-      expect(collection.determineDirection()).to.be(undefined);
-    });
-
-    describe('calculates correct direction when two letters have been added', function() {
-      it('can calculate when tiles are placed horizontally', function() {
-        var letter = Scrabble.LetterFactory.create({ tileNumber: 113 });
-
+      beforeEach(function() {
+        letter = Scrabble.LetterFactory.create({ tileNumber: 113, status: 'placed' });
+        centreLetter.set('status', 'placed');
         collection.add(centreLetter);
         collection.add(letter);
-        expect(collection.direction).to.eql('horizontal');
       });
 
-      it('can calculate when tiles are placed vertically', function() {
-        var letter = Scrabble.LetterFactory.create({ tileNumber: 97 });
+      it('#firstTileNumber returns tileNumber of first letter', function() {
+        expect(collection.firstTileNumber()).to.eql(112);
+      });
 
-        collection.add(centreLetter);
-        collection.add(letter);
+      it('#lastTileNumber returns tileNumber of last letter', function() {
+        expect(collection.lastTileNumber()).to.eql(113);
+      });
 
-        expect(collection.direction).to.eql('vertical');
+      it('#nextPlacedTileNumber returns tileNumber of next placed letter', function() {
+        expect(collection.nextPlacedTileNumber(112)).to.eql(113);
+      });
+
+      it('#nextPlacedTileNumber returns undefined if at end of collection of next letter', function() {
+        expect(collection.nextPlacedTileNumber(113)).to.be(undefined);
       });
     });
-  });
 
-  describe('#comparator', function() {
-    it('correctly sorts based on tileNumber', function() {
-      collection.add(Scrabble.LetterFactory.create({ tileNumber: 49 }));
-      collection.add(Scrabble.LetterFactory.create({ tileNumber: 48 }));
-      collection.add(Scrabble.LetterFactory.create({ tileNumber: 50 }));
+    describe('#determineDirection', function() {
+      it('returns undefined if less than two letters have been played', function() {
+        expect(collection.determineDirection()).to.be(undefined);
+      });
 
-      expect(collection.pluck('tileNumber')).to.eql([48, 49, 50]);
-      collection.reset();
+      describe('calculates correct direction when two letters have been added', function() {
+        it('can calculate when tiles are placed horizontally', function() {
+          var letter = Scrabble.LetterFactory.create({ tileNumber: 113 });
+
+          collection.add(centreLetter);
+          collection.add(letter);
+          expect(collection.direction).to.eql('horizontal');
+        });
+
+        it('can calculate when tiles are placed vertically', function() {
+          var letter = Scrabble.LetterFactory.create({ tileNumber: 97 });
+
+          collection.add(centreLetter);
+          collection.add(letter);
+
+          expect(collection.direction).to.eql('vertical');
+        });
+      });
     });
-  });
 
-  describe('#assembleWord', function() {
-    it('correctly assembles the word', function() {
-      collection.add(Scrabble.LetterFactory.create({ tileNumber: 98, value: 'c' }));
-      collection.add(Scrabble.LetterFactory.create({ tileNumber: 99, value: 'a' }));
-      collection.add(Scrabble.LetterFactory.create({ tileNumber: 100, value: 't' }));
+    describe('#comparator', function() {
+      it('correctly sorts based on tileNumber', function() {
+        collection.add(Scrabble.LetterFactory.create({ tileNumber: 49 }));
+        collection.add(Scrabble.LetterFactory.create({ tileNumber: 48 }));
+        collection.add(Scrabble.LetterFactory.create({ tileNumber: 50 }));
 
-      expect(collection.assembleWord()).to.eql('cat');
+        expect(collection.pluck('tileNumber')).to.eql([48, 49, 50]);
+        collection.reset();
+      });
     });
-  });
 
-  describe('#valueWithBonus', function() {
-    it('converts to object with value and bonus', function() {
-      collection.add(Scrabble.LetterFactory.create({ tileNumber: 98, value: 'c' }));
-      collection.add(Scrabble.LetterFactory.create({ tileNumber: 99, value: 'a' }));
-      collection.add(Scrabble.LetterFactory.create({ tileNumber: 100, value: 't', bonusMultiplier: 'doubleletter' }));
+    describe('#assembleWord', function() {
+      it('correctly assembles the word', function() {
+        collection.add(Scrabble.LetterFactory.create({ tileNumber: 98, value: 'c' }));
+        collection.add(Scrabble.LetterFactory.create({ tileNumber: 99, value: 'a' }));
+        collection.add(Scrabble.LetterFactory.create({ tileNumber: 100, value: 't' }));
 
-      expect(collection.valueWithBonus()).to.eql([
-        { value: 'c', bonus: undefined },
-        { value: 'a', bonus: undefined },
-        { value: 't', bonus: 'doubleletter' }
-      ]);
+        expect(collection.assembleWord()).to.eql('cat');
+      });
+    });
+
+    describe('#valueWithBonus', function() {
+      it('converts to object with value and bonus', function() {
+        collection.add(Scrabble.LetterFactory.create({ tileNumber: 98, value: 'c' }));
+        collection.add(Scrabble.LetterFactory.create({ tileNumber: 99, value: 'a' }));
+        collection.add(Scrabble.LetterFactory.create({ tileNumber: 100, value: 't', bonusMultiplier: 'doubleletter' }));
+
+        expect(collection.valueWithBonus()).to.eql([
+          { value: 'c', bonus: undefined },
+          { value: 'a', bonus: undefined },
+          { value: 't', bonus: 'doubleletter' }
+        ]);
+      });
     });
   });
 });
