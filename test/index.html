@@ -62,31 +62,9 @@
   </script>
 
   <script>mocha.setup('bdd')</script>
-  <script src="../bower_components/sinon-browser-only/sinon.js"></script>
-  <script src="../bower_components/bootstrap/js/modal.js"></script>
-  <script src="../vendor/index.js"></script>
-  <script data-main="../js/scripts/main" src="../bower_components/requirejs/require.js"></script>
 
-  <script src="collections/boardTiles.test.js"></script>
-  <script src="collections/lettersBag.test.js"></script>
-  <script src="collections/placedLetters.test.js"></script>
-  <script src="collections/playerLetters.test.js"></script>
-  <script src="collections/playedWords.test.js"></script>
-  <script src="collections/players.test.js"></script>
-  <script src="models/letter.test.js"></script>
-  <script src="models/player.test.js"></script>
-  <script src="models/tile.test.js"></script>
-  <script src="views/boardView.test.js"></script>
-  <script src="views/blankLetterView.test.js"></script>
-  <script src="views/invalidWordView.test.js"></script>
-  <script src="views/letterView.test.js"></script>
-  <script src="views/playerDashboardView.test.js"></script>
-  <script src="views/tileView.test.js"></script>
-  <script src="helpers/dictionaryHelper.test.js"></script>
-  <script src="helpers/letterHelper.test.js"></script>
-  <script src="helpers/playerTurnHelper.test.js"></script>
-  <script src="helpers/tileHelper.test.js"></script>
-  <script src="helpers/tileHighlighter.test.js"></script>
+  <script data-main="test.config.js" src="../bower_components/requirejs/require.js"></script>
+
   <script>
     mocha.checkLeaks();
     mocha.globals(['jQuery']);
