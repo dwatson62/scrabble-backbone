@@ -1,10 +1,17 @@
-var Scrabble = Scrabble || {};
+define([
+  'underscore',
+  'backbone',
+  'scrabble',
+], function (_, Backbone, Scrabble) {
 
-Scrabble.LettersBagFactory = Scrabble.LettersBag.extend({
-  initialize: function(collection) {
-    collection = collection || [Scrabble.LetterFactory.create({ 'value': 'a' }),
-                                Scrabble.LetterFactory.create({ 'value': 'b' })];
+  Scrabble.LettersBagFactory = Scrabble.LettersBag.extend({
+    initialize: function(collection) {
+      collection = collection || [Scrabble.LetterFactory.create({ 'value': 'a' }),
+                                  Scrabble.LetterFactory.create({ 'value': 'b' })];
 
-    this.reset(collection);
-  }
+      this.reset(collection);
+    }
+  });
+
+  return Scrabble.LettersBagFactory;
 });
