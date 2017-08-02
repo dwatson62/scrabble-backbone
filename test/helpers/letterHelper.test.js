@@ -2,10 +2,11 @@ define([
   'underscore',
   'backbone',
   'scrabble',
-], function (_, Backbone, Scrabble) {
+  'letterHelper',
+], function (_, Backbone, Scrabble, letterHelper) {
 
   describe('Letter Helper', function() {
-    var helper = new Scrabble.LetterHelper();
+    var helper = letterHelper;
 
     describe('#calculatePoints', function() {
       it('correctly calculates score of given letters', function() {

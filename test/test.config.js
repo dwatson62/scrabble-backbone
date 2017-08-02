@@ -3,32 +3,33 @@ require.config({
     jquery: '../bower_components/jquery/dist/jquery',
     backbone: '../bower_components/backbone/backbone',
     underscore: '../bower_components/underscore/underscore',
+    sinon: '../bower_components/sinon-browser-only/sinon',
     expect: '../vendor/index.js',
     scrabble: '../js/scrabble',
 
-    boardTilesTest: 'collections/boardTiles',
-    lettersBagTest: 'collections/lettersBag',
-    placedLettersTest: 'collections/placedLetters',
-    playedWordsTest: 'collections/playedWords',
-    playerLettersTest: 'collections/playerLetters',
-    playersTest: 'collections/players',
+    boardTilesTest: 'collections/boardTiles.test',
+    lettersBagTest: 'collections/lettersBag.test',
+    placedLettersTest: 'collections/placedLetters.test',
+    playedWordsTest: 'collections/playedWords.test',
+    playerLettersTest: 'collections/playerLetters.test',
+    playersTest: 'collections/players.test',
 
-    dictionaryHelperTest: 'helpers/dictionaryHelper',
-    letterHelperTest: 'helpers/letterHelper',
-    playerTurnHelperTest: 'helpers/playerTurnHelper',
-    tileHelperTest: 'helpers/tileHelper',
-    tileHighlighterTest: 'helpers/tileHighlighter',
+    dictionaryHelperTest: 'helpers/dictionaryHelper.test',
+    letterHelperTest: 'helpers/letterHelper.test',
+    playerTurnHelperTest: 'helpers/playerTurnHelper.test',
+    tileHelperTest: 'helpers/tileHelper.test',
+    tileHighlighterTest: 'helpers/tileHighlighter.test',
 
-    letterTest: 'models/letter',
-    playerTest: 'models/player',
-    tileTest: 'models/tile',
+    letterTest: 'models/letter.test',
+    playerTest: 'models/player.test',
+    tileTest: 'models/tile.test',
 
-    blankLetterViewTest: 'views/blankLetterView',
-    boardViewTest: 'views/boardView',
-    invalidWordViewTest: 'views/invalidWordView',
-    letterViewTest: 'views/letterView',
-    playerDashboardViewTest: 'views/playerDashboardView',
-    tileViewTest: 'views/tileView',
+    blankLetterViewTest: 'views/blankLetterView.test',
+    boardViewTest: 'views/boardView.test',
+    invalidWordViewTest: 'views/invalidWordView.test',
+    letterViewTest: 'views/letterView.test',
+    playerDashboardViewTest: 'views/playerDashboardView.test',
+    tileViewTest: 'views/tileView.test',
 
 
 
@@ -71,7 +72,7 @@ require.config({
 });
 
 require([
-  'backbone', 'jquery', 'scrabble',
+  'backbone', 'jquery', 'scrabble', 'sinon',
 
   'lettersBag', 'playedWords', 'placedLetters', 'playerLetters', 'players', 'boardTiles',
 
@@ -84,6 +85,16 @@ require([
 
   'baseModalView', 'blankLetterView', 'boardView', 'invalidWordView', 'letterView', 'playedWordsView',
   'playerDashboardView','tileView', 'wordView',
+
+  'boardTilesTest', 'lettersBagTest', 'placedLettersTest', 'playedWordsTest', 'playerLettersTest',
+  'playersTest',
+
+  'dictionaryHelperTest', 'letterHelperTest', 'playerTurnHelperTest', 'tileHelperTest', 'tileHighlighterTest',
+
+  'letterTest', 'playerTest', 'tileTest',
+
+  'blankLetterViewTest', 'boardViewTest', 'invalidWordViewTest', 'letterViewTest', 'playerDashboardViewTest',
+  'tileViewTest',
 ], function() {
   mocha.run();
 });
