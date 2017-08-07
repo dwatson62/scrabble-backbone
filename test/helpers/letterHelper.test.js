@@ -1,9 +1,6 @@
 define([
-  'underscore',
-  'backbone',
-  'scrabble',
-  'letterHelper',
-], function (_, Backbone, Scrabble, letterHelper) {
+  'letterHelper'
+], function (letterHelper) {
 
   describe('Letter Helper', function() {
     var helper = letterHelper;

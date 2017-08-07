@@ -1,11 +1,9 @@
 define([
-  'underscore',
-  'backbone',
-  'scrabble',
-], function (_, Backbone, Scrabble) {
+  'lettersBag'
+], function (LettersBag) {
 
   describe('Letters Bag Collection', function() {
-    var collection = new Scrabble.LettersBag();
+    var collection = new LettersBag();
 
     describe('#retrieve', function() {
       it('removes given number of letters from collection', function() {

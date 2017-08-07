@@ -1,6 +1,6 @@
 define([
   'underscore',
-  'Scrabble'
+  'scrabble'
 ], function (_, Scrabble) {
 
   var dictionaryHelper = {

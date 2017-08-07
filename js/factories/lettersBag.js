@@ -1,10 +1,9 @@
 define([
-  'underscore',
-  'backbone',
   'scrabble',
-], function (_, Backbone, Scrabble) {
+  'lettersBag',
+], function (Scrabble, LettersBag) {
 
-  Scrabble.LettersBagFactory = Scrabble.LettersBag.extend({
+  Scrabble.LettersBagFactory = LettersBag.extend({
     initialize: function(collection) {
       collection = collection || [Scrabble.LetterFactory.create({ 'value': 'a' }),
                                   Scrabble.LetterFactory.create({ 'value': 'b' })];

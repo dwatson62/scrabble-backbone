@@ -1,8 +1,6 @@
 define([
-  'underscore',
-  'backbone',
-  'scrabble',
-], function (_, Backbone, Scrabble) {
+  'scrabble'
+], function (Scrabble) {
 
   describe('Player Turn Helper', function() {
     var boardTiles;

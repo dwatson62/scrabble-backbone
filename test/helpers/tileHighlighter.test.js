@@ -1,8 +1,7 @@
 define([
   'underscore',
-  'backbone',
-  'scrabble',
-], function (_, Backbone, Scrabble) {
+  'scrabble'
+], function (_, Scrabble) {
 
   describe('Tile Highlighter Helper', function() {
     var boardTiles;

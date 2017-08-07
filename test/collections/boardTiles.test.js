@@ -1,8 +1,7 @@
 define([
   'underscore',
-  'backbone',
   'scrabble',
-], function (_, Backbone, Scrabble) {
+], function (_, Scrabble) {
 
   describe('BoardTiles Collection', function() {
     var collection;
