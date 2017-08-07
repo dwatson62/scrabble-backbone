@@ -63,10 +63,6 @@ require([
   'baseModalView', 'blankLetterView', 'boardView', 'invalidWordView', 'letterView', 'playedWordsView',
   'playerDashboardView','tileView', 'wordView',
 ], function (_, Game, $) {
-  _.templateSettings = {
-    interpolate : /\{\{(.+?)\}\}/g
-  };
-
   $(document).ready(function() {
     var game = new Game();
     game.create();

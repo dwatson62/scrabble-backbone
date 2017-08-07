@@ -2,6 +2,10 @@ define([
   'underscore', 'scrabble'
 ], function (_, Scrabble) {
 
+  _.templateSettings = {
+    interpolate : /\{\{(.+?)\}\}/g
+  };
+
   var Game = function() {
     this.bag = new Scrabble.LettersBag();
     this.blankLetterView = new Scrabble.BlankLetterView();
