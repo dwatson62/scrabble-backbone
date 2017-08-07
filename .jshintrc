@@ -7,9 +7,8 @@
   "node": true,
   "browser": true,
   "globals": {
-    "Backbone": true,
-    "_": true,
     "expect": true,
-    "sinon": true
+    "sinon": true,
+    "define": true
   }
 }

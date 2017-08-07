@@ -2,7 +2,8 @@ define([
   'underscore',
   'backbone',
   'scrabble',
-], function (_, Backbone, Scrabble) {
+  'letterHelper'
+], function (_, Backbone, Scrabble, letterHelper) {
 
   Scrabble.PlayedWords = Backbone.Collection.extend({
     sort_key: 'value',

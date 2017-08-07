@@ -1,6 +1,7 @@
 define([
-  'underscore'
-], function (_) {
+  'underscore',
+  'letterHelper'
+], function (_, letterHelper) {
 
   letterHelper = {
     letterValues: {

@@ -1,4 +1,7 @@
-define([], function () {
+define([
+  'underscore',
+  'Scrabble'
+], function (_, Scrabble) {
 
   var dictionaryHelper = {
     wordSubmissions: [],

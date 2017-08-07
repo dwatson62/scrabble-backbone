@@ -1,8 +1,9 @@
 define([
   'underscore',
   'backbone',
-  'scrabble'
-], function (_, Backbone, Scrabble) {
+  'scrabble',
+  'letterHelper'
+], function (_, Backbone, Scrabble, letterHelper) {
 
   Scrabble.LettersBag = Backbone.Collection.extend({
     initialize: function() {

@@ -1,9 +1,8 @@
 define([
   'underscore',
   'backbone',
-  'scrabble',
-  'letterSelection',
-], function (_, Backbone, letterSelection) {
+  'scrabble'
+], function (_, Backbone) {
 
   var letterSelection = {
     letters: [],
