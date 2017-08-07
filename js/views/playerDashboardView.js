@@ -2,7 +2,8 @@ define([
   'underscore',
   'backbone',
   'scrabble',
-], function (_, Backbone, Scrabble) {
+  'letterSelection'
+], function (_, Backbone, Scrabble, letterSelection) {
 
   Scrabble.PlayerDashboardView = Backbone.View.extend({
     template: _.template($('#player-template').html()),
