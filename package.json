@@ -7,7 +7,7 @@
     "postinstall": "bower install",
     "build-css": "./bin/build-css",
     "watch-css": "./bin/watch-css",
-    "test": "mocha"
+    "test": "./bin/phantomjs"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -31,6 +31,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-requirejs": "^0.4.2",
     "mocha": "^3.4.1",
+    "mocha-phantomjs": "^4.1.0",
     "mocha-phantomjs-core": "^2.1.2",
     "node-sass": "^4.5.2",
     "nodemon": "^1.11.0",
