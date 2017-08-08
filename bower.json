@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "sinon-browser-only": "^1.17.1",
-    "requirejs": "^2.3.4"
+    "requirejs": "^2.3.4",
+    "mocha": "^3.5.0"
   }
 }

@@ -1,5 +1,6 @@
 define([
-  'scrabble'
+  'scrabble',
+  'mocha'
 ], function (Scrabble) {
   describe('Dictionary Helper', function() {
     var boardTiles;

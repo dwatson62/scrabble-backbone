@@ -1,5 +1,6 @@
 define([
-  'tileHelper'
+  'tileHelper',
+  'mocha'
 ], function (tileHelper) {
 
   describe('Tile Helper', function() {

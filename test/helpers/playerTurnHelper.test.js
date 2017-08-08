@@ -1,5 +1,6 @@
 define([
-  'scrabble'
+  'scrabble',
+  'mocha'
 ], function (Scrabble) {
 
   describe('Player Turn Helper', function() {

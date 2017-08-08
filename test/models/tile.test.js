@@ -2,6 +2,7 @@ define([
   'underscore',
   'backbone',
   'scrabble',
+  'mocha'
 ], function (_, Backbone, Scrabble) {
 
   describe('Tile', function() {

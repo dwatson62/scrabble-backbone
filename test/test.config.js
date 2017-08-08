@@ -1,10 +1,21 @@
 require.config({
+  shim: {
+    'mocha': {
+      init: function () {
+        this.mocha.setup('bdd');
+        this.mocha.checkLeaks();
+        return this.mocha;
+      }
+    }
+  },
+
   paths: {
+    mocha: '../bower_components/mocha/mocha',
     jquery: '../bower_components/jquery/dist/jquery',
     backbone: '../bower_components/backbone/backbone',
     underscore: '../bower_components/underscore/underscore',
     sinon: '../bower_components/sinon-browser-only/sinon',
-    expect: '../vendor/index.js',
+    expect: '../vendor/index',
     scrabble: '../js/scrabble',
 
     boardTilesTest: 'collections/boardTiles.test',
@@ -72,7 +83,7 @@ require.config({
 });
 
 require([
-  'backbone', 'jquery', 'scrabble', 'sinon',
+  'mocha', 'backbone', 'jquery', 'scrabble', 'sinon',
 
   'lettersBag', 'playedWords', 'placedLetters', 'playerLetters', 'players', 'boardTiles',
 
@@ -95,6 +106,7 @@ require([
 
   'blankLetterViewTest', 'boardViewTest', 'invalidWordViewTest', 'letterViewTest', 'playerDashboardViewTest',
   'tileViewTest',
-], function() {
+], function(mocha) {
+  mocha.setup('bdd');
   mocha.run();
 });

@@ -1,16 +1,16 @@
-var Scrabble = Scrabble || {};
+// var Scrabble = Scrabble || {};
 
-describe('BoardView', function() {
-  var boardTiles;
-  var boardView;
-  var letter;
+// describe('BoardView', function() {
+//   var boardTiles;
+//   var boardView;
+//   var letter;
 
-  beforeEach(function() {
-    boardTiles = new Scrabble.BoardTiles();
+//   beforeEach(function() {
+//     boardTiles = new Scrabble.BoardTiles();
 
-    boardView = new Scrabble.BoardView({
-      boardTiles: boardTiles,
-      placedLettersCollection: new Scrabble.PlacedLetters()
-    });
-  });
-});
+//     boardView = new Scrabble.BoardView({
+//       boardTiles: boardTiles,
+//       placedLettersCollection: new Scrabble.PlacedLetters()
+//     });
+//   });
+// });

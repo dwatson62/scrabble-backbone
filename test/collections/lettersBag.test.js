@@ -1,5 +1,6 @@
 define([
-  'lettersBag'
+  'lettersBag',
+  'mocha'
 ], function (LettersBag) {
 
   describe('Letters Bag Collection', function() {

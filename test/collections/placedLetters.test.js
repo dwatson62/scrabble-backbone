@@ -1,5 +1,6 @@
 define([
-  'scrabble'
+  'scrabble',
+  'mocha'
 ], function (Scrabble) {
 
   describe('PlacedLetters Collection', function() {

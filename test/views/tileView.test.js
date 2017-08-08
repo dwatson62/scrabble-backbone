@@ -3,6 +3,7 @@ define([
   'backbone',
   'scrabble',
   'letterSelection',
+  'mocha'
 ], function (_, Backbone, Scrabble, letterSelection) {
 
   describe('Tile View', function() {

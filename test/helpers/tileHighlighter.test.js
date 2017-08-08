@@ -1,6 +1,7 @@
 define([
   'underscore',
-  'scrabble'
+  'scrabble',
+  'mocha'
 ], function (_, Scrabble) {
 
   describe('Tile Highlighter Helper', function() {

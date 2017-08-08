@@ -1,6 +1,8 @@
 define([
   'underscore',
   'scrabble',
+  'mocha',
+  'expect'
 ], function (_, Scrabble) {
 
   describe('BoardTiles Collection', function() {

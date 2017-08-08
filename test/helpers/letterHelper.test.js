@@ -1,5 +1,6 @@
 define([
-  'letterHelper'
+  'letterHelper',
+  'mocha'
 ], function (letterHelper) {
 
   describe('Letter Helper', function() {
