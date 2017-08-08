@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/dwatson62/scrabble-backbone/badges/gpa.svg)](https://codeclimate.com/github/dwatson62/scrabble-backbone)
+[![Codeship Status for dwatson62/scrabble-backbone](https://app.codeship.com/projects/07d2fda0-4229-0135-7a2f-5e4339c9613e/status?branch=master)](https://app.codeship.com/projects/230255)
 
 #### Scrabble Backbone
 =================================
@@ -17,4 +18,3 @@ Available at [https://scrabble-backbone.herokuapp.com/](https://scrabble-backbon
 #### Todo
 
 - Handle end game
-- Setup CI
